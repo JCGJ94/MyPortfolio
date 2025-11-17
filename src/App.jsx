@@ -24,8 +24,7 @@ export default function App() {
 
       <Hero social={social} />
 
-      <Wave
-      Divider from="var(--bg-main)" to="#f8f9fa" />
+      <WaveDivider from="var(--bg-main)" to="#f8f9fa" />
 
       <About/>
 
