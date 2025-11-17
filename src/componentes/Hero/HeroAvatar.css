@@ -1,0 +1,48 @@
+.hero-avatar-wrapper {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  perspective: 900px;
+  transition: transform 0.35s ease;
+}
+
+.hero-avatar-wrapper:hover {
+  transform: translateY(-6px);
+}
+
+.hero-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+
+  transition: 
+    transform 0.45s ease,
+    filter 0.45s ease,
+    box-shadow 0.45s ease;
+  transform-style: preserve-3d;
+
+  filter: drop-shadow(0 18px 35px rgba(0,0,0,0.55));
+}
+
+.hero-avatar-wrapper:hover .hero-avatar-image {
+  transform: 
+    perspective(600px)
+    rotateX(6deg)
+    rotateY(-6deg)
+    scale(1.03);
+    
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.75));
+  box-shadow: 0 10px 35px rgba(37, 99, 235, 0.35);
+}
+
+@media (max-width: 576px) {
+  .hero-avatar-wrapper {
+    width: 290px;
+    height: 290px;
+  }
+}

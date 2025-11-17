@@ -1,0 +1,252 @@
+.hero-wrap {
+  position: relative;
+  min-height: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111318;
+  color: var(--text-main);
+  overflow: visible;
+  z-index: 1;
+  margin-top: 10rem;
+}
+
+.hero-text {
+  max-width: 560px;
+}
+
+.hero-intro {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero-line {
+  width: 42px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.hero-small {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-soft);
+}
+
+.hero-title {
+  font-size: clamp(3.0rem, 4vw, 3.2rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.hero-name {
+  color: var(--accent);
+}
+
+.hero-role {
+  color: #ffffff;
+}
+
+.hero-desc {
+  max-width: 480px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  margin-top: 1.2rem;
+  padding-top: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
+}
+
+.btn-hero-primary {
+  background: var(--accent);
+  border: 1px solid var(--accent-dark);
+  color: #ffffff;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.6);
+}
+
+.btn-hero-primary:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-soft);
+}
+
+.btn-hero-outline {
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.7rem 1.6rem;
+  border: 1px solid var(--accent-soft);
+  color: var(--accent-soft);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.btn-hero-outline:hover {
+  background: rgba(37, 99, 235, 0.08);
+  color: #e5e7eb;
+}
+
+.hero-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  animation: scroll-pulse 1.7s ease-in-out infinite;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hero-scroll i {
+  font-size: 1rem;
+}
+
+.hero-scroll:hover{
+  color: #e5e7eb
+}
+
+
+@keyframes scroll-pulse {
+  0% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+}
+
+.hero-avatar-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-avatar-splash {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 20%, #facc15 0, #facc15 40%, #111318 100%);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.8);
+  overflow: visible;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-avatar-splash::before,
+.hero-avatar-splash::after {
+  content: '';
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.8) 0, transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(37, 99, 235, 0.9) 0, transparent 55%),
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.6) 0, transparent 55%),
+    radial-gradient(circle at 70% 90%, rgba(30, 64, 175, 0.8) 0, transparent 55%);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  filter: blur(1px);
+}
+
+.hero-avatar-splash::after {
+  transform: rotate(18deg);
+  opacity: 0.75;
+}
+
+.hero-avatar-splash img {
+  position: relative;
+  width: 70%;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .hero-wrap {
+     margin-top: 5.5rem; 
+    padding-top: 1.5rem; 
+    text-align: center;
+  }
+
+  .hero-text {
+    margin-inline: auto;
+  }
+
+  .hero-intro {
+    justify-content: center;
+  }
+  
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-scroll {
+    justify-content: center;
+  }
+
+  .hero-avatar-wrapper {
+    margin-bottom: 2rem;
+  }
+}
+.hero-typewriter {
+  display: inline-block;
+  min-height: 1.2em;
+  position: relative;
+}
+.hero-typing-wrapper {
+  display: block;
+  height: 115px; 
+  overflow: hidden;
+}
+
+
+.hero-typewriter::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 4px;
+  background: #ffffff;
+  animation: hero-caret-blink 0.8s steps(1) infinite;
+  vertical-align: -0.1em;
+}
+
+@keyframes hero-caret-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  50.01%, 100% {
+    opacity: 0;
+  }
+}

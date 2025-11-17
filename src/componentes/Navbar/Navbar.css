@@ -1,0 +1,146 @@
+
+.navbar-fixed {
+  background: var(--bg-main);
+  border-bottom: 1px solid transparent;
+  background-image: linear-gradient(var(--bg-main), var(--bg-main)), 
+                    linear-gradient(90deg, #1e3a8a, #3b82f6, #06b6d4);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.brand-flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  background: var(--accent);        
+  color: #fff;
+
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+
+  border-radius: 0 0 12px 12px;     
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+
+  transform: translateY(-2px);      
+  transition: transform 0.3s ease;
+}
+
+.brand-flag:hover {
+  transform: translateY(-8px) scale(1.05);
+}
+
+.brand-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  margin-left: 0.6rem;
+
+  color: #e5e7eb;                 
+  position: relative;
+
+  animation: fadeSlide 1.4s ease forwards;
+}
+
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.navbar-brand:hover .brand-text {
+  color: var(--accent-soft);
+  transition: color 0.8s ease;
+}
+
+.nav-link {
+  position: relative;
+  color: #e5e7eb !important;
+  font-weight: 500;
+  padding-bottom: 3px;
+  transition: color 0.25s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent) !important;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Botón hamburguesa con borde azul */
+.navbar-toggler {
+  border-color: var(--accent);
+  padding: 1rem 0.5rem;
+  display: flex;
+  margin: 0.2rem 1rem;
+  border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.15rem rgba(59, 130, 246, 0.45);
+}
+
+.navbar-toggler-icon {
+  background-image: none;         
+  position: relative;
+  width: 1.4rem;
+  height: 2px;
+  background-color: var(--accent);
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+}
+
+.navbar-toggler-icon::before {
+  top: -6px;
+}
+
+.navbar-toggler-icon::after {
+  top: 6px;
+}
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    gap: 0.25rem;
+    text-align: center;
+  }
+
+  .navbar .nav-item.ms-lg-3 {
+    margin-left: 0;
+    margin-top: 0.75rem;
+  }
+
+  .navbar .nav-item.ms-lg-3 .btn-hero-primary {
+    padding-inline: 1.6rem;
+  }
+}

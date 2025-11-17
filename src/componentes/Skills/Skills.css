@@ -1,0 +1,143 @@
+
+.skills-tree {
+  position: relative;
+  margin-top: 2rem;
+}
+.skills-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.skills-svg path {
+  fill: none;
+  stroke: rgba(1, 9, 25, 0.4); 
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skills-branch-row {
+  position: relative;
+  z-index: 1; 
+}
+
+.skills-group {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skills-group-1 {
+  transform: translateY(10px) translateX(-10px);
+}
+
+.skills-group-2 {
+  transform: translateY(-6px);
+}
+
+.skills-group-3 {
+  transform: translateY(10px) translateX(10px);
+}
+
+.skills-group-4 {
+  transform: translateY(0);
+}
+
+.skills-group:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+}
+
+.tech-card {
+  background: whitesmoke;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.tech-card img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.tech-card p {
+  margin: 0;
+  font-weight: 600;
+  color: #020f1c;
+  font-size: 0.9rem;
+}
+
+.tech-card:hover {
+  background: #0e7bba;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tech-card:hover img {
+  transform: rotate(8deg) scale(1.1);
+}
+
+.language-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.language-card p {
+  margin-top: 0.35rem;
+}
+
+.language-card span {
+  font-size: 0.8rem;
+  color: #0f172a;
+  opacity: 0.85;
+}
+
+
+.language-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+}
+
+.language-icon-es {
+  background: linear-gradient(135deg, #c1121f, #fca311);
+}
+
+.language-icon-en {
+  background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+}
+
+@media (max-width: 991.98px) {
+  .skills-svg {
+    opacity: 0.4;
+  }
+
+  .skills-group-1,
+  .skills-group-2,
+  .skills-group-3,
+  .skills-group-4 {
+    transform: none;
+  }
+
+  .skills-group:hover {
+    transform: translateY(-6px) scale(1.01);
+  }
+}
