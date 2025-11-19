@@ -2,7 +2,7 @@ import "./Certs.css"
 
 export function Certs({ certs, education, social }) {
   return (
-    <section id="certs" className="py-6 bg-light ">
+    <section id="certs" className="py-6 bg-light section-overlap-top">
       <div className="container">
         <h2 className="h3 fw-bold text-center mb-4 text-gradient-2">
           Certificaciones & Formación

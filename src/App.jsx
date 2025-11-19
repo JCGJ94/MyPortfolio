@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './index.css'
 
-import { ContactModal } from './componentes/ContactModal'
+import { ContactModal } from './componentes/ContactModal/ContactModal'
 import { Navbar } from './componentes/Navbar/Navbar'
 import { Hero } from './componentes/Hero/Hero'
 import { About } from './componentes/About/About'

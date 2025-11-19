@@ -52,3 +52,19 @@
   opacity: 1;
   transform: translateX(0);
 }
+@media (max-width: 768px) {
+  .scroll-top-btn {
+    bottom: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-top-btn .tooltip {
+    display: none; 
+  }
+}

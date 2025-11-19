@@ -1,0 +1,196 @@
+
+.contact-modal-dialog {
+  max-width: 520px;
+}
+
+.modal.fade .contact-modal-dialog {
+  transform: translateY(20px);
+  transition: transform .25s ease-out, opacity .25s ease-out;
+}
+
+.modal.show .contact-modal-dialog {
+  transform: translateY(0);
+}
+
+.contact-modal {
+  border-radius: 1.4rem;
+  border: none;
+  overflow: hidden;
+
+  background: linear-gradient(
+    165deg,
+    #ebf3ff 0%,
+    #ffffff 55%
+  );
+
+  box-shadow: 0 24px 65px rgba(15, 23, 42, 0.25);
+  color: #0f172a;
+}
+
+.contact-modal-header {
+  background: linear-gradient(
+    120deg,
+    rgba(59, 130, 246, 0.25),
+    rgba(96, 165, 250, 0.15)
+  );
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 1.1rem 1.4rem;
+}
+
+.contact-modal-header .modal-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+.contact-modal-subtitle {
+  font-size: .9rem;
+  color: #475569;
+}
+
+.contact-modal-close {
+  opacity: .45;
+  transition: .2s ease;
+}
+
+.contact-modal-close:hover {
+  opacity: .85;
+  transform: scale(1.08);
+}
+
+.contact-modal-body {
+  padding: 1.4rem 1.4rem 1.2rem;
+}
+
+.contact-label {
+  font-size: .85rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: .25rem;
+}
+
+.contact-input {
+  background: #ffffff;
+  border-radius: .8rem;
+  border: 1px solid #d5dce7;
+  color: #0f172a !important;      
+  font-size: .9rem;
+  padding: .62rem .8rem;
+  padding-right: 2.3rem;
+  transition: all .25s ease;
+}
+
+.contact-input::placeholder {
+  color: #94a3b8;
+  opacity: 0.9;
+}
+
+.contact-input:focus {
+  background: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, .25);
+  outline: none;
+}
+
+.contact-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-privacy {
+  margin-top: .5rem;
+  color: #64748b;
+  font-size: .8rem;
+}
+
+.contact-modal-footer {
+  border-top: 1px solid rgba(148, 163, 184, .25);
+  padding: 1rem 1.4rem;
+}
+
+.contact-btn-email {
+  border-radius: .9rem;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding-block: .65rem;
+  transition: .25s ease;
+}
+
+.contact-btn-email:hover {
+  box-shadow: 0 14px 30px rgba(37, 99, 235, .35);
+  transform: translateY(-2px);
+}
+
+.contact-btn-wa {
+  border-radius: .9rem;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding-block: .65rem;
+  transition: .25s ease;
+}
+
+.contact-btn-wa:hover {
+  box-shadow: 0 14px 30px rgba(22, 163, 74, .35);
+  transform: translateY(-2px);
+}
+
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center; 
+}
+
+.input-wrap input,
+.input-wrap textarea {
+  width: 100%;
+  padding-right: 2.4rem !important; 
+}
+
+.input-icon {
+  position: absolute;
+  right: 10px;
+  font-size: 1.25rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 0.25s ease;
+}
+
+
+.input-icon.success.show,
+.input-icon.error.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+.input-icon.success {
+  color: #22c55e; 
+}
+
+.input-icon.error {
+  color: #dc2626; 
+}
+
+
+@media (max-width: 576px) {
+  .contact-modal-dialog {
+    margin: .75rem;
+  }
+
+  .contact-modal {
+    border-radius: 1rem;
+  }
+
+  .contact-modal-header,
+  .contact-modal-body,
+  .contact-modal-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

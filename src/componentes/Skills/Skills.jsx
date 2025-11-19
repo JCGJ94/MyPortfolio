@@ -1,5 +1,6 @@
 import React from 'react'
 import './Skills.css'
+import { WaveDivider } from '../WaveDivider/WaveDivider'
 
 function TechCard({ src, alt, label }) {
   return (
@@ -44,7 +45,7 @@ const SKILLS = {
 
 export function Skills() {
   return (
-    <section id="skills" className="py-6 bg-light">
+    <section id="skills" className="py-6 bg-light section-overlap-top skills-section section-with-wave">
       <div className="container">
         <p className="fs-1 fw-bold mb-4 text-center text-gradient">
           Stack Técnico
@@ -106,7 +107,7 @@ export function Skills() {
               <div className="skills-group skills-group-4 p-4 rounded-4 shadow-sm bg-white border-left-accent-4 h-100">
                 <h5 className="fw-bold text-center text-gradient mb-4">
                   <i className="bi bi-chat-dots me-2 text-success"></i>
-                  Communication Skills
+                  Habilidades de Comunicación 
                 </h5>
                 <div className="row g-3 text-center">
                   {SKILLS.communication.map(lang => (
@@ -124,7 +125,6 @@ export function Skills() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

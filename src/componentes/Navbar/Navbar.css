@@ -91,13 +91,11 @@
   width: 100%;
 }
 
-/* Botón hamburguesa con borde azul */
 .navbar-toggler {
   border-color: var(--accent);
   padding: 1rem 0.5rem;
   display: flex;
   margin: 0.2rem 1rem;
-  border: none;
 }
 
 .navbar-toggler:focus {
@@ -129,6 +127,7 @@
 .navbar-toggler-icon::after {
   top: 6px;
 }
+
 @media (max-width: 991.98px) {
   .navbar-nav {
     gap: 0.25rem;
@@ -142,5 +141,26 @@
 
   .navbar .nav-item.ms-lg-3 .btn-hero-primary {
     padding-inline: 1.6rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .brand-flag {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  .brand-text {
+    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+    margin-left: 0.4rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: var(--bg-main);
+    padding: 0.5rem 1rem 1rem;
   }
 }

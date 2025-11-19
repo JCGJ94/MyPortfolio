@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import './Projects.css'
 
+
 function ProjectCard({ project }) {
   return (
     <div className="card project-card h-100 border-0">
@@ -67,10 +68,10 @@ export function Projects({ projects, social }) {
   }
 
   return (
-    <section id="projects" className="py-6 projects-section">
+    <section id="projects" className="py-6 projects-section section-overlap-top">
       <div className="container">
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h2 className="h3 fw-bold mb-0 text-gradient-2">Proyectos Destacados</h2>
+        <div className="d-flex justify-content-center align-items-center g-5 mb-3">
+          <h2 className="h3 fw-bold mb-0 text-gradient-2 mx-5 ">Proyectos Destacados</h2>
           <a href={social.github} className="btn btn-outline-light btn-sm d-none d-md-inline-flex">
             <i className="bi bi-github me-1"></i> Ver más
           </a>

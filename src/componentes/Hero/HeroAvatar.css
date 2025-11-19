@@ -1,7 +1,7 @@
 .hero-avatar-wrapper {
   position: relative;
-  width: 420px;
-  height: 420px;
+  width: 520px;
+  height: 520px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,7 +42,7 @@
 
 @media (max-width: 576px) {
   .hero-avatar-wrapper {
-    width: 290px;
-    height: 290px;
+    width: 350px;
+    height: 350px;
   }
 }

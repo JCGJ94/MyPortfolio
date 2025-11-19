@@ -2,7 +2,7 @@ import "./About.css";
 
 export function About() {
   return (
-    <section id="about" className="about-section py-6">
+    <section id="about" className="about-section section-overlap-top py-6">
       <div className="container">
         <div className="row g-5 align-items-center">
           

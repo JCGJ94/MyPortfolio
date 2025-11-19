@@ -1,6 +1,6 @@
 export function ContactSection({ social }) {
   return (
-    <section id="contact"  className="py-6 ">
+    <section id="contact"  className="py-6 section-overlap-top">
       <div className="container">
         <div className="bg-white rounded-4 shadow p-4 p-lg-5 border-left-accent-1">
           <div className="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">

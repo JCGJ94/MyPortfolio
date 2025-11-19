@@ -1,3 +1,6 @@
+.hero-section {
+  background: var(--bg-main);
+}
 .hero-wrap {
   position: relative;
   min-height: max-content;

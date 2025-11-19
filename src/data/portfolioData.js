@@ -8,13 +8,13 @@ export const social = {
 
 export const projects = [
   {
-    title: 'Gestor de Tareas con Flask API',
+    title: 'SportBar league',
     desc: 'App fullstack con autenticación JWT y CRUD.',
     stack: ['React', 'Flask', 'REST API', 'PostgreSQL'],
     link: '#',
-    repo: '#',
+    repo: 'https://github.com/JCGJ94/JCGJ94-SportBarLeague',
     image:
-      'https://images.unsplash.com/photo-1526378722447-4c1a2e6f9f49?w=1200&q=60',
+      '../../public/images/SportBar Luague captura.png',
   },
   {
     title: 'Portfolio Personal',
@@ -27,33 +27,42 @@ export const projects = [
   },
   {
     title: 'API de Productos',
-    desc: 'Endpoints RESTful con documentación Swagger.',
+    desc: 'Endpoints RESTful con documentación.',
     stack: ['Python', 'Flask', 'SQL', 'PostgreSQL'],
     link: '#',
     repo: '#',
     image:
       'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=1200&q=60',
   },
+  {
+    title: 'JEG Studio',
+    desc: "Colaboración creativa en construcíon",
+    stack: ['React', 'CSS', "..."],
+    link: '#',
+    repo: '#',
+    image:
+      '../../public/images/comming soon.png',
+  },
 ]
 
 export const certs = [
   {
-    title: 'Certificación React',
-    org: 'Meta / Coursera',
-    year: '2024',
-    link: '#',
-  },
-  {
     title: 'Python Backend con Flask',
     org: 'Udemy',
-    year: '2023',
+    year: '2025',
     link: '#',
   },
   {
-    title: 'SQL y PostgreSQL Avanzado',
-    org: 'Platzi',
-    year: '2023',
-    link: '#',
+    title: 'Full Stack Developer',
+    org: '4Geek Academy',
+    year: '2025',
+    link: '../../public/Certificado Bootcamp 4geeks.pdf',
+  },
+  {
+    title: 'Técnico en Microinformática y Redes',
+    org: 'MINISTERIO FORMACIÓN PROFESIONAL',
+    year: '2024',
+    link: '../../public/homologacion de informatica jose c.pdf',
   },
 ]
 

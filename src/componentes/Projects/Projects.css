@@ -1,32 +1,34 @@
+
 .projects-section {
-  background: #111318;
+  background: var(--bg-main);
 }
 
-/* CONTENEDOR DEL CARRUSEL */
 .projects-carousel {
   position: relative;
+  max-width: 980px;
+  margin: 0 auto;
   padding: 2.5rem 0 3.5rem;
   overflow: visible;
 }
 
-/* TRACK CENTRAL */
 .projects-track {
   position: relative;
-  height: 420px;          /* alto fijo para las cards */
-  max-width: 880px;
+  height: 360px;
+  max-width: 100%;
   margin: 0 auto;
+  perspective: 1200px;
 }
 
-/* SLIDE BASE */
 .project-slide {
   position: absolute;
   top: 0;
   left: 50%;
   width: 100%;
-  max-width: 360px;
+  max-width: min(90vw, 340px);   
   transform: translateX(-50%);
   opacity: 0;
   pointer-events: none;
+  transform-style: preserve-3d;
   transition:
     transform 0.45s ease,
     opacity 0.35s ease,
@@ -34,7 +36,7 @@
     z-index 0.35s ease;
 }
 
-/* CARD PRINCIPAL (CENTRO) */
+/* central */
 .project-slide.active {
   opacity: 1;
   pointer-events: auto;
@@ -43,29 +45,27 @@
   filter: blur(0);
 }
 
-/* CARD ANTERIOR (IZQUIERDA) */
+/* laterales (en móviles: efecto suave para que no rompa) */
 .project-slide.prev {
-  opacity: 0.45;
+  opacity: 0.4;
   z-index: 2;
-  transform: translateX(-140%) scale(0.9) rotateY(18deg);
+  transform: translateX(-105%) scale(0.9) rotateY(10deg);
   filter: blur(2px);
 }
 
-/* CARD SIGUIENTE (DERECHA) */
 .project-slide.next {
-  opacity: 0.45;
+  opacity: 0.4;
   z-index: 2;
-  transform: translateX(40%) scale(0.9) rotateY(-18deg);
+  transform: translateX(5%) scale(0.9) rotateY(-10deg);
   filter: blur(2px);
 }
 
-/* RESTO OCULTAS */
 .project-slide.hidden {
   opacity: 0;
   z-index: 1;
 }
 
-/* CARD ESTILO */
+/* ====== CARD ====== */
 .project-card {
   border-radius: 1.4rem;
   background: #f9fafb;
@@ -79,46 +79,45 @@
   box-shadow: 0 26px 65px rgba(15, 23, 42, 0.55);
 }
 
-/* Imagen superior */
 .project-img {
-  max-height: 200px;
+  max-height: 220px;
   object-fit: cover;
 }
 
-/* FLECHAS */
 .projects-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.5);
   background: rgba(15, 23, 42, 0.9);
-  color:var(--accent); 
+  color: var(--accent);
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 4;
+  z-index: 10;
   transition: all 0.25s ease;
 }
 
 .projects-arrow-left {
-  left: 6%;
+  left: 8px;
 }
 
 .projects-arrow-right {
-  right: 6%;
+  right: 8px;
 }
 
 .projects-arrow:hover {
   background: var(--accent-dark);
   color: #0b1120;
   border-color: transparent;
-  box-shadow: 0 10px 28px rgba(34, 167, 197, 0.45);
+  box-shadow: 0 10px 28px rgba(34, 197, 94, 0.45);
 }
 
-/* DOTS INFERIORES */
+
 .projects-dots {
   display: flex;
   justify-content: center;
@@ -141,28 +140,51 @@
   background: var(--accent-soft);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .projects-track {
-    height: auto;
-    min-height: 0;
+    height: 400px;
+    max-width: 880px;
   }
 
-  .project-slide,
-  .project-slide.active,
-  .project-slide.prev,
+  .project-img {
+    max-height: 240px;
+  }
+
+  .project-slide {
+    max-width: 360px;
+  }
+
+  .project-slide.prev {
+    transform: translateX(-135%) scale(0.9) rotateY(16deg);
+  }
+
   .project-slide.next {
-    position: relative;
-    transform: translateX(0) scale(1);
-    opacity: 1;
-    filter: none;
-    max-width: 100%;
+    transform: translateX(35%) scale(0.9) rotateY(-16deg);
   }
 
-  .projects-arrow {
-    display: none;
+  .projects-arrow-left {
+    left: 4%;
   }
 
-  .projects-carousel {
-    padding-top: 1.5rem;
+  .projects-arrow-right {
+    right: 4%;
+  }
+}
+
+@media (min-width: 992px) {
+  .projects-track {
+    height: 430px;
+  }
+
+  .project-img {
+    max-height: 260px;
+  }
+
+  .project-slide.prev {
+    transform: translateX(-150%) scale(0.9) rotateY(18deg);
+  }
+
+  .project-slide.next {
+    transform: translateX(50%) scale(0.9) rotateY(-18deg);
   }
 }
