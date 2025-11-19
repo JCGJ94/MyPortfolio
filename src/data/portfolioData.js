@@ -13,8 +13,7 @@ export const projects = [
     stack: ['React', 'Flask', 'REST API', 'PostgreSQL'],
     link: '#',
     repo: 'https://github.com/JCGJ94/JCGJ94-SportBarLeague',
-    image:
-      '../../public/images/SportBar Luague captura.png',
+    image:'/images/sportbar-league-captura.png',
   },
   {
     title: 'Portfolio Personal',
@@ -23,7 +22,7 @@ export const projects = [
     link: '#',
     repo: '#',
     image:
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=60',
+    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=60',
   },
   {
     title: 'API de Productos',
@@ -40,8 +39,7 @@ export const projects = [
     stack: ['React', 'CSS', "..."],
     link: '#',
     repo: '#',
-    image:
-      '../../public/images/comming soon.png',
+    image:'/images/coming-soon.png',
   },
 ]
 
@@ -56,13 +54,13 @@ export const certs = [
     title: 'Full Stack Developer',
     org: '4Geek Academy',
     year: '2025',
-    link: '../../public/Certificado Bootcamp 4geeks.pdf',
+    link: '/Bootcamp-4geeks.pdf',
   },
   {
     title: 'Técnico en Microinformática y Redes',
     org: 'MINISTERIO FORMACIÓN PROFESIONAL',
     year: '2024',
-    link: '../../public/homologacion de informatica jose c.pdf',
+    link: '/homologacion-informatica-jose-c.pdf',
   },
 ]
 
