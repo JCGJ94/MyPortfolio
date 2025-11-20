@@ -1,46 +1,44 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Navbar.css'
-import Collapse from 'bootstrap/js/dist/collapse'
 
 export function Navbar({ social }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const navRef = useRef(null)
+  const togglerRef = useRef(null)
 
-    useEffect(() => {
-    const navbar = document.querySelector(".navbar");
-    const navbarCollapse = document.getElementById("nav");
-
+  // Cerrar al hacer clic fuera del nav (solo en móvil)
+  useEffect(() => {
     const handleClickOutside = (e) => {
+      if (window.innerWidth >= 992) return // solo móvil/tablet
+
       if (
-        window.innerWidth < 992 &&
-        navbarCollapse.classList.contains("show") &&
-        !navbar.contains(e.target)
+        isOpen &&
+        navRef.current &&
+        !navRef.current.contains(e.target) &&
+        togglerRef.current &&
+        !togglerRef.current.contains(e.target)
       ) {
-        const bsCollapse =
-          Collapse.getInstance(navbarCollapse) ||
-          new Collapse(navbarCollapse, { toggle: false });
-        bsCollapse.hide();
+        setIsOpen(false)
       }
-    };
+    }
 
-    document.addEventListener("click", handleClickOutside);
-
+    document.addEventListener('click', handleClickOutside)
     return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [isOpen])
 
-
-    const handleNavClick = () => {
-    if (window.innerWidth < 992) {    
-      const navbarCollapse = document.getElementById('nav')
-      if (!navbarCollapse) return
-
-      const bsCollapse = Collapse.getInstance(navbarCollapse) 
-        || new Collapse(navbarCollapse, { toggle: false })
-
-      bsCollapse.hide()
+  const handleNavClick = () => {
+    if (window.innerWidth < 992) {
+      setIsOpen(false)
     }
   }
 
+  const handleTogglerClick = () => {
+    if (window.innerWidth < 992) {
+      setIsOpen((prev) => !prev)
+    }
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-fixed bg-gradient-1 fixed-top shadow-sm">
@@ -49,15 +47,24 @@ export function Navbar({ social }) {
           <span className="brand-flag">JC</span>
           <span className="brand-text">CODE</span>
         </a>
+
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#nav"
+          onClick={handleTogglerClick}
+          aria-controls="nav"
+          aria-expanded={isOpen ? 'true' : 'false'}
+          aria-label="Toggle navigation"
+          ref={togglerRef}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div id="nav" className="collapse navbar-collapse">
+
+        <div
+          id="nav"
+          ref={navRef}
+          className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`}
+        >
           <ul className="navbar-nav ms-auto align-items-lg-center">
             <li className="nav-item">
               <a className="nav-link" href="#skills" onClick={handleNavClick}>
@@ -84,7 +91,8 @@ export function Navbar({ social }) {
                 href={social.cv}
                 className="btn btn-hero-primary"
                 target="_blank"
-                rel="noreferrer" onClick={handleNavClick}
+                rel="noreferrer"
+                onClick={handleNavClick}
               >
                 <i className="bi bi-cloud-arrow-down me-2" />
                 Resume

@@ -197,8 +197,8 @@
 
 @media (max-width: 991.98px) {
   .hero-wrap {
-     margin-top: 5.5rem; 
-    padding-top: 1.5rem; 
+    margin-top: 4rem;   
+    padding-top: 2rem; 
     text-align: center;
   }
 
@@ -220,6 +220,18 @@
 
   .hero-avatar-wrapper {
     margin-bottom: 2rem;
+  }
+  .hero-typing-wrapper {
+    height: 150px; 
+  }
+
+  .hero-title {
+    font-size: 2.4rem; 
+    line-height: 1.2;
+  }
+
+  .hero-desc {
+    padding-top: 1rem;
   }
 }
 .hero-typewriter {

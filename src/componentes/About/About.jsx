@@ -59,15 +59,13 @@ export function About() {
               </p>
 
               <p>
-                Soy una persona <strong>colaborativo, proactivo y orientada al detalle</strong>,
+                Soy una persona <strong>colaborativa, proactiva y orientada al detalle</strong>,
                 con ganas de seguir aprendiendo y crecer profesionalmente.
                 Disfruto trabajar en equipo, compartir ideas y fomentar un entorno de <strong>
                   innovación y calidad</strong> para que cada proyecto supere las expectativas.
               </p>
             </div>
-          </div>
-
-
+          </div>        
         </div>
       </div>
     </section>
