@@ -11,7 +11,7 @@ export const projects = [
     title: 'SportBar league',
     desc: 'App fullstack con autenticación JWT y CRUD.',
     stack: ['React', 'Flask', 'REST API', 'PostgreSQL'],
-    link: '#',
+    link: 'https://sample-service-name-2ppv.onrender.com',
     repo: 'https://github.com/JCGJ94/JCGJ94-SportBarLeague',
     image:'/images/sportbar-league-captura.png',
   },
