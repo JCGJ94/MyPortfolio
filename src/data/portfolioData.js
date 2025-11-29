@@ -34,12 +34,20 @@ export const projects = [
       'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=1200&q=60',
   },
   {
-    title: 'JEG Studio',
+    title: 'Web Dev',
     desc: "Colaboración creativa en construcíon",
     stack: ['React', 'CSS', "..."],
     link: '#',
     repo: '#',
     image:'/images/coming-soon.png',
+  },
+  {
+    title: 'JEG Studio',
+    desc: "Equipo de desarrolladores",
+    stack: ['React', "Next.js", 'Tailwind CSS', ],
+    link: 'https://www.jegsdev.com/',
+    repo: 'https://github.com/JCGJ94/CodeNinja',
+    image:'/images/JegStudio.png',
   },
 ]
 
