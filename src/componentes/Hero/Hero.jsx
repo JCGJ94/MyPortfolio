@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { HeroAvatar } from './HeroAvatar'
-import { social } from '../../data/portfolioData'
 import './Hero.css'
 
 const HERO_ROLES = [
@@ -11,14 +10,14 @@ const HERO_ROLES = [
   'PostgreSQL & REST API Builder',
 ]
 
-export function Hero() {
+export function Hero({ social }) {
   const [text, setText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [loopIndex, setLoopIndex] = useState(0)
 
   useEffect(() => {
     const current = HERO_ROLES[loopIndex % HERO_ROLES.length]
-   const typingSpeed = isDeleting ? 75 : 145
+    const typingSpeed = isDeleting ? 75 : 145
 
     const timeout = setTimeout(() => {
       const nextText = isDeleting

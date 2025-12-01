@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './index.css'
-
 import { ContactModal } from './componentes/ContactModal/ContactModal'
 import { Navbar } from './componentes/Navbar/Navbar'
 import { Hero } from './componentes/Hero/Hero'
@@ -22,25 +21,27 @@ export default function App() {
     <>
       <Navbar social={social} />
 
-      <Hero social={social} />
+      <main>
+        <Hero social={social} />
 
-      <WaveDivider from="var(--bg-main)" to="#f8f9fa" />
+        <WaveDivider from="var(--bg-main)" to="#f8f9fa" />
 
-      <About/>
+        <About />
 
-      <Skills />
+        <Skills />
 
-      <WaveDivider from="#f8f9fa" to="var(--bg-main)" />
+        <WaveDivider from="#f8f9fa" to="var(--bg-main)" />
 
-      <Projects projects={projects} social={social} />
+        <Projects projects={projects} social={social} />
 
-      <WaveDivider from="var(--bg-main)" to="#f8f9fa" />
+        <WaveDivider from="var(--bg-main)" to="#f8f9fa" />
 
-      <Certs certs={certs} education={education} social={social} />
+        <Certs certs={certs} education={education} social={social} />
 
-      <WaveDivider from="#f8f9fa" to="var(--bg-main)" />
+        <WaveDivider from="#f8f9fa" to="var(--bg-main)" />
 
-      <ContactSection social={social} />
+        <ContactSection social={social} />
+      </main>
 
       <ContactModal
         emailDestino="jcdevelopment94@gmail.com"
