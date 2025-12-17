@@ -49,6 +49,14 @@ export const projects = [
     repo: 'https://github.com/JCGJ94/CodeNinja',
     image:'/images/JegStudio.png',
   },
+  {
+    title: 'Taller El Cardonal',
+    desc: "Proyecto freelance de digitalización de negocio local",
+    stack: ['React', 'CSS Custom', 'Vercel', 'SEO Básico','Google ADS + Tag Manager + Analytics'],
+    link: 'https://www.tallercardonal.es/',
+    repo: 'https://github.com/JCGJ94/Taller-de-mecanica-El-Cardonal',
+    image:'/images/taller-demo.png',
+  },
 ]
 
 export const certs = [
