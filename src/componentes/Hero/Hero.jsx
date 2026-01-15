@@ -1,46 +1,49 @@
-import { useEffect, useState } from 'react'
-import { HeroAvatar } from './HeroAvatar'
-import './Hero.css'
+import { useEffect, useState } from "react";
+import { HeroAvatar } from "./HeroAvatar";
+import "./Hero.css";
 
 const HERO_ROLES = [
-  'Full Stack Developer',
-  'Frontend Developer (React.js)',
-  'React, Bootstrap & CSS Lover',
-  'Python & Flask Developer',
-  'PostgreSQL & REST API Builder',
-]
+  "Full Stack Developer",
+  "Frontend Developer (React.js)",
+  "React, Bootstrap & CSS Lover",
+  "Python & Flask Developer",
+  "PostgreSQL & REST API Builder",
+];
 
 export function Hero({ social }) {
-  const [text, setText] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [loopIndex, setLoopIndex] = useState(0)
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopIndex, setLoopIndex] = useState(0);
 
   useEffect(() => {
-    const current = HERO_ROLES[loopIndex % HERO_ROLES.length]
-    const typingSpeed = isDeleting ? 75 : 145
+    const current = HERO_ROLES[loopIndex % HERO_ROLES.length];
+    const speed = isDeleting ? 75 : 145;
 
     const timeout = setTimeout(() => {
       const nextText = isDeleting
-        ? current.substring(0, text.length - 1)
-        : current.substring(0, text.length + 1)
+        ? current.slice(0, text.length - 1)
+        : current.slice(0, text.length + 1);
 
-      setText(nextText)
+      setText(nextText);
 
       if (!isDeleting && nextText === current) {
-        setTimeout(() => setIsDeleting(true), 800)
-      } else if (isDeleting && nextText === '') {
-        setIsDeleting(false)
-        setLoopIndex(prev => prev + 1)
+        setTimeout(() => setIsDeleting(true), 800);
       }
-    }, typingSpeed)
 
-    return () => clearTimeout(timeout)
-  }, [text, isDeleting, loopIndex])
+      if (isDeleting && nextText === "") {
+        setIsDeleting(false);
+        setLoopIndex((prev) => prev + 1);
+      }
+    }, speed);
+
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, loopIndex]);
 
   return (
     <header id="home" className="hero-wrap">
       <div className="container">
         <div className="row align-items-center gy-5">
+          {/* TEXTO */}
           <div className="col-12 col-lg-7">
             <div className="hero-text">
               <div className="hero-intro">
@@ -51,7 +54,6 @@ export function Hero({ social }) {
               <h1 className="hero-title">
                 <span className="hero-name">JoseC González,</span>
                 <br />
-
                 <span className="hero-typing-wrapper">
                   <span className="hero-typewriter hero-role">
                     {text}
@@ -60,7 +62,7 @@ export function Hero({ social }) {
               </h1>
 
               <p className="hero-desc">
-                Desarrollador <strong>full stack</strong> orientado al{' '}
+                Desarrollador <strong>full stack</strong> orientado al{" "}
                 <strong>frontend</strong>. Me gusta crear interfaces limpias,
                 rápidas y usables con React, conectadas a APIs en Flask pulidas
                 y bien estructuradas.
@@ -76,6 +78,7 @@ export function Hero({ social }) {
                   <i className="bi bi-cloud-arrow-down me-2" />
                   Resume
                 </a>
+
                 <button
                   className="btn btn-hero-outline"
                   data-bs-toggle="modal"
@@ -93,11 +96,12 @@ export function Hero({ social }) {
             </div>
           </div>
 
+          {/* AVATAR */}
           <div className="col-12 col-lg-5">
             <HeroAvatar />
           </div>
         </div>
       </div>
     </header>
-  )
+  );
 }
