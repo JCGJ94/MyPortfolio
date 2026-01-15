@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import emailjs from "emailjs-com";
 import "./ContactModal.css";
 import {
   validateField,
@@ -21,6 +22,8 @@ export function ContactModal({
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [botField, setBotField] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [messageStatus, setMessageStatus] = useState(null);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -44,9 +47,6 @@ export function ContactModal({
     }));
   };
 
-  const buildResumen = () =>
-    `Nombre: ${form.nombre}\nEmail: ${form.email}\nAsunto: ${form.asunto}\n\nMensaje:\n${form.mensaje}`;
-
   const marcarTodoTocado = () =>
     setTouched({
       nombre: true,
@@ -55,7 +55,7 @@ export function ContactModal({
       mensaje: true,
     });
 
-  const handleSendEmail = (e) => {
+  const handleSendEmail = async (e) => {
     e.preventDefault();
     if (botField) return;
 
@@ -65,9 +65,101 @@ export function ContactModal({
 
     if (!isValid) return;
 
-    const subject = encodeURIComponent(form.asunto || "Contacto");
-    const body = encodeURIComponent(buildResumen());
-    window.location.href = `mailto:${emailDestino}?subject=${subject}&body=${body}`;
+    setLoading(true);
+    setMessageStatus(null);
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // envio de email a mi mismo
+    const adminParams = {
+      to_email: emailDestino,
+      subject: `[Portfolio] ${form.asunto}`,
+      contenido:
+        `Nuevo mensaje desde el portfolio\n\n` +
+        `Nombre: ${form.nombre}\n` +
+        `Email: ${form.email}\n` +
+        `Asunto: ${form.asunto}\n\n` +
+        `Mensaje:\n${form.mensaje}`,
+      reply_to: form.email,
+    };
+
+    // Auto-respuesta al usuario
+    const autoReplyParams = {
+      to_email: form.email,
+      subject: "Gracias por tu mensaje",
+      contenido:
+        `Hola ${form.nombre},\n\n` +
+        `Gracias por ponerte en contacto conmigo a través de mi portfolio.\n` +
+        `He recibido tu mensaje correctamente y te responderé lo antes posible.\n\n` +
+        `Un saludo,\n` +
+        `JC\n` +
+        `Desarrollador Full Stack`,
+      reply_to: emailDestino,
+    };
+
+    try {
+      const [r1, r2] = await Promise.all([
+        emailjs.send(serviceId, templateId, adminParams, publicKey),
+        emailjs.send(serviceId, templateId, autoReplyParams, publicKey),
+      ]);
+
+      if (r1.status === 200 && r2.status === 200) {
+        setMessageStatus({
+          type: "success",
+          message: "✓ Mensaje enviado correctamente. Gracias por contactarme.",
+        });
+
+        setForm({
+          nombre: "",
+          email: "",
+          asunto: "Consulta desde el portfolio",
+          mensaje: "",
+        });
+        setErrors({});
+        setTouched({});
+
+        // Cerrar modal después de 2 segundos
+        setTimeout(() => {
+          const modalElement = document.getElementById("contactModal");
+          if (!modalElement) return;
+
+          //  Intento con Bootstrap (si existe)
+          if (window.bootstrap?.Modal) {
+            const modalInstance =
+              window.bootstrap.Modal.getInstance(modalElement) ||
+              new window.bootstrap.Modal(modalElement);
+
+            modalInstance.hide();
+          } else {
+            //  Fallback manual si Bootstrap no está disponible
+            modalElement.classList.remove("show");
+            modalElement.style.display = "none";
+            modalElement.setAttribute("aria-hidden", "true");
+
+            document.body.classList.remove("modal-open");
+            document.body.style.removeProperty("padding-right");
+
+            const backdrop = document.querySelector(".modal-backdrop");
+            if (backdrop) backdrop.remove();
+          }
+
+          setMessageStatus(null);
+        }, 2000);
+      } else {
+        throw new Error("EmailJS respondió con estado no esperado");
+      }
+    } catch (error) {
+      console.error("Error al enviar email:", error);
+      setMessageStatus({
+        type: "error",
+        message:
+          "✗ Error al enviar el mensaje. Por favor intenta de nuevo o usa WhatsApp.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSendWhatsApp = (e) => {
@@ -240,21 +332,46 @@ export function ContactModal({
                 No guardo tus datos: el envío se hace directamente por tu
                 email o WhatsApp.
               </div>
+
+              {messageStatus && (
+                <div
+                  className={`alert ${messageStatus.type === "success"
+                    ? "alert-success"
+                    : "alert-danger"
+                    } mt-3 mb-0`}
+                  role="alert"
+                >
+                  {messageStatus.message}
+                </div>
+              )}
             </div>
 
             <div className="modal-footer contact-modal-footer d-flex flex-column flex-sm-row gap-2">
               <button
                 type="submit"
                 className="btn contact-btn-email w-100"
-                disabled={!isFormValid}
+                disabled={!isFormValid || loading}
               >
-                <i className="bi bi-envelope me-1"></i> Enviar por email
+                {loading ? (
+                  <>
+                    <span
+                      className="spinner-border spinner-border-sm me-1"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-envelope me-1"></i> Enviar por email
+                  </>
+                )}
               </button>
               <button
                 onClick={handleSendWhatsApp}
                 className="btn contact-btn-wa w-100"
                 type="button"
-                disabled={!isFormValid}
+                disabled={!isFormValid || loading}
               >
                 <i className="bi bi-whatsapp me-1"></i> WhatsApp
               </button>
