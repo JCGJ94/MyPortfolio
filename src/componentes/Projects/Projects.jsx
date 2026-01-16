@@ -2,8 +2,36 @@
 import { useState } from 'react'
 import './Projects.css'
 
+function showAlert(message, type = 'info') {
+  const existing = document.getElementById('portfolio-global-alert')
+  if (existing) existing.remove()
+
+  const el = document.createElement('div')
+  el.id = 'portfolio-global-alert'
+  el.className = `alert alert-${type} position-fixed top-0 end-0 m-3 shadow`
+  el.style.zIndex = 1060
+  el.role = 'alert'
+  el.textContent = message
+
+  document.body.appendChild(el)
+
+  setTimeout(() => {
+    el.remove()
+  }, 3000)
+}
+
 
 function ProjectCard({ project }) {
+
+  const handleDemoClick = () => {
+    if (project.link && project.link !== '#') {
+      window.open(project.link, '_blank', 'noopener,noreferrer')
+    } else {
+      showAlert('Enlace no disponible por el momento', 'warning')
+    }
+  }
+
+  
   return (
     <div className="card project-card h-100 border-0">
       <img
@@ -26,14 +54,13 @@ function ProjectCard({ project }) {
         </div>
 
         <div className="mt-auto d-flex flex-wrap gap-2">
-          <a
+          <button
+            type="button"
             className="btn btn-sm btn-hero-primary"
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
+            onClick={handleDemoClick}
           >
             <i className="bi bi-box-arrow-up-right me-1"></i> Demo
-          </a>
+          </button>
           <a
             className="btn btn-sm btn-hero-outline"
             href={project.repo}

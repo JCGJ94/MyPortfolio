@@ -19,8 +19,8 @@ export const projects = [
     title: 'Portfolio Personal',
     desc: 'Sitio responsive para mostrar proyectos y experiencia.',
     stack: ['React', 'Bootstrap', 'CSS'],
-    link: '#',
-    repo: '#',
+    link: 'https://my-portfolio-cd9vhb7vw-jose-cs-projects-2df642b5.vercel.app/',
+    repo: 'https://github.com/JCGJ94/MyPortfolio',
     image:
     'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=60',
   },
@@ -94,3 +94,32 @@ export const education = [
     detail: 'Git, Testing, Accesibilidad, Despliegue.',
   },
 ]
+
+export const portfolioData = {
+  skills: {
+    frontend: [
+      { id: "react", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", label: "React" },
+      { id: "js", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", label: "JavaScript" },
+      { id: "bootstrap", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg", label: "Bootstrap" },
+      { id: "css", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", label: "CSS3" },
+      { id: "html", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", label: "HTML5" },
+    ],
+    backend: [
+      { id: "python", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", label: "Python" },
+      { id: "flask", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg", label: "Flask" },
+      { id: "postgres", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", label: "PostgreSQL" },
+      { id: "sqlalchemy", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg", label: "SQLAlchemy" },
+      { id: "postman", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg", label: "Postman" },
+    ],
+    tools: [
+      { id: "github", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", label: "GitHub" },
+      { id: "git", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", label: "Git" },
+      { id: "vscode", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", label: "VSCode" },
+      { id: "figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", label: "Figma" },
+    ],
+    communication: [
+      { id: "es", code: "ES", label: "Español", level: "Nativo" },
+      { id: "en", code: "EN", label: "Inglés", level: "Nivel medio" },
+    ],
+  },
+};
