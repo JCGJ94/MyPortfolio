@@ -77,17 +77,17 @@ export const projects: Project[] = [
     {
         id: 'sportbarleague',
         title: 'SportBarLeague',
-        subtitle: 'Base Técnica Full-Stack',
-        description: 'Aplicación para gestión de ligas deportivas. Implementación de autenticación JWT, modelado relacional de datos avanzado y API REST con Flask. Representa mis cimientos en el desarrollo Full Stack.',
+        subtitle: 'Full Stack Application with Python Backend',
+        description: 'Aplicación de gestión de ligas deportivas con backend completo en Python. Implementación de autenticación JWT, modelado relacional avanzado con SQLAlchemy y API REST diseñada con Flask. Demuestra competencia sólida en arquitectura backend y diseño de bases de datos.',
         image: '/projects/sportbar-league-captura.png',
-        tags: ['React', 'Flask', 'SQLAlchemy', 'PostgreSQL', 'JWT', 'REST API'],
-        badge: 'Fundación Técnica',
-        badgeEmoji: '🧱',
-        tier: 'secondary',
+        tags: ['Python', 'Flask', 'SQLAlchemy', 'PostgreSQL', 'JWT', 'REST API'],
+        badge: 'Python Backend',
+        badgeEmoji: '🐍',
+        tier: 'primary',
         highlights: [
-            'Autenticación y roles implementados desde cero',
-            'Modelado de base de datos relacional complejo',
-            'Integración frontend-backend completa'
+            'API REST completa con Flask y autenticación JWT',
+            'Modelado de base de datos relacional complejo con SQLAlchemy',
+            'Arquitectura backend robusta con Python'
         ],
         repoUrl: 'https://github.com/JCGJ94/SportBarLeague',
     }

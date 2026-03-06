@@ -34,7 +34,7 @@ export function Navbar() {
       className={cn(
         'fixed top-0 z-50 w-full transition-all duration-500',
         scrolled || isOpen
-          ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm py-3'
+          ? 'bg-background/80 backdrop-blur-md shadow-sm py-3'
           : 'bg-transparent py-5'
       )}
     >
@@ -170,6 +170,17 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Luxurious Divider Line */}
+      <div
+        className={cn(
+          "absolute bottom-0 left-0 w-full transition-all duration-700 pointer-events-none",
+          scrolled || isOpen ? "opacity-100" : "opacity-0"
+        )}
+      >
+        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent blur-[2px]" />
+      </div>
     </header>
   );
 }

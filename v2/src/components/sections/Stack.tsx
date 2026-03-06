@@ -6,10 +6,8 @@ import {
     Server,
     Database,
     Cpu,
-    Layers,
     Terminal,
-    MessageCircle,
-    Megaphone
+    MessageCircle
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -18,39 +16,29 @@ export function Stack() {
 
     const technologies = [
         {
-            category: t.stack.categories.frontend,
-            icon: <Code2 className="h-6 w-6 text-blue-500" />,
-            items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap', 'Responsive Design', 'CSS Clamp()']
-        },
-        {
             category: t.stack.categories.backend,
             icon: <Server className="h-6 w-6 text-emerald-500" />,
-            items: ['Node.js', 'NestJS', 'Python', 'Flask', 'REST APIs', 'JWT', 'Postman']
+            items: ['Python', 'Flask', 'FastAPI', 'REST APIs', 'JWT', 'SQLAlchemy', 'Node.js', 'NestJS']
+        },
+        {
+            category: t.stack.categories.frontend,
+            icon: <Code2 className="h-6 w-6 text-blue-500" />,
+            items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS']
         },
         {
             category: t.stack.categories.database,
             icon: <Database className="h-6 w-6 text-orange-500" />,
-            items: ['PostgreSQL', 'MySQL', 'SQLAlchemy', 'Supabase', 'Relational Modeling']
-        },
-        {
-            category: t.stack.categories.infrastructure,
-            icon: <Layers className="h-6 w-6 text-purple-500" />,
-            items: ['Vercel', 'Railway', 'OVHcloud', 'Git', 'CI/CD Basics', 'SEO Optimization']
+            items: ['PostgreSQL', 'Supabase', 'SQLAlchemy', 'Relational Modeling', 'Railway', 'Vercel', 'Git']
         },
         {
             category: t.stack.categories.ia,
             icon: <Cpu className="h-6 w-6 text-amber-500" />,
-            items: ['AI Skills', 'System Rules', 'Elite Context', 'Advanced Prompting', 'Antigravity', 'IA Automation']
+            items: ['Gemini API', 'LLM Orchestration', 'Agent Architecture', 'Advanced Prompting', 'AI Automation', 'Tool Calling']
         },
         {
             category: t.stack.categories.development,
             icon: <Terminal className="h-6 w-6 text-zinc-500" />,
-            items: ['GitHub', 'VSCode', 'Figma', 'npm', 'pnpm', 'Testing', 'SOLID', 'Clean Code']
-        },
-        {
-            category: t.stack.categories.marketing,
-            icon: <Megaphone className="h-6 w-6 text-red-500" />,
-            items: ['Google Ads', 'Google Analytics', 'Google Tag Manager', 'SEO Técnico']
+            items: ['GitHub', 'VSCode', 'Postman', 'Testing', 'SOLID', 'Clean Code']
         },
         {
             category: t.stack.categories.communication,
@@ -84,19 +72,18 @@ export function Stack() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 perspective-(--perspective-deep)">
                     {technologies.map((tech, i) => (
                         <motion.div
                             key={tech.category}
-                            className="p-6 rounded-2xl border border-border bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-colors group relative overflow-hidden"
+                            className="p-6 rounded-2xl border border-border bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-500 group relative overflow-hidden transform-3d hover:rotate-y-6 hover:rotate-x-2 @container shadow-sm hover:shadow-xl hover:shadow-primary/5"
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: i * 0.1 }}
-                            whileHover={{ y: -5 }}
                         >
                             {/* Animated background shape */}
-                            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors duration-500" />
+                            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors duration-500" />
 
                             <div className="flex items-center gap-4 mb-6">
                                 <motion.div
@@ -117,8 +104,8 @@ export function Stack() {
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.3, delay: (i * 0.1) + (j * 0.05) }}
-                                        whileHover={{ scale: 1.1, backgroundColor: 'var(--primary)', color: 'white' }}
-                                        className="px-3 py-1 rounded-full bg-secondary/50 text-secondary-foreground text-sm font-medium border border-border/50 cursor-default transition-colors"
+                                        whileHover={{ scale: 1.1 }}
+                                        className="px-3 py-1 rounded-full bg-secondary/50 text-secondary-foreground text-sm font-medium border border-border/50 cursor-default transition-colors hover:bg-primary hover:text-white"
                                     >
                                         {item}
                                     </motion.li>

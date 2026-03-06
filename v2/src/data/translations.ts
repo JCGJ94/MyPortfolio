@@ -12,31 +12,36 @@ export const translations = {
         },
         hero: {
             badge: 'Disponible para nuevas oportunidades en equipos técnicos',
-            title: "Hola, soy",
-            name: "JoseC González,",
+            name: "JoseC González",
             roles: [
-                "Full Stack Developer",
-                "Frontend Developer (React.js, Next.js)",
-                "Python & Flask Developer",
-                "Node.js Backend Developer",
-                "PostgreSQL & REST API Builder"
+                "Backend Developer",
+                "Python & AI Systems",
+                "REST API Architect",
+                "Data/AI Integrations"
             ],
-            titleSpan: 'Full Stack',
-            titleEnd: 'con foco en producto.',
-            description: 'Desarrollador Full Stack con una base técnica y mentalidad orientada a producto. Combino la rigurosidad de la arquitectura moderna (Node.js o Python) con la experiencia práctica de entregar proyectos reales a clientes finales. Mi enfoque se centra en construir soluciones que no solo funcionen, sino que sean mantenibles y seguras, integrando la Inteligencia Artificial como catalizador para optimizar flujos de desarrollo y calidad de entrega.',
-            caseStudy: 'Ver Caso NutriFlow',
-            viewProjects: 'Ver Proyectos',
+            description: 'Construyo APIs y servicios backend donde la arquitectura del software y la inteligencia artificial trabajan juntas para crear productos útiles y escalables.',
+            techFocus: 'Python · FastAPI · Flask · REST APIs · LLMs · AI Agents',
+            caseStudy: 'Ver proyecto NutriFlow',
+            viewProjects: 'Ver proyectos',
             downloadCv: 'Descargar CV (PDF)'
         },
         about: {
-            title: 'Desarrollo de Software',
-            titleSpan: 'enfocado en resultados.',
-            p1: 'Mi trabajo se centra en construir sistemas donde la lógica de negocio y la experiencia de usuario se unen para resolver necesidades reales.',
-            p2: 'Con una base técnica que evoluciona desde mi formación inicial en Informática (2009) hasta mi reciente especialización como Full Stack Developer, entrego soluciones funcionales integrando Frontend y Backend.',
-            p3: 'He trabajado en el desarrollo de APIs REST robustas y la digitalización de negocios, priorizando siempre la simplicidad y el código que se pueda mantener sin complicaciones.',
-            p4: 'Actualmente creciendo con Next.js y TypeScript, utilizando la Inteligencia Artificial como un apoyo estratégico para mejorar la calidad y velocidad de mis entregas.',
+            title: 'Sobre',
+            titleSpan: 'mí.',
+            subtitle: 'Desarrollador con experiencia en aplicaciones web y APIs, actualmente enfocado en el desarrollo backend con Python y el uso de inteligencia artificial en productos de software.',
+            p1: 'Mi trabajo se centra en construir APIs y servicios backend mantenibles, diseñando soluciones que transforman necesidades de negocio en productos digitales funcionales y escalables.',
+            p2: 'Con una base técnica que parte de mi formación en Informática (2009) y mi especialización como desarrollador Full Stack, he trabajado en proyectos de desarrollo de APIs REST, modelado de datos relacional y digitalización de procesos utilizando Python y Flask.',
+            p3: 'Actualmente estoy profundizando en el desarrollo backend con Python y en la construcción de aplicaciones que integran IA generativa, explorando arquitecturas basadas en agentes, automatización inteligente y el uso práctico de modelos de lenguaje dentro del ciclo de desarrollo de software.',
+            p4: 'Mi objetivo es participar en la creación de productos donde la inteligencia artificial forme parte de la arquitectura del sistema y aporte valor real a los usuarios.',
+            focusTitle: 'Foco técnico actual',
+            focusAreas: [
+                'Backend con Python (Flask / FastAPI)',
+                'APIs REST y arquitectura de servicios',
+                'IA generativa y sistemas basados en agentes (LLMs)',
+                'Automatización y herramientas de desarrollo asistido por IA'
+            ],
             stats: {
-                profile: 'Perfil Profesional',
+                profile: 'Backend + AI',
                 modeling: 'Modelado de Datos',
                 production: 'Sistemas en Producción',
                 workflow: 'Workflow Moderno'
@@ -51,13 +56,13 @@ export const translations = {
         stack: {
             title: 'Stack',
             titleSpan: 'Técnico',
-            description: 'Tecnologías y herramientas que utilizo para construir sistemas robustos, mejoradas con flujos de trabajo eficientes.',
+            description: 'Tecnologías principales con las que construyo backends, APIs y sistemas inteligentes.',
             categories: {
-                frontend: 'Frontend',
-                backend: 'Backend',
-                database: 'Base de Datos',
+                frontend: 'Frontend (complementario)',
+                backend: 'Backend (principal)',
+                database: 'Data & Infraestructura',
                 infrastructure: 'Infraestructura',
-                ia: 'Herramientas de IA',
+                ia: 'IA & Automatización',
                 development: 'Desarrollo & Herramientas',
                 marketing: 'Marketing Digital',
                 communication: 'Comunicación & Idiomas'
@@ -86,7 +91,7 @@ export const translations = {
             sendAnother: 'Enviar otro mensaje'
         },
         footer: {
-            description: 'Desarrollador Full Stack especializado en construir soluciones digitales escalables y centradas en el usuario.',
+            description: 'Backend Python Developer enfocado en construir APIs, sistemas inteligentes y soluciones escalables con IA.',
             navTitle: 'Navegación',
             resourcesTitle: 'Recursos',
             contact: 'Contacto',
@@ -104,31 +109,36 @@ export const translations = {
         },
         hero: {
             badge: 'Available for new opportunities in technical teams',
-            title: "Hi, I'm",
-            name: "JoseC González,",
+            name: "JoseC González",
             roles: [
-                "Full Stack Developer",
-                "Frontend Developer (React.js, Next.js)",
-                "Python & Flask Developer",
-                "Node.js Backend Developer",
-                "PostgreSQL & REST API Builder"
+                "Backend Developer",
+                "Python & AI Systems",
+                "REST API Architect",
+                "Data/AI Integrations"
             ],
-            titleSpan: 'Development',
-            titleEnd: 'with product focus.',
-            description: 'Full Stack Developer with a technical foundation and product-oriented mindset. I combine modern architecture rigor (Node.js or Python) with hands-on experience delivering real projects to end clients. My focus is on building solutions that not only work but are maintainable and secure, integrating Artificial Intelligence as a catalyst to optimize development workflows and delivery quality.',
-            caseStudy: 'View Case NutriFlow',
-            viewProjects: 'View Projects',
+            description: 'I build APIs and backend services where software architecture and artificial intelligence work together to create useful and scalable products.',
+            techFocus: 'Python · FastAPI · Flask · REST APIs · LLMs · AI Agents',
+            caseStudy: 'View project NutriFlow',
+            viewProjects: 'View projects',
             downloadCv: 'Download CV (PDF)'
         },
         about: {
-            title: 'Software Development',
-            titleSpan: 'focused on results.',
-            p1: 'My work focuses on building systems where business logic and user experience come together to solve real needs.',
-            p2: 'With a technical base evolving from my initial computer science training (2009) to my recent specialization as a Full Stack Developer, I deliver functional solutions integrating Frontend and Backend.',
-            p3: 'I have worked on developing robust REST APIs and business digitalization, always prioritizing simplicity and maintainable code.',
-            p4: 'Currently growing with Next.js and TypeScript, using AI as a strategic support to improve delivery quality and speed.',
+            title: 'About',
+            titleSpan: 'me.',
+            subtitle: 'Developer with experience in web applications and APIs, currently specialized in Python backend and AI-based systems.',
+            p1: 'My experience focuses on building robust APIs and backend applications, designing architectures that transform business needs into functional, scalable digital products.',
+            p2: 'With a technical foundation from my Computer Science training (2009) and my specialization as a developer, I have worked on REST API projects, relational data modeling, and process digitalization with Python and Flask.',
+            p3: 'My current professional focus is on Python backend and applications powered by generative AI, exploring agent-based architectures, intelligent automation, and the strategic use of LLMs within the software development lifecycle.',
+            p4: 'My goal is to contribute to building products where artificial intelligence is integrated as a core part of the software architecture.',
+            focusTitle: 'Current specialization',
+            focusAreas: [
+                'Python Backend (Flask / FastAPI)',
+                'REST APIs & microservices architecture',
+                'Generative AI & agent-based systems (LLMs)',
+                'Automation & AI-assisted dev tools'
+            ],
             stats: {
-                profile: 'Professional Profile',
+                profile: 'Backend + AI',
                 modeling: 'Data Modeling',
                 production: 'Production Systems',
                 workflow: 'Modern Workflow'
@@ -143,13 +153,13 @@ export const translations = {
         stack: {
             title: 'Technical',
             titleSpan: 'Stack',
-            description: 'Technologies and tools I use to build robust systems, enhanced with efficient workflows.',
+            description: 'Core technologies I use to build backends, APIs, and intelligent systems.',
             categories: {
-                frontend: 'Frontend',
-                backend: 'Backend',
-                database: 'Database',
+                frontend: 'Frontend (complementary)',
+                backend: 'Backend (primary)',
+                database: 'Data & Infrastructure',
                 infrastructure: 'Infrastructure',
-                ia: 'AI Tooling',
+                ia: 'AI & Automation',
                 development: 'Development & Tools',
                 marketing: 'Digital Marketing',
                 communication: 'Communication & Languages'
@@ -178,7 +188,7 @@ export const translations = {
             sendAnother: 'Send another message'
         },
         footer: {
-            description: 'Full Stack Developer specialized in building scalable and user-centered digital solutions.',
+            description: 'Backend Python Developer focused on building APIs, intelligent systems, and scalable solutions with AI.',
             navTitle: 'Navigation',
             resourcesTitle: 'Resources',
             contact: 'Contact',
@@ -189,31 +199,36 @@ export const translations = {
         nav: { home: 'Start', projects: 'Projekte', about: 'Über mich', nutriflow: 'NutriFlow', cv: 'CV', cta: 'Technikbereich' },
         hero: {
             badge: 'Verfügbar für neue Möglichkeiten in technischen Teams',
-            title: "Hallo, ich bin",
-            name: "JoseC González,",
+            name: "JoseC González",
             roles: [
-                "Full Stack Developer",
-                "Frontend Developer (React.js, Next.js)",
-                "Python & Flask Developer",
-                "Node.js Backend Developer",
-                "PostgreSQL & REST API Builder"
+                "Backend Developer",
+                "Python & AI Systems",
+                "REST API Architect",
+                "Data/AI Integrations"
             ],
-            titleSpan: 'Entwicklung',
-            titleEnd: 'mit Produktfokus.',
-            description: 'Ich verwandle Ideen in funktionale digitale Lösungen. Spezialisiert auf das JavaScript-Ökosystem (React.js, Node.js, Next.js) und Python (Flask), mit Praxiserfahrung und Engagement für Best Practices.',
-            caseStudy: 'NutriFlow Fallstudie',
+            description: 'Ich entwickle APIs und Backend-Dienste, bei denen Softwarearchitektur und künstliche Intelligenz zusammenarbeiten, um nützliche und skalierbare Produkte zu schaffen.',
+            techFocus: 'Python · FastAPI · Flask · REST APIs · LLMs · AI Agents',
+            caseStudy: 'Projekt NutriFlow ansehen',
             viewProjects: 'Projekte ansehen',
             downloadCv: 'CV herunterladen (PDF)'
         },
         about: {
-            title: 'Softwareentwicklung',
-            titleSpan: 'ergebnisorientiert.',
-            p1: 'Meine Arbeit konzentriert sich darauf, Systeme zu bauen, in denen Geschäftslogik und Benutzererfahrung zusammenkommen.',
-            p2: 'Von der Ausbildung 2009 bis zur Spezialisierung als Full Stack Developer liefere ich funktionale Lösungen.',
-            p3: 'Ich habe robuste REST-APIs entwickelt und Unternehmen digitalisiert.',
-            p4: 'Derzeit wachse ich mit Next.js und TypeScript, unterstützt durch KI.',
+            title: 'Über',
+            titleSpan: 'mich.',
+            subtitle: 'Entwickler mit Erfahrung in Webanwendungen und APIs, derzeit spezialisiert auf Python-Backend und KI-basierte Systeme.',
+            p1: 'Meine Erfahrung konzentriert sich auf den Aufbau robuster APIs und Backend-Anwendungen.',
+            p2: 'Von meiner Informatik-Ausbildung (2009) bis zur Spezialisierung als Entwickler habe ich an REST-APIs, Datenmodellierung und Prozessdigitalisierung mit Python und Flask gearbeitet.',
+            p3: 'Mein aktueller Fokus liegt auf Python-Backend und generativer KI, agentenbasierten Architekturen und intelligenter Automatisierung.',
+            p4: 'Mein Ziel ist es, Produkte mitzugestalten, in denen KI ein zentraler Teil der Softwarearchitektur ist.',
+            focusTitle: 'Aktuelle Spezialisierung',
+            focusAreas: [
+                'Python Backend (Flask / FastAPI)',
+                'REST-APIs & Microservices-Architektur',
+                'Generative KI & agentenbasierte Systeme (LLMs)',
+                'Automatisierung & KI-gestützte Entwicklungstools'
+            ],
             stats: {
-                profile: 'Beruflicher Werdegang',
+                profile: 'Backend + KI',
                 modeling: 'Datenmodellierung',
                 production: 'Produktionssysteme',
                 workflow: 'Moderner Workflow'
@@ -228,13 +243,13 @@ export const translations = {
         stack: {
             title: 'Tech',
             titleSpan: 'Stack',
-            description: 'Technologien und Tools, die ich für robuste Systeme nutze.',
+            description: 'Kerntechnologien, mit denen ich Backends, APIs und intelligente Systeme baue.',
             categories: {
-                frontend: 'Frontend',
-                backend: 'Backend',
-                database: 'Datenbank',
+                frontend: 'Frontend (ergänzend)',
+                backend: 'Backend (Hauptbereich)',
+                database: 'Daten & Infrastruktur',
                 infrastructure: 'Infrastruktur',
-                ia: 'KI-Tools',
+                ia: 'KI & Automatisierung',
                 development: 'Entwicklung & Tools',
                 marketing: 'Digitales Marketing',
                 communication: 'Kommunikation & Sprachen'
@@ -263,7 +278,7 @@ export const translations = {
             sendAnother: 'Weitere Nachricht'
         },
         footer: {
-            description: 'Full-Stack-Entwickler, spezialisiert auf skalierbare und benutzerzentrierte digitale Lösungen.',
+            description: 'Backend Python Developer, spezialisiert auf APIs, intelligente Systeme und skalierbare Lösungen mit KI.',
             navTitle: 'Navigation',
             resourcesTitle: 'Ressourcen',
             contact: 'Kontakt',
@@ -274,31 +289,36 @@ export const translations = {
         nav: { home: 'Accueil', projects: 'Projets', about: 'À propos', nutriflow: 'NutriFlow', cv: 'CV', cta: 'Zone Technique' },
         hero: {
             badge: 'Disponible pour de nouvelles opportunités',
-            title: "Bonjour, je suis",
-            name: "JoseC González,",
+            name: "JoseC González",
             roles: [
-                "Full Stack Developer",
-                "Frontend Developer (React.js, Next.js)",
-                "Python & Flask Developer",
-                "Node.js Backend Developer",
-                "PostgreSQL & REST API Builder"
+                "Backend Developer",
+                "Python & AI Systems",
+                "REST API Architect",
+                "Data/AI Integrations"
             ],
-            titleSpan: 'Full Stack',
-            titleEnd: 'axé sur le produit.',
-            description: 'Je transforme des idées en solutions numériques. Spécialisé en JavaScript (React.js, Node.js, Next.js) et Python (Flask).',
-            caseStudy: 'Voir NutriFlow',
-            viewProjects: 'Voir Projets',
+            description: 'Je construis des APIs et des services backend où l\'architecture logicielle et l\'intelligence artificielle travaillent ensemble pour créer des produits utiles et évolutifs.',
+            techFocus: 'Python · FastAPI · Flask · REST APIs · LLMs · AI Agents',
+            caseStudy: 'Voir projet NutriFlow',
+            viewProjects: 'Voir projets',
             downloadCv: 'Télécharger CV (PDF)'
         },
         about: {
-            title: 'Développement Logiciel',
-            titleSpan: 'axé sur les résultats.',
-            p1: 'Mon travail se concentre sur la création de systèmes où la logique métier et l\'expérience utilisateur s\'unissent.',
-            p2: 'De ma formation en 2009 à ma spécialisation Full Stack, je fournis des solutions fonctionnelles.',
-            p3: 'J\'ai développé des API REST robustes et numérisé des entreprises.',
-            p4: 'Actuellement, je progresse avec Next.js et TypeScript, en utilisant l\'IA comme soutien.',
+            title: 'À',
+            titleSpan: 'propos.',
+            subtitle: 'Développeur expérimenté en applications web et APIs, spécialisé actuellement en backend Python et systèmes basés sur l\'IA.',
+            p1: 'Mon expérience se concentre sur la construction d\'APIs robustes et d\'applications backend.',
+            p2: 'Avec une formation en informatique (2009) et ma spécialisation comme développeur, j\'ai travaillé sur les API REST, la modélisation de données et la digitalisation avec Python et Flask.',
+            p3: 'Mon focus actuel est sur le backend Python et l\'IA générative, l\'architecture agentique et l\'automatisation intelligente.',
+            p4: 'Mon objectif est de contribuer à des produits où l\'IA est intégrée au cœur de l\'architecture logicielle.',
+            focusTitle: 'Spécialisation actuelle',
+            focusAreas: [
+                'Python Backend (Flask / FastAPI)',
+                'APIs REST & architecture microservices',
+                'IA générative & systèmes agentiques (LLMs)',
+                'Automatisation & outils de développement IA'
+            ],
             stats: {
-                profile: 'Profil Professionnel',
+                profile: 'Backend + IA',
                 modeling: 'Modélisation de Données',
                 production: 'Systèmes en Production',
                 workflow: 'Workflow Moderne'
@@ -313,13 +333,13 @@ export const translations = {
         stack: {
             title: 'Stack',
             titleSpan: 'Technique',
-            description: 'Technologies et outils utilisés pour des systèmes robustes.',
+            description: 'Technologies principales pour construire des backends, APIs et systèmes intelligents.',
             categories: {
-                frontend: 'Frontend',
-                backend: 'Backend',
-                database: 'Base de données',
+                frontend: 'Frontend (complémentaire)',
+                backend: 'Backend (principal)',
+                database: 'Données & Infrastructure',
                 infrastructure: 'Infrastructure',
-                ia: 'Outils IA',
+                ia: 'IA & Automatisation',
                 development: 'Développement & Outils',
                 marketing: 'Marketing Digital',
                 communication: 'Communication & Langues'
@@ -348,7 +368,7 @@ export const translations = {
             sendAnother: 'Envoyer un autre'
         },
         footer: {
-            description: 'Développeur Full Stack spécialisé en solutions digitales évolutives et centrées sur l\'utilisateur.',
+            description: 'Backend Python Developer spécialisé dans la construction d\'APIs, systèmes intelligents et solutions scalables avec IA.',
             navTitle: 'Navigation',
             resourcesTitle: 'Ressources',
             contact: 'Contact',
@@ -359,31 +379,36 @@ export const translations = {
         nav: { home: 'Inizio', projects: 'Progetti', about: 'Su di me', nutriflow: 'NutriFlow', cv: 'CV', cta: 'Area Tecnica' },
         hero: {
             badge: 'Disponibile per nuove opportunità',
-            title: "Ciao, sono",
-            name: "JoseC González,",
+            name: "JoseC González",
             roles: [
-                "Full Stack Developer",
-                "Frontend Developer (React.js, Next.js)",
-                "Python & Flask Developer",
-                "Node.js Backend Developer",
-                "PostgreSQL & REST API Builder"
+                "Backend Developer",
+                "Python & AI Systems",
+                "REST API Architect",
+                "Data/AI Integrations"
             ],
-            titleSpan: 'Full Stack',
-            titleEnd: 'orientato al prodotto.',
-            description: 'Trasformo idee in soluzioni digitali. Specializzato in JavaScript (React.js, Node.js, Next.js) e Python (Flask).',
-            caseStudy: 'Vedi NutriFlow',
-            viewProjects: 'Vedi Progetti',
+            description: 'Costruisco API e servizi backend in cui l\'architettura del software e l\'intelligenza artificiale lavorano insieme per creare prodotti utili e scalabili.',
+            techFocus: 'Python · FastAPI · Flask · REST APIs · LLMs · AI Agents',
+            caseStudy: 'Vedi progetto NutriFlow',
+            viewProjects: 'Vedi progetti',
             downloadCv: 'Scarica CV (PDF)'
         },
         about: {
-            title: 'Sviluppo Software',
-            titleSpan: 'focalizzato sui risultati.',
-            p1: 'Il mio lavoro si concentra sulla costruzione di sistemi dove logica e UX si uniscono.',
-            p2: 'Dalla formazione nel 2009 alla specializzazione Full Stack, offro soluzioni funzionali.',
-            p3: 'Ho sviluppato API REST robuste e digitalizzato aziende.',
-            p4: 'Attualmente cresco con Next.js e TypeScript, usando l\'IA.',
+            title: 'Su',
+            titleSpan: 'di me.',
+            subtitle: 'Sviluppatore con esperienza in applicazioni web e API, attualmente specializzato in backend Python e sistemi basati sull\'IA.',
+            p1: 'La mia esperienza si concentra sulla costruzione di API robuste e applicazioni backend.',
+            p2: 'Con una formazione in informatica (2009) e la specializzazione come sviluppatore, ho lavorato su API REST, modellazione dati e digitalizzazione con Python e Flask.',
+            p3: 'Il mio focus attuale è su backend Python e IA generativa, architetture ad agenti e automazione intelligente.',
+            p4: 'Il mio obiettivo è contribuire a prodotti dove l\'IA è parte centrale dell\'architettura software.',
+            focusTitle: 'Specializzazione attuale',
+            focusAreas: [
+                'Backend Python (Flask / FastAPI)',
+                'API REST & architettura microservizi',
+                'IA generativa & sistemi ad agenti (LLMs)',
+                'Automazione & strumenti di sviluppo IA'
+            ],
             stats: {
-                profile: 'Profilo Professionale',
+                profile: 'Backend + IA',
                 modeling: 'Modellazione Dati',
                 production: 'Sistemi in Produzione',
                 workflow: 'Workflow Moderno'
@@ -398,13 +423,13 @@ export const translations = {
         stack: {
             title: 'Stack',
             titleSpan: 'Tecnico',
-            description: 'Tecnologie e strumenti per sistemi robusti.',
+            description: 'Tecnologie principali per costruire backend, API e sistemi intelligenti.',
             categories: {
-                frontend: 'Frontend',
-                backend: 'Backend',
-                database: 'Database',
+                frontend: 'Frontend (complementare)',
+                backend: 'Backend (principale)',
+                database: 'Data & Infrastruttura',
                 infrastructure: 'Infrastruttura',
-                ia: 'Strumenti IA',
+                ia: 'IA & Automazione',
                 development: 'Sviluppo & Strumenti',
                 marketing: 'Marketing Digitale',
                 communication: 'Comunicazione & Lingue'
@@ -433,7 +458,7 @@ export const translations = {
             sendAnother: 'Invia un altro'
         },
         footer: {
-            description: 'Sviluppatore Full Stack specializzato nella creazione di soluzioni digitali scalabili e centrate sull\'utente.',
+            description: 'Backend Python Developer specializzato nella costruzione di API, sistemi intelligenti e soluzioni scalabili con IA.',
             navTitle: 'Navigazione',
             resourcesTitle: 'Risorse',
             contact: 'Contatto',

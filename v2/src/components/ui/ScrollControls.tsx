@@ -18,10 +18,10 @@ export function ScrollControls() {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        whileHover={{ scale: 1.1, backgroundColor: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))' }}
+                        whileHover={{ scale: 1.1, backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
                         whileTap={{ scale: 0.9 }}
                         onClick={scrollPrev}
-                        className="flex items-center justify-center w-12 h-12 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground transition-colors"
+                        className="flex items-center justify-center w-12 h-12 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground"
                     >
                         <ChevronsUp className="w-6 h-6" />
                     </motion.button>
@@ -34,10 +34,10 @@ export function ScrollControls() {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        whileHover={{ scale: 1.1, backgroundColor: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))' }}
+                        whileHover={{ scale: 1.1, backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
                         whileTap={{ scale: 0.9 }}
                         onClick={scrollNext}
-                        className="flex items-center justify-center w-12 h-12 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground transition-colors"
+                        className="flex items-center justify-center w-12 h-12 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground"
                     >
                         <ChevronsDown className="w-6 h-6" />
                     </motion.button>

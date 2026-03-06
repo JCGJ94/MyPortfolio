@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# José Carlos - Software Engineer Portfolio v2
 
-## Getting Started
+> **"Este desarrollador no solo hace páginas. Construye sistemas."**
 
-First, run the development server:
+Bienvenido al código fuente de mi portafolio v2. Este proyecto nació con una visión clara: dejar de ser un currículum digital estático para convertirse en **una plataforma interactiva que funciona como un producto real**.
+
+## 🚀 La Evolución (De v1 a v2)
+
+La primera versión de este portafolio fue construida como una Single Page Application (SPA) tradicional utilizando React y Vite. Cumplía su función, pero no reflejaba mi progreso técnico real hacia el desarrollo Full Stack avanzado orientado a IA y la construcción de sistemas robustos.
+
+Esta **versión 2** es una reescritura completa desde cero enfocada en la escalabilidad, el rendimiento y la integración completa de un Backend (BaaS) con arquitecturas de próxima generación.
+
+## 🛠 Stack Técnico (2026 Standards)
+
+Este proyecto está construido siguiendo los más altos estándares modernos (Gemini Elite Core Standards):
+
+### Core & Framework
+- **Next.js 16.1** (App Router)
+- **React 19.2** (Server Components, Actions)
+- **TypeScript** (Estricto)
+
+### Styling & UI
+- **Tailwind CSS 4.0** (CSS-First, optimizado)
+- **Framer Motion** (Animaciones a 60fps con control preciso, ej. efecto *.monks*)
+- Componentes altamente modulares y accesibles
+
+### Backend & Datos
+- **Supabase** (Auth & PostgreSQL DB)
+- Autenticación real (Login, Registro, Persistencia de sesión y Cookies seguras)
+- Edge-ready data fetching
+
+### Herramientas & Calidad
+- **Bun** (Runtime y Package Manager)
+- **Zod** (Validación de esquemas)
+- **Resend** (Integración de emails)
+- Strict Linting & Type Checking
+
+## 🏗 Arquitectura
+
+El proyecto emplea una arquitectura modular basada en las mejores prácticas de Next.js App Router:
+
+- **`/app`**: Rutas de la aplicación (Landing, Proyectos, flujos de Autenticación).
+- **`/components`**: UI reutilizable organizada atómicamente (`/ui`, `/sections`, `/layout`).
+- **`/lib`**: Utilidades core (instancias de Supabase Clients, validaciones, mailers).
+- **`/data`**: Orígenes de datos estáticos y sincronización.
+
+Para más detalles, revisa la [Documentación de Arquitectura](./docs/architecture.md).
+
+## 🏃‍♂️ Quick Start
+
+Si deseas ejecutar este proyecto localmente:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# 1. Clonar el repositorio
+git clone <repo-url>
+cd mi-cv/v2
+
+# 2. Instalar dependencias con Bun (recomendado)
+bun install
+
+# 3. Configurar variables de entorno (Supabase, Resend)
+cp .env.example .env.local
+
+# 4. Iniciar el servidor de desarrollo
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📚 Documentación Adicional
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Architecture & System Design](./docs/architecture.md)
+- [Recruiter's Guide: Entendiendo el Perfil](./docs/recruiters-guide.md)
+- [Plan de Refinamiento Original](./docs/cv-refinement-plan.md)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Diseñado y desarrollado por José Carlos - 2026*

@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground flex flex-col min-h-screen`}>
+      <body suppressHydrationWarning className={`${inter.variable} font-sans antialiased bg-background text-foreground flex flex-col min-h-screen`}>
         <LanguageProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <JsonLd />

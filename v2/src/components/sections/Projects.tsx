@@ -15,7 +15,10 @@ export function Projects() {
   const [isHovering, setIsHovering] = React.useState(false);
   const [position, setPosition] = React.useState({ x: 0, y: 0 });
 
-  const handlePointerEnter = (project: Project) => {
+  const handlePointerEnter = (project: Project, e?: React.PointerEvent) => {
+    if (e && (e.target as HTMLElement).closest('.project-btn-container')) {
+      return;
+    }
     setActiveProject(project);
     setIsHovering(true);
   };
@@ -24,7 +27,15 @@ export function Projects() {
     setIsHovering(false);
   };
 
-  const handlePointerMove = (e: React.PointerEvent) => {
+  const handlePointerMove = (e: React.PointerEvent, project: Project) => {
+    if ((e.target as HTMLElement).closest('.project-btn-container')) {
+      if (isHovering) setIsHovering(false);
+      return;
+    }
+    if (!isHovering || activeProject?.id !== project.id) {
+      setActiveProject(project);
+      setIsHovering(true);
+    }
     setPosition({ x: e.clientX + 24, y: e.clientY + 24 });
   };
 
@@ -63,15 +74,15 @@ export function Projects() {
           {projects.map((project, i) => (
             <motion.div
               key={project.id}
-              className="group relative flex flex-col md:flex-row md:items-center justify-between py-3 md:py-5 border-b border-border transition-all duration-500 hover:px-4"
+              className="group relative flex flex-col md:flex-row md:items-center justify-between py-5 border-b border-border transition-all duration-500"
               initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
-              onPointerEnter={() => handlePointerEnter(project)}
-              onPointerMove={handlePointerMove}
+              onPointerEnter={(e) => handlePointerEnter(project, e)}
+              onPointerMove={(e) => handlePointerMove(e, project)}
             >
-              <div className="max-w-xl transition-transform duration-500 group-hover:translate-x-2">
+              <div className="max-w-xl transition-transform duration-500">
                 {project.badge && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -104,12 +115,12 @@ export function Projects() {
                 </div>
               </div>
 
-              <div className="mt-4 md:mt-0 flex shrink-0 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300">
+              <div className="project-btn-container mt-6 md:mt-0 md:ml-auto flex items-center justify-start md:justify-end shrink-0 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-500">
                 <MagneticPillButton
                   href={`/${project.id}`}
                   label={t.projects.viewProject}
-                  variant="primary"
-                  className="px-5 py-2.5 text-[10px] uppercase tracking-widest font-black"
+                  variant="ghost"
+                  className="py-3 px-6 text-sm bg-slate-900 border-slate-800 text-white hover:border-slate-700 dark:bg-white/5 dark:border-white/10 !group-hover/btn:text-white"
                 />
               </div>
 
