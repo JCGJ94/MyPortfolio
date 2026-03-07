@@ -47,27 +47,34 @@ export function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Configuration for EmailJS
-      // The user should set these in .env.local
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'default_service';
       const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_id';
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'public_key';
 
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          reply_to: formData.email,
-        },
-        publicKey
-      );
+      const adminParams = {
+        to_email: 'jcdevelopment94@gmail.com',
+        subject: `[Portfolio] Mensaje de ${formData.name}`,
+        contenido: `Nuevo mensaje desde el portfolio\n\nNombre: ${formData.name}\nEmail: ${formData.email}\n\nMensaje:\n${formData.message}`,
+        reply_to: formData.email,
+      };
 
-      setIsSuccess(true);
-      // setFormData({ name: '', email: '', message: '' }); // Moved to success button click
+      const autoReplyParams = {
+        to_email: formData.email,
+        subject: "Gracias por tu mensaje",
+        contenido: `Hola ${formData.name},\n\nGracias por ponerte en contacto conmigo a través de mi portfolio.\nHe recibido tu mensaje correctamente y te responderé lo antes posible.\n\nUn saludo,\nJC\nDesarrollador Full Stack`,
+        reply_to: 'jcdevelopment94@gmail.com',
+      };
 
+      const [r1, r2] = await Promise.all([
+        emailjs.send(serviceId, templateId, adminParams, publicKey),
+        emailjs.send(serviceId, templateId, autoReplyParams, publicKey),
+      ]);
+
+      if (r1.status === 200 && r2.status === 200) {
+        setIsSuccess(true);
+      } else {
+        throw new Error("EmailJS respondió con estado no esperado");
+      }
     } catch (error) {
       console.error('EmailJS Error:', error);
       setSubmitError('Hubo un problema al enviar el mensaje. Por favor, verifica tu configuración de EmailJS o inténtalo más tarde.');

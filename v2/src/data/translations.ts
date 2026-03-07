@@ -14,6 +14,7 @@ export const translations = {
             badge: 'Disponible para nuevas oportunidades en equipos técnicos',
             name: "JoseC González",
             roles: [
+                "Full Stack Developer",
                 "Backend Developer",
                 "Python & AI Systems",
                 "REST API Architect",
@@ -111,6 +112,7 @@ export const translations = {
             badge: 'Available for new opportunities in technical teams',
             name: "JoseC González",
             roles: [
+                "Full Stack Developer",
                 "Backend Developer",
                 "Python & AI Systems",
                 "REST API Architect",
@@ -201,6 +203,7 @@ export const translations = {
             badge: 'Verfügbar für neue Möglichkeiten in technischen Teams',
             name: "JoseC González",
             roles: [
+                "Full Stack Developer",
                 "Backend Developer",
                 "Python & AI Systems",
                 "REST API Architect",
@@ -291,6 +294,7 @@ export const translations = {
             badge: 'Disponible pour de nouvelles opportunités',
             name: "JoseC González",
             roles: [
+                "Full Stack Developer",
                 "Backend Developer",
                 "Python & AI Systems",
                 "REST API Architect",
@@ -381,6 +385,7 @@ export const translations = {
             badge: 'Disponibile per nuove opportunità',
             name: "JoseC González",
             roles: [
+                "Full Stack Developer",
                 "Backend Developer",
                 "Python & AI Systems",
                 "REST API Architect",

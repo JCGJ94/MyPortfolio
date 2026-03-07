@@ -22,7 +22,7 @@ export function Hero() {
               {t.hero.badge}
             </div>
 
-            <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-4 text-balance leading-[0.9]">
+            <h1 className="text-4xl md:text-7xl font-black tracking-tight mb-4 text-balance leading-[0.9]">
               <span className="bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">{t.hero.name}</span>
             </h1>
 
@@ -43,13 +43,13 @@ export function Hero() {
                 href="/nutriflow"
                 label={t.hero.caseStudy}
                 variant="primary"
-                className="py-4 px-10 text-base shadow-2xl shadow-primary/20 min-w-[220px]"
+                className="py-3 px-8 text-sm shadow-2xl shadow-primary/20 min-w-[180px]"
               />
               <MagneticPillButton
                 href="/#projects"
                 label={t.hero.viewProjects}
                 variant="ghost"
-                className="py-4 px-10 text-base min-w-[220px] bg-white/5 border-white/10"
+                className="py-3 px-8 text-sm min-w-[180px] bg-white/5 border-white/10"
               />
             </div>
           </div>
