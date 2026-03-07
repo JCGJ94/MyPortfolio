@@ -1,11 +1,12 @@
 import { MetadataRoute } from 'next';
 
+const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : 'https://mi-cv.vercel.app');
+
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://mi-cv.vercel.app';
-
-    // En aplicaciones reales, podrías obtener los IDs de proyectos de una DB
-    // Por ahora los definimos estáticamente basados en el PRD
-
     const routes = [
         '',
         '/nutriflow',

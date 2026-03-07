@@ -1,5 +1,11 @@
 import { MetadataRoute } from 'next';
 
+const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : 'https://mi-cv.vercel.app');
+
 export default function robots(): MetadataRoute.Robots {
     return {
         rules: {
@@ -7,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/api/', '/dashboard/'],
         },
-        sitemap: 'https://mi-cv.vercel.app/sitemap.xml',
+        sitemap: `${baseUrl}/sitemap.xml`,
     };
 }

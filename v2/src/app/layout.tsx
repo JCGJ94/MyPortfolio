@@ -13,6 +13,12 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'https://mi-cv.vercel.app');
+
 export const metadata: Metadata = {
   title: {
     default: 'JC | F.S Developer',
@@ -25,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://mi-cv.vercel.app',
+    url: siteUrl,
     title: 'JC | F.S Developer',
     description: 'Construyendo sistemas de alto rendimiento y arquitecturas escalables.',
     siteName: 'Jose Carlos González Portfolio',
@@ -60,7 +66,7 @@ export default function RootLayout({
             <Footer />
           </ThemeProvider>
         </LanguageProvider>
-        <DevTools />
+        {process.env.NODE_ENV === 'development' && <DevTools />}
       </body>
     </html>
   );

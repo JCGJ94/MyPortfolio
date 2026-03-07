@@ -62,7 +62,7 @@ export function Hero() {
               <div className="absolute inset-0 bg-blue-500/10 rounded-full blur-[80px] -translate-x-10 translate-y-10"></div>
 
               <Image
-                src="/heroAvatarCombined.svg"
+                src="/heroAvatar.png"
                 alt="Jose Carlos Avatar"
                 width={550}
                 height={550}
