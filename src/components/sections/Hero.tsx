@@ -49,7 +49,7 @@ export function Hero() {
                 href="/#projects"
                 label={t.hero.viewProjects}
                 variant="ghost"
-                className="py-3 px-8 text-sm min-w-[180px] bg-white/5 border-white/10"
+                className="py-3 px-8 text-sm min-w-[180px] bg-background/50 border-border"
               />
             </div>
           </div>

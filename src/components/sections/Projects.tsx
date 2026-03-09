@@ -120,7 +120,7 @@ export function Projects() {
                   href={`/${project.id}`}
                   label={t.projects.viewProject}
                   variant="ghost"
-                  className="py-3 px-6 text-sm bg-slate-900 border-slate-800 text-white hover:border-slate-700 dark:bg-white/5 dark:border-white/10 !group-hover/btn:text-white"
+                  className="py-3 px-6 text-sm bg-background/50 border-border hover:border-primary/50 dark:bg-white/5 dark:border-white/10"
                 />
               </div>
 
