@@ -1,43 +1,54 @@
-# 🏗 Architecture & System Design
+# 🏗 System Architecture & Design / Arquitectura y Diseño del Sistema
 
-Este documento detalla las decisiones arquitectónicas del Portafolio v2, diseñado no como un simple escaparate de proyectos, sino como un **producto digital completo** y escalable.
+> **[ES]** Este documento detalla las decisiones arquitectónicas del Portafolio v2. El sistema está diseñado como una plataforma escalable y modular, construida sobre estándares de la industria (2026).
+> **[EN]** This document details the architectural decisions of Portfolio v2. The system is designed as a scalable and modular platform, built on industry standards (2026).
 
-## 1. Visión del Sistema
+## 1. Visión del Sistema / System Vision
 
-La meta principal era migrar de un entorno estático (Vite/React SPA - v1) a un entorno SSR/SSG dinámico, con capacidades transaccionales (Auth) y un modelo mental enfocado en el "Product Delivery".
+**[ES]** La transición de una arquitectura SPA estática a un entorno Server-Side Rendering (SSR) dinámico responde a la necesidad de construir un sistema con capacidades transaccionales y manejo de estado robusto.
+**[EN]** The transition from a static SPA architecture to a dynamic Server-Side Rendering (SSR) environment responds to the need to build a system with transactional capabilities and robust state management.
 
-El portafolio actúa como una plataforma SaaS minimalista, donde los usuarios (y reclutadores) pueden explorar proyectos, interactuar con el entorno y, eventualmente, consumir contenido protegido.
+## 2. Infrastructure & Edge Strategy / Infraestructura y Estrategia Edge
 
-## 2. Infrastructure & Edge Strategy
+- **Next.js 16 (App Router)**:
+  - **[ES]** Arquitectura basada en componentes de servidor (`RSC`). El cálculo pesado ocurre en la capa del servidor/Edge, reduciendo el peso del bundle JavaScript y logrando métricas Lighthouse >95.
+  - **[EN]** Architecture based on Server Components (`RSC`). Heavy computation happens on the Server/Edge layer, reducing the JavaScript bundle size and achieving Lighthouse metrics >95.
+- **Server Actions**:
+  - **[ES]** Las mutaciones (ej. formularios, auth) se manejan orgánicamente. Se eliminan las rutas API REST innecesarias, logrando alta cohesión.
+  - **[EN]** Mutations (e.g. forms, auth) are handled organically. Unnecessary REST API routes are eliminated, achieving high cohesion.
 
-- **Next.js 16 (App Router)**: Utilizamos componentes de servidor (`RSC`) por defecto para empujar la mayor cantidad de trabajo al servidor. Esto reduce drásticamente el peso del JavaScript en el cliente, logrando un Lighthouse Score de >95.
-- **Server Actions**: Las mutaciones (ej. envío de formularios de contacto) se manejan nativamente a través de Server Actions de React 19, eliminando la necesidad de rutas API monolíticas, logrando una cohesión directa entre UI y Lógica.
+## 3. Data & Auth Layer / Capa de Datos y Autenticación (Supabase)
 
-## 3. Data & Auth Layer (Supabase)
+### Autenticación Segura / Secure Authentication
+- **[ES]** Implementación de `@supabase/ssr` para manejo de sesión persistente con cookies seguras. Segmentación de rutas mediante Next.js Middleware.
+- **[EN]** `@supabase/ssr` implementation for persistent session management using secure cookies. Route segmentation via Next.js Middleware.
 
-El sistema integra **Supabase** como Backend as a Service (BaaS):
+### Base de Datos PostgreSQL / PostgreSQL Database
+- **[ES]** **Esquema Core**: Tablas relacionales como `users` y `profiles`. **Seguridad Zero-Trust**: Implementación de políticas de Row Level Security (RLS).
+- **[EN]** **Core Schema**: Relational tables like `users` and `profiles`. **Zero-Trust Security**: Implementation of Row Level Security (RLS) policies.
 
-### Autenticación Segura
-- Utilizamos `@supabase/ssr` para un manejo de cookies de sesión seguro, resistente a ataques comunes.
-- El ciclo de autenticación está integrado con middlewares en Next.js para proteger rutas (ej. `/dashboard`).
+## 4. UI Architecture & Motion / Arquitectura UI y Animaciones
 
-### Base de Datos Postgres
-- **Tablas Core**: `users` (auth nativo), `profiles` (datos públicos/extendidos del usuario).
-- **Zero-Trust**: Se han implementado Row Level Security (RLS) policies en la DB para asegurar que ningún endpoint exponga datos que no pertenecen estrictamente al portafolio y a la sesión del usuario.
+- **Atomic Components / Componentes Atómicos**:
+  - **[ES]** Separación estricta entre componentes de presentación (`/components/ui`) y lógicos (`/components/auth`).
+  - **[EN]** Strict separation between presentation (`/components/ui`) and logical components (`/components/auth`).
+- **Tailwind CSS 4.0**:
+  - **[ES]** Implementación "CSS-first" que garantiza configuraciones de diseño mediante tokens.
+  - **[EN]** "CSS-first" implementation ensuring design configurations through tokens.
+- **Framer Motion**:
+  - **[ES]** Sistema de interacciones basado en *requestAnimationFrame* garantizando 60fps constantes.
+  - **[EN]** Interaction system based on *requestAnimationFrame* ensuring a constant 60fps.
 
-## 4. UI Architecture & Motion Identity
+## 5. Security & Stability / Seguridad y Estabilidad
 
-El portafolio tiene una identidad visual definida influenciada por estudios de alto nivel creativo (ej. Media.Monks):
+- **Zod Validations / Validaciones Zod**:
+  - **[ES]** End-to-End Type Safety. Las peticiones son validadas en runtime mediante esquemas estrictos de Zod.
+  - **[EN]** End-to-End Type Safety. Requests are validated at runtime using strict Zod schemas.
+- **Resilience & Rate-Limiting**:
+  - **[ES]** Interacciones externas (ej. emails) incluyen validaciones en el servidor para evitar abusos.
+  - **[EN]** External interactions (e.g. emails) include server-side validations to prevent abuse.
 
-- **Atomic Components**: Separación estricta entre componentes de presentación (`/components/ui`) y lógicos (`/components/auth`, `/components/sections`).
-- **Tailwind CSS 4.0**: Styling "CSS-first", garantizando el menor footprint posible.
-- **Framer Motion (Hover Preview System)**: Implementación técnica clave en la sección de proyectos. Un sistema de *requestAnimationFrame* y portales de React para lograr layouts de seguimiento del cursor (Hover Transitions flotantes) que son extremadamente performantes a 60fps constantes sin repintados forzados.
+## 6. Escalabilidad Futura / Future Scalability
 
-## 5. Security & Stability
-
-- **Zod Validations**: Cada input que entra al servidor es validado en runtime mediante schemas de Zod, garantizando Type Safety tanto en el servidor como en el navegador.
-- **Rate-Limiting & Honeypots**: Las interacciones externas (como correos mediante Resend) están cubiertas contra spam básico.
-
-## 6. Evolución Futura
-
-La arquitectura soporta nativamente la adición de futuras entidades (blogs dinámicos, casos de estudio detallados descargados vía Markdown CMS, e integraciones de IA con capacidades Edge) sin necesidad de reescribir la base del código.
+- **[ES]** Integración de un Headless CMS (MDX/Sanity) e integraciones automatizadas impulsadas por IA.
+- **[EN]** Headless CMS (MDX/Sanity) integration and automated AI-driven integrations.
