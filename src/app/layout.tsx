@@ -21,25 +21,25 @@ const siteUrl =
 
 export const metadata: Metadata = {
   title: {
-    default: 'JC | F.S Developer',
-    template: 'JC | F.S Developer | %s'
+    default: 'JC | Full Stack · Backend Python & AI',
+    template: 'JC | Full Stack · Backend Python & AI | %s'
   },
-  description: 'Desarrollador de Software Full Stack especializado en React, Next.js y Node.js. Enfoque en arquitectura escalable y productos en producción.',
-  keywords: ['Software Developer', 'Full Stack Developer', 'React', 'Next.js', 'TypeScript', 'Jose Carlos González', 'Node.js', 'PostgreSQL'],
+  description: 'Desarrollador Full Stack con foco en Backend Python e IA aplicada. Construyo APIs, servicios backend y productos web con Next.js que integran LLMs y automatización.',
+  keywords: ['Full Stack Developer', 'Backend Python Developer', 'Python', 'FastAPI', 'Next.js', 'React', 'TypeScript', 'LLM', 'AI Developer', 'Jose Carlos González'],
   authors: [{ name: 'Jose Carlos González' }],
   creator: 'Jose Carlos González',
   openGraph: {
     type: 'website',
     locale: 'es_ES',
     url: siteUrl,
-    title: 'JC | F.S Developer',
-    description: 'Construyendo sistemas de alto rendimiento y arquitecturas escalables.',
+    title: 'JC | Full Stack · Backend Python & AI',
+    description: 'Full Stack con foco en Backend Python e IA aplicada. APIs, servicios backend y productos web con LLMs.',
     siteName: 'Jose Carlos González Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'JC | F.S Developer',
-    description: 'Desarrollador Full Stack enfocado en desarrollar productos interactivos de alto rendimiento.',
+    title: 'JC | Full Stack · Backend Python & AI',
+    description: 'Full Stack Developer con foco en Backend Python e IA aplicada.',
     creator: '@jcgj94',
   },
   robots: {

@@ -82,7 +82,7 @@ export async function POST(request: Request) {
             from: 'Jose Carlos <onboarding@resend.dev>', // Update with verified domain in production
             to: email,
             subject: 'Gracias por contactarme / Thanks for reaching out',
-            text: `Hola ${name},\n\nHe recibido tu mensaje correctamente y me pondré en contacto contigo lo antes posible.\n\nAquí tienes una copia de tu mensaje:\n"${message}"\n\nSaludos,\nJose Carlos\nSenior Software Engineer`,
+            text: `Hola ${name},\n\nHe recibido tu mensaje correctamente y me pondré en contacto contigo lo antes posible.\n\nAquí tienes una copia de tu mensaje:\n"${message}"\n\nSaludos,\nJose Carlos\nFull Stack Developer · Backend Python & AI`,
         });
 
         return NextResponse.json({ success: true }, { status: 200 });

@@ -5,20 +5,24 @@ export function JsonLd() {
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: 'Jose Carlos',
-        jobTitle: 'Senior Software Engineer',
+        jobTitle: 'Full Stack Developer',
         url: 'https://mi-cv.vercel.app',
         sameAs: [
             'https://github.com/jcgj94',
             'https://linkedin.com/in/jcgj94', // Asumiendo estos slugs
         ],
-        description: 'Senior Software Engineer enfocado en desarrollar productos interactivos de alto rendimiento, escalables y con un UX premium.',
+        description: 'Full Stack Developer con foco en Backend Python e IA aplicada. Construyo APIs, servicios backend y productos web que integran LLMs y automatización.',
         knowsAbout: [
-            'Software Engineering',
-            'Web Development',
+            'Full Stack Development',
+            'Backend Development',
+            'Python',
+            'FastAPI',
+            'REST APIs',
+            'LLMs',
+            'AI Integration',
             'React',
             'Next.js',
             'TypeScript',
-            'Supabase',
             'Node.js'
         ],
     };
