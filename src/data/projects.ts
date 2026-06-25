@@ -38,6 +38,23 @@ export const projects: Project[] = [
         repoUrl: 'https://github.com/JCGJ94/NutriFlow-Project',
     },
     {
+        id: 'clinical-ai',
+        title: 'Clinical AI Multi-Agent',
+        subtitle: 'Backend Multi-Agente de IA para Soporte Clínico',
+        description: 'Backend de IA multi-agente de nivel producción para soporte en decisión clínica. Clasifica la urgencia de un caso mediante triage con LLM y activa agentes especialistas en paralelo que consultan guías clínicas vía RAG (pgvector), devolviendo una evaluación integrada y tipada. Construido con FastAPI async, LangChain (LCEL) y SQLAlchemy 2.0, con tolerancia a fallos parciales y despliegue containerizado.',
+        image: '/projects/clinical-ai.png',
+        tags: ['Python', 'FastAPI', 'LangChain', 'pgvector', 'PostgreSQL', 'RAG', 'Docker'],
+        badge: 'Backend IA · Producción',
+        badgeEmoji: '🤖',
+        tier: 'flagship',
+        highlights: [
+            'Orquestación multi-agente con ejecución paralela (asyncio.gather)',
+            'RAG sobre guías clínicas con pgvector y LangChain (LCEL)',
+            'FastAPI async, SQLAlchemy 2.0, Docker multi-stage y CI/CD a GHCR'
+        ],
+        repoUrl: 'https://github.com/JCGJ94/Clinical-AI-Multi-Agent',
+    },
+    {
         id: 'tallercardonal',
         title: 'Taller El Cardonal',
         subtitle: 'Proyecto para Cliente en Producción',

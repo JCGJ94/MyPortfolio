@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const routes = [
         '',
         '/nutriflow',
+        '/clinical-ai',
         '/login',
         '/register',
     ].map((route) => ({
