@@ -1,19 +1,27 @@
 'use client';
 
 import * as React from 'react';
-import { z } from 'zod';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Loader2, CheckCircle2, Send, Mail, User, MessageSquare } from 'lucide-react';
-import emailjs from '@emailjs/browser';
+import { AlertCircle, Check, Copy, FileText, Linkedin, Mail, Globe, MessageSquare, Send, User } from 'lucide-react';
+import { SectionLabel } from '@/components/ui/SectionLabel';
+import { TechIcon } from '@/components/ui/TechIcon';
 import { useLanguage } from '@/context/LanguageContext';
 
-const contactSchema = z.object({
-  name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
-  email: z.string().email('Correo electrónico no válido'),
-  message: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres'),
-});
+type ContactFormData = { name: string; email: string; message: string };
 
-type ContactFormData = z.infer<typeof contactSchema>;
+// Decorative leading icon per field; the visible label stays the accessible name.
+const fieldIcons = { name: User, email: Mail, message: MessageSquare } as const;
+
+// zod is fetched on first form interaction, not with the page (it is ~65 KB gzipped).
+const loadSchema = () =>
+  import('zod').then(({ z }) => {
+    const contactSchema = z.object({
+      name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
+      email: z.string().email('Correo electrónico no válido'),
+      message: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres'),
+    });
+    return contactSchema;
+  });
+type ContactSchema = Awaited<ReturnType<typeof loadSchema>>;
 
 export function Contact() {
   const { t } = useLanguage();
@@ -24,6 +32,8 @@ export function Contact() {
   });
   const [errors, setErrors] = React.useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [schema, setSchema] = React.useState<ContactSchema | null>(null);
+  const warmSchema = () => { void loadSchema().then(setSchema); };
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
 
@@ -32,12 +42,14 @@ export function Contact() {
     setErrors({});
     setSubmitError(null);
 
+    const contactSchema = schema ?? (await loadSchema());
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
       result.error.issues.forEach((err) => {
         if (err.path[0]) {
-          fieldErrors[err.path[0] as keyof ContactFormData] = err.message;
+          const field = err.path[0] as keyof ContactFormData;
+          fieldErrors[field] = t.contact.errors[field];
         }
       });
       setErrors(fieldErrors);
@@ -65,6 +77,8 @@ export function Contact() {
         reply_to: 'jcdevelopment94@gmail.com',
       };
 
+      // Loaded on submit only: the SDK is not needed to paint or interact with the page.
+      const { default: emailjs } = await import('@emailjs/browser');
       const [r1, r2] = await Promise.all([
         emailjs.send(serviceId, templateId, adminParams, publicKey),
         emailjs.send(serviceId, templateId, autoReplyParams, publicKey),
@@ -77,7 +91,7 @@ export function Contact() {
       }
     } catch (error) {
       console.error('EmailJS Error:', error);
-      setSubmitError('Hubo un problema al enviar el mensaje. Por favor, verifica tu configuración de EmailJS o inténtalo más tarde.');
+      setSubmitError(t.contact.errors.submit);
     } finally {
       setIsSubmitting(false);
     }
@@ -88,232 +102,127 @@ export function Contact() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  return (
-    <section id="contact" className="py-10 lg:py-16 bg-secondary/10 relative overflow-hidden flex flex-col justify-center min-h-[100dvh]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            className="text-center mb-10 md:mb-14"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 text-center text-balance">{t.contact.title} <span className="text-primary">{t.contact.titleSpan}</span></h2>
-            <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto font-medium">
-              {t.contact.description} <br />
-              <span className="text-primary/70 text-sm font-bold uppercase tracking-widest mt-4 block">{t.contact.guarantee}</span>
-            </p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-            {/* Contact Info */}
-            <motion.div
-              className="flex flex-col space-y-8 h-full"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="p-8 md:p-10 rounded-3xl border border-border bg-card/50 backdrop-blur-sm shadow-xl space-y-8 flex-1 flex flex-col justify-center w-full">
-                <div className="flex items-center gap-6">
-                  <div className="p-4 rounded-2xl bg-primary/10 text-primary shrink-0">
-                    <Mail className="h-7 w-7" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">{t.contact.writeMe}</p>
-                    <p className="font-bold text-lg md:text-xl truncate" title="jcdevelopment94@gmail.com">jcdevelopment94@gmail.com</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-6">
-                  <div className="p-4 rounded-2xl bg-emerald-500/10 text-emerald-500 shrink-0">
-                    <MessageSquare className="h-7 w-7" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">{t.contact.chat}</p>
-                    <p className="font-bold text-lg md:text-xl">{t.contact.chatStatus}</p>
-                  </div>
-                </div>
-              </div>
+  const [touched, setTouched] = React.useState<Partial<Record<keyof ContactFormData, boolean>>>({});
+  const [copied, setCopied] = React.useState(false);
+  const fieldError = (field: keyof ContactFormData) =>
+    !schema || schema.shape[field].safeParse(formData[field]).success ? undefined : t.contact.errors[field];
+  const shown = (field: keyof ContactFormData) =>
+    errors[field] ?? (touched[field] ? fieldError(field) : undefined);
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const name = e.target.name as keyof ContactFormData;
+    setTouched(prev => ({ ...prev, [name]: true }));
+  };
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText('jcdevelopment94@gmail.com');
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      // ponytail: clipboard blocked (insecure context); the mailto link stays as the fallback
+    }
+  };
 
-              <div className="p-8 rounded-3xl border-2 border-primary/20 bg-primary/5 flex items-center justify-between group cursor-default relative overflow-hidden shrink-0">
-                <div className="space-y-1 relative z-10">
-                  <p className="text-xl font-black tracking-tight">{t.contact.coffee}</p>
-                  <p className="text-sm text-muted-foreground">{t.contact.location}</p>
-                </div>
-
-                {/* Custom Canary Islands SVG with Location Pin */}
-                <div className="relative w-24 h-24 flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
-                  <svg viewBox="0 0 100 100" className="w-full h-full text-primary/30" fill="currentColor">
-                    {/* Lanzarote */}
-                    <path d="M75,20 Q80,15 85,18 Q90,25 88,30 Q80,25 75,20 Z" />
-                    {/* Fuerteventura */}
-                    <path d="M70,35 Q75,30 80,45 Q75,55 65,50 Q72,40 70,35 Z" />
-                    {/* Gran Canaria */}
-                    <path d="M55,50 Q65,45 60,60 Q50,65 55,50 Z" />
-                    {/* Tenerife */}
-                    <path d="M40,45 Q45,35 50,55 Q40,60 35,50 Z" />
-                    {/* La Gomera */}
-                    <path d="M30,55 Q35,52 33,60 Q28,58 30,55 Z" />
-                    {/* La Palma */}
-                    <path d="M25,40 Q30,35 28,45 Q22,48 25,40 Z" />
-                    {/* El Hierro */}
-                    <path d="M20,60 Q25,58 22,65 Q18,63 20,60 Z" />
-                  </svg>
-
-                  {/* Pin pointing to Tenerife (x:45, y:45) */}
-                  <motion.div
-                    className="absolute top-[25%] left-[38%] text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.8)]"
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                  >
-                    <MapPin className="w-6 h-6 fill-primary/20" />
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div
-              className="flex flex-col h-full"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <div className="bg-card border-2 border-border shadow-2xl rounded-3xl p-8 md:p-10 relative overflow-hidden flex-1 flex flex-col justify-center w-full">
-                <AnimatePresence mode="wait">
-                  {isSuccess ? (
-                    <motion.div
-                      key="success"
-                      className="text-center py-12"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.1 }}
-                    >
-                      <motion.div
-                        className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 text-primary mb-8"
-                        initial={{ rotate: -90 }}
-                        animate={{ rotate: 0 }}
-                        transition={{ type: "spring", stiffness: 200 }}
-                      >
-                        <CheckCircle2 className="w-10 h-10" />
-                      </motion.div>
-                      <h3 className="text-3xl font-black tracking-tight mb-4">{t.contact.successTitle}</h3>
-                      <p className="text-muted-foreground mb-8 text-lg font-medium leading-relaxed">
-                        {t.contact.successMsg(formData.name.split(' ')[0])}
-                      </p>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setIsSuccess(false)}
-                        className="text-primary font-bold uppercase tracking-widest text-sm hover:underline"
-                      >
-                        {t.contact.sendAnother}
-                      </motion.button>
-                    </motion.div>
-                  ) : (
-                    <motion.form
-                      key="form"
-                      onSubmit={handleSubmit}
-                      className="space-y-6"
-                      initial={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label htmlFor="name" className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">{t.contact.formName}</label>
-                          <div className="relative group">
-                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
-                            <input
-                              type="text"
-                              id="name"
-                              name="name"
-                              required
-                              value={formData.name}
-                              onChange={handleChange}
-                              className="flex h-12 w-full rounded-2xl border-2 border-border bg-background/50 pl-10 pr-4 text-sm font-medium focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all shadow-inner"
-                              placeholder={t.contact.formNamePlaceholder}
-                            />
-                          </div>
-                          {errors.name && <p className="text-xs text-destructive font-bold mt-1">{errors.name}</p>}
-                        </div>
-                        <div className="space-y-2">
-                          <label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">{t.contact.formEmail}</label>
-                          <div className="relative group">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
-                            <input
-                              type="email"
-                              id="email"
-                              name="email"
-                              required
-                              value={formData.email}
-                              onChange={handleChange}
-                              className="flex h-12 w-full rounded-2xl border-2 border-border bg-background/50 pl-10 pr-4 text-sm font-medium focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all shadow-inner"
-                              placeholder={t.contact.formEmailPlaceholder}
-                            />
-                          </div>
-                          {errors.email && <p className="text-xs text-destructive font-bold mt-1">{errors.email}</p>}
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <label htmlFor="message" className="text-xs font-black uppercase tracking-widest text-muted-foreground ml-1">{t.contact.formMessage}</label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          rows={6}
-                          required
-                          value={formData.message}
-                          onChange={handleChange}
-                          className="flex w-full rounded-2xl border-2 border-border bg-background/50 p-4 text-sm font-medium focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all resize-none shadow-inner"
-                          placeholder={t.contact.formMessagePlaceholder}
-                        />
-                        {errors.message && <p className="text-xs text-destructive font-bold mt-1">{errors.message}</p>}
-                      </div>
-
-                      {submitError && (
-                        <motion.div
-                          className="p-4 bg-destructive/10 text-destructive text-sm rounded-2xl font-bold border border-destructive/20"
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                        >
-                          {submitError}
-                        </motion.div>
-                      )}
-
-                      <motion.button
-                        type="submit"
-                        disabled={isSubmitting}
-                        whileHover={{ scale: 1.02, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-primary-foreground shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed group border-b-4 border-primary-foreground/20 active:border-b-0"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className="mr-3 h-5 w-5 animate-spin" />
-                            {t.contact.formSubmitting}
-                          </>
-                        ) : (
-                          <>
-                            {t.contact.formSubmit}
-                            <Send className="ml-3 h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                          </>
-                        )}
-                      </motion.button>
-                    </motion.form>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-          </div>
+  const field = (
+    name: keyof ContactFormData,
+    label: string,
+    placeholder: string,
+    extra?: React.ReactNode,
+  ) => {
+    const err = shown(name);
+    const ok = !err && touched[name] && formData[name].length > 0;
+    const Icon = fieldIcons[name];
+    const common = {
+      id: name,
+      name,
+      required: true,
+      value: formData[name],
+      onChange: handleChange,
+      onBlur: handleBlur,
+      className: 'pv3-contact__field',
+      placeholder,
+      'aria-invalid': Boolean(err),
+      'aria-describedby': err ? `${name}-error` : undefined,
+    };
+    return (
+      <div className="pv3-contact__group" data-state={err ? 'error' : ok ? 'ok' : undefined}>
+        <div className="pv3-contact__control">
+          <Icon aria-hidden="true" focusable="false" size={18} className="pv3-contact__fi" />
+          {name === 'message'
+            ? <textarea rows={6} {...common} />
+            : <input type={name === 'email' ? 'email' : 'text'} autoComplete={name} {...common} />}
+          <label htmlFor={name} className="pv3-contact__float">{label}</label>
+        </div>
+        <div className="pv3-contact__meta">
+          {err
+            ? <p id={`${name}-error`} className="pv3-contact__error" role="alert"><AlertCircle aria-hidden="true" focusable="false" size={15} />{err}</p>
+            : <span />}
+          {extra}
         </div>
       </div>
+    );
+  };
 
-      {/* Decorative background elements */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -z-0" />
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] -z-0" />
+  return (
+    <section id="contact" className="pv3-section pv3-contact">
+      <div className="pv3-section__inner">
+        <SectionLabel index="04" label={t.sectionLabel.contact} />
+        <div className="pv3-contact__panel">
+          <header className="pv3-contact__head">
+            <h2 className="pv3-contact__title">
+              {t.contact.title} <span>{t.contact.titleSpan}</span>
+            </h2>
+            <p className="pv3-contact__lede">{t.contact.description}</p>
+            <p className="pv3-contact__avail"><span aria-hidden="true" className="pv3-contact__dot" />{t.hero.badge}</p>
+            <p className="pv3-contact__label">{t.contact.writeMe}</p>
+            <div className="pv3-contact__mailrow">
+              <span className="pv3-contact__badge" aria-hidden="true"><Mail size={18} /></span>
+              <a href="mailto:jcdevelopment94@gmail.com" className="pv3-contact__mail pv3-focus">jcdevelopment94@gmail.com</a>
+              <button type="button" onClick={copyEmail} className="pv3-contact__copy pv3-focus">
+                {copied ? <Check aria-hidden="true" size={16} /> : <Copy aria-hidden="true" size={16} />}
+                {copied ? t.contact.copied : t.contact.copyEmail}
+              </button>
+              <span className="pv3-contact__sr" role="status">{copied ? t.contact.copied : ''}</span>
+            </div>
+            <p className="pv3-contact__place"><Globe aria-hidden="true" focusable="false" size={16} />{t.contact.location}</p>
+            <p className="pv3-contact__label">{t.contact.elsewhere}</p>
+            <ul className="pv3-contact__links">
+              <li><a href="https://github.com/JCGJ94" target="_blank" rel="noopener noreferrer" className="pv3-focus"><TechIcon name="GitHub" />GitHub</a></li>
+              <li><a href="https://linkedin.com/in/josecgonzález" target="_blank" rel="noopener noreferrer" className="pv3-focus"><Linkedin aria-hidden="true" focusable="false" size={16} className="pv3-contact__in" />LinkedIn</a></li>
+              <li><a href="/JoseCarlos-CV.pdf" target="_blank" rel="noopener noreferrer" className="pv3-focus"><FileText aria-hidden="true" size={16} />{t.hero.downloadCv}</a></li>
+            </ul>
+          </header>
+
+          {isSuccess ? (
+            <div className="pv3-contact__done" role="status">
+              <span className="pv3-contact__tick" aria-hidden="true"><Check size={28} /></span>
+              <h3>{t.contact.successTitle}</h3>
+              <p>{t.contact.successMsg(formData.name.split(' ')[0])}</p>
+              <button type="button" onClick={() => { setIsSuccess(false); setTouched({}); setFormData({ name: '', email: '', message: '' }); }} className="pv3-contact__again pv3-focus">
+                {t.contact.sendAnother}
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} onFocusCapture={warmSchema} className="pv3-contact__form" noValidate>
+              <div className="pv3-contact__pair">
+                {field('name', t.contact.formName, t.contact.formNamePlaceholder)}
+                {field('email', t.contact.formEmail, t.contact.formEmailPlaceholder)}
+              </div>
+              {field('message', t.contact.formMessage, t.contact.formMessagePlaceholder,
+                <span className="pv3-contact__count" data-met={formData.message.trim().length >= 10 || undefined}>
+                  {formData.message.length} · {t.contact.hintMin}
+                </span>)}
+
+              {submitError && <p className="pv3-contact__error pv3-contact__error--form" role="alert"><AlertCircle aria-hidden="true" focusable="false" size={16} />{submitError}</p>}
+
+              <button type="submit" disabled={isSubmitting} aria-busy={isSubmitting} className="pv3-contact__submit pv3-focus">
+                <span>{isSubmitting ? t.contact.formSubmitting : t.contact.formSubmit}</span>
+                <Send aria-hidden="true" size={18} />
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
     </section>
   );
 }

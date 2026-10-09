@@ -1,57 +1,46 @@
 'use client';
 
-import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 interface TypewriterProps {
-    words: string[];
-    typingSpeed?: number;
-    deletingSpeed?: number;
-    delayBeforeDelete?: number;
-    className?: string;
+  words: string[];
+  /** Hold the animation until true (e.g. until the name finished typing). */
+  start?: boolean;
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pause?: number;
+  className?: string;
 }
 
-export function Typewriter({
-    words,
-    typingSpeed = 100,
-    deletingSpeed = 60,
-    delayBeforeDelete = 1500,
-    className
-}: TypewriterProps) {
-    const [text, setText] = React.useState("");
-    const [isDeleting, setIsDeleting] = React.useState(false);
-    const [loopIndex, setLoopIndex] = React.useState(0);
+/**
+ * V2-style typewriter: type, pause, delete, next word. Runs under reduced motion too
+ * (text changing in place is not vestibular motion); the caret blinks at 1 Hz.
+ * The longest word is rendered invisibly in the same grid cell, so the box never resizes.
+ * The animated text is aria-hidden: pair it with a static sr-only copy.
+ */
+export function Typewriter({ words, start = true, typingSpeed = 70, deletingSpeed = 35, pause = 1800, className }: TypewriterProps) {
+  const [text, setText] = useState('');
+  const [index, setIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  const word = words[index % words.length];
+  const longest = words.reduce((a, b) => (b.length > a.length ? b : a), '');
 
-    React.useEffect(() => {
-        const currentWord = words[loopIndex % words.length];
-        const speed = isDeleting ? deletingSpeed : typingSpeed;
+  useEffect(() => {
+    if (!start) return;
+    let delay = deleting ? deletingSpeed : typingSpeed;
+    if (!deleting && text === word) delay = pause;
+    const timer = setTimeout(() => {
+      if (!deleting && text === word) setDeleting(true);
+      else if (deleting && text === '') { setDeleting(false); setIndex((i) => i + 1); }
+      else setText(deleting ? text.slice(0, -1) : word.slice(0, text.length + 1));
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [start, text, deleting, word, typingSpeed, deletingSpeed, pause]);
 
-        const timeout = setTimeout(() => {
-            setText(prev =>
-                isDeleting
-                    ? prev.slice(0, -1)
-                    : currentWord.slice(0, prev.length + 1)
-            );
-
-            if (!isDeleting && text === currentWord) {
-                setTimeout(() => setIsDeleting(true), delayBeforeDelete);
-            } else if (isDeleting && text === "") {
-                setIsDeleting(false);
-                setLoopIndex(prev => prev + 1);
-            }
-        }, speed);
-
-        return () => clearTimeout(timeout);
-    }, [text, isDeleting, loopIndex, words, typingSpeed, deletingSpeed, delayBeforeDelete]);
-
-    return (
-        <span className={className}>
-            {text}
-            <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ repeat: Infinity, duration: 0.8 }}
-                className="inline-block w-[3px] h-[1em] bg-primary ml-1 align-baseline"
-            />
-        </span>
-    );
+  return (
+    <span className={`hw-type${className ? ` ${className}` : ''}`} aria-hidden="true">
+      <span className="hw-type__space">{longest}</span>
+      <span className="hw-type__text">{text}<span className="hw-type__caret" /></span>
+    </span>
+  );
 }

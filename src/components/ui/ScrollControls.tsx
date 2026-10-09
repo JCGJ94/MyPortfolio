@@ -10,7 +10,7 @@ export function ScrollControls() {
     const { scrollNext, scrollPrev, isFirst, isLast } = useSectionScroll(SECTIONS);
 
     return (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] flex flex-row gap-4">
+        <div className="fixed bottom-8 right-2 z-[60] hidden min-[90rem]:flex flex-col gap-3">
             <AnimatePresence>
                 {!isFirst && (
                     <motion.button
@@ -21,7 +21,7 @@ export function ScrollControls() {
                         whileHover={{ scale: 1.1, backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
                         whileTap={{ scale: 0.9 }}
                         onClick={scrollPrev}
-                        className="flex items-center justify-center w-12 h-12 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground"
+                        className="flex items-center justify-center w-11 h-11 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground"
                     >
                         <ChevronsUp className="w-6 h-6" />
                     </motion.button>
@@ -37,7 +37,7 @@ export function ScrollControls() {
                         whileHover={{ scale: 1.1, backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
                         whileTap={{ scale: 0.9 }}
                         onClick={scrollNext}
-                        className="flex items-center justify-center w-12 h-12 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground"
+                        className="flex items-center justify-center w-11 h-11 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground"
                     >
                         <ChevronsDown className="w-6 h-6" />
                     </motion.button>

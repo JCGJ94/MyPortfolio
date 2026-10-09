@@ -1,54 +1,47 @@
-# 🏗 System Architecture & Design / Arquitectura y Diseño del Sistema
+# Arquitectura / Architecture
 
-> **[ES]** Este documento detalla las decisiones arquitectónicas del Portafolio v2. El sistema está diseñado como una plataforma escalable y modular, construida sobre estándares de la industria (2026).
-> **[EN]** This document details the architectural decisions of Portfolio v2. The system is designed as a scalable and modular platform, built on industry standards (2026).
+> **[ES]** Descripción de la arquitectura actual (V3). El estado del rediseño y sus decisiones de diseño están en [`portfolio-v3/README.md`](./portfolio-v3/README.md).
+> **[EN]** Description of the current architecture (V3). Redesign status and design decisions are in [`portfolio-v3/README.md`](./portfolio-v3/README.md).
 
-## 1. Visión del Sistema / System Vision
+## 1. Aplicación / Application
 
-**[ES]** La transición de una arquitectura SPA estática a un entorno Server-Side Rendering (SSR) dinámico responde a la necesidad de construir un sistema con capacidades transaccionales y manejo de estado robusto.
-**[EN]** The transition from a static SPA architecture to a dynamic Server-Side Rendering (SSR) environment responds to the need to build a system with transactional capabilities and robust state management.
+- **[ES]** Next.js 16.1.6 (App Router) con React 19 y TypeScript. Las páginas son Server Components por defecto; los componentes con estado o animación son Client Components (`'use client'`).
+- **[EN]** Next.js 16.1.6 (App Router) with React 19 and TypeScript. Pages are Server Components by default; stateful or animated components are Client Components (`'use client'`).
 
-## 2. Infrastructure & Edge Strategy / Infraestructura y Estrategia Edge
+## 2. Estructura / Structure
 
-- **Next.js 16 (App Router)**:
-  - **[ES]** Arquitectura basada en componentes de servidor (`RSC`). El cálculo pesado ocurre en la capa del servidor/Edge, reduciendo el peso del bundle JavaScript y logrando métricas Lighthouse >95.
-  - **[EN]** Architecture based on Server Components (`RSC`). Heavy computation happens on the Server/Edge layer, reducing the JavaScript bundle size and achieving Lighthouse metrics >95.
-- **Server Actions**:
-  - **[ES]** Las mutaciones (ej. formularios, auth) se manejan orgánicamente. Se eliminan las rutas API REST innecesarias, logrando alta cohesión.
-  - **[EN]** Mutations (e.g. forms, auth) are handled organically. Unnecessary REST API routes are eliminated, achieving high cohesion.
+| Ruta / Path | Contenido / Content |
+| --- | --- |
+| `src/app` | Rutas, layouts, metadatos, `sitemap.ts`, `robots.ts` y hojas `pv3-*.css` / Routes, layouts, metadata and `pv3-*.css` sheets |
+| `src/components/sections` | Hero, About, Projects, Stack, Contact |
+| `src/components/ui` | Piezas reutilizables: `FlowDiagram`, `Stack3D`, `TechIcon`/`TechLabel`, `CaseHeader`, `CaseAtAGlance`, `Typewriter`, `ScrollReveal`... / Reusable pieces |
+| `src/components/layout` | Navbar, Footer, proveedores de tema y movimiento, JSON-LD / Navbar, Footer, theme and motion providers, JSON-LD |
+| `src/data` | `projects.ts` (casos), `translations.ts` (5 idiomas), `diagrams.ts`, `techIcons.ts` / case data, translations, diagram data, tech icons |
+| `src/context` | Idioma: `language-store.ts` (store externo con `useSyncExternalStore`) y `LanguageContext.tsx` / Language store and context |
+| `src/lib/supabase` | Clientes de Supabase (navegador, servidor, proxy de sesión) / Supabase clients |
+| `src/proxy.ts` | Refresco de sesión de Supabase / Supabase session refresh |
+| `tokens.css` | Tokens de diseño `--pv3-*` / Design tokens |
 
-## 3. Data & Auth Layer / Capa de Datos y Autenticación (Supabase)
+## 3. Datos y diseño / Data and design
 
-### Autenticación Segura / Secure Authentication
-- **[ES]** Implementación de `@supabase/ssr` para manejo de sesión persistente con cookies seguras. Segmentación de rutas mediante Next.js Middleware.
-- **[EN]** `@supabase/ssr` implementation for persistent session management using secure cookies. Route segmentation via Next.js Middleware.
+- **[ES]** Los casos viven en `src/data/projects.ts`; los diagramas en `src/data/diagrams.ts`; los iconos de marca en `src/data/techIcons.ts` (Simple Icons v16.34.0, CC0, sin dependencia). Las rutas de detalle y los diagramas se alimentan de estos datos.
+- **[EN]** Cases live in `src/data/projects.ts`; diagrams in `src/data/diagrams.ts`; brand icons in `src/data/techIcons.ts` (Simple Icons v16.34.0, CC0, no dependency). Detail routes and diagrams are fed from this data.
+- **[ES]** Tailwind CSS 4 con tokens `--pv3-*` y clases `pv3-*`. El 3D (retrato del hero, Stack) es CSS puro; las animaciones usan `transform`/`opacity` y respetan `prefers-reduced-motion`.
+- **[EN]** Tailwind CSS 4 with `--pv3-*` tokens and `pv3-*` classes. 3D (hero portrait, Stack) is plain CSS; animations use `transform`/`opacity` and honour `prefers-reduced-motion`.
 
-### Base de Datos PostgreSQL / PostgreSQL Database
-- **[ES]** **Esquema Core**: Tablas relacionales como `users` y `profiles`. **Seguridad Zero-Trust**: Implementación de políticas de Row Level Security (RLS).
-- **[EN]** **Core Schema**: Relational tables like `users` and `profiles`. **Zero-Trust Security**: Implementation of Row Level Security (RLS) policies.
+## 4. Idioma / Language
 
-## 4. UI Architecture & Motion / Arquitectura UI y Animaciones
+- **[ES]** Cinco idiomas (es/en/de/fr/it) en `src/data/translations.ts`. La preferencia se guarda en `localStorage` y se valida contra una lista blanca; el SSR siempre renderiza español. Limitaciones: los textos de los casos, el Stack y los diagramas están solo en español, y `<html lang>` es siempre `es`.
+- **[EN]** Five languages (es/en/de/fr/it) in `src/data/translations.ts`. The preference is stored in `localStorage` and validated against an allow-list; SSR always renders Spanish. Limitations: case texts, Stack and diagrams are Spanish-only, and `<html lang>` is always `es`.
 
-- **Atomic Components / Componentes Atómicos**:
-  - **[ES]** Separación estricta entre componentes de presentación (`/components/ui`) y lógicos (`/components/auth`).
-  - **[EN]** Strict separation between presentation (`/components/ui`) and logical components (`/components/auth`).
-- **Tailwind CSS 4.0**:
-  - **[ES]** Implementación "CSS-first" que garantiza configuraciones de diseño mediante tokens.
-  - **[EN]** "CSS-first" implementation ensuring design configurations through tokens.
-- **Framer Motion**:
-  - **[ES]** Sistema de interacciones basado en *requestAnimationFrame* garantizando 60fps constantes.
-  - **[EN]** Interaction system based on *requestAnimationFrame* ensuring a constant 60fps.
+## 5. Contacto, autenticación y datos / Contact, auth and data
 
-## 5. Security & Stability / Seguridad y Estabilidad
+- **[ES]** El formulario de la UI envía con EmailJS (cargado bajo demanda, validado con Zod). Existe además `POST /api/contact`, que envía con Resend (necesita `RESEND_API_KEY`).
+- **[EN]** The UI form sends through EmailJS (lazy-loaded, validated with Zod). There is also `POST /api/contact`, which sends through Resend (needs `RESEND_API_KEY`).
+- **[ES]** Autenticación con `@supabase/ssr` (cookies de sesión) y Server Actions en `login`/`register`. La migración `supabase/migrations/20260224000000_profiles_schema.sql` crea `public.profiles` con Row Level Security y políticas de lectura y actualización del propio perfil.
+- **[EN]** Authentication with `@supabase/ssr` (session cookies) and Server Actions in `login`/`register`. The migration `supabase/migrations/20260224000000_profiles_schema.sql` creates `public.profiles` with Row Level Security and read/update-own-profile policies.
 
-- **Zod Validations / Validaciones Zod**:
-  - **[ES]** End-to-End Type Safety. Las peticiones son validadas en runtime mediante esquemas estrictos de Zod.
-  - **[EN]** End-to-End Type Safety. Requests are validated at runtime using strict Zod schemas.
-- **Resilience & Rate-Limiting**:
-  - **[ES]** Interacciones externas (ej. emails) incluyen validaciones en el servidor para evitar abusos.
-  - **[EN]** External interactions (e.g. emails) include server-side validations to prevent abuse.
+## 6. Despliegue / Deployment
 
-## 6. Escalabilidad Futura / Future Scalability
-
-- **[ES]** Integración de un Headless CMS (MDX/Sanity) e integraciones automatizadas impulsadas por IA.
-- **[EN]** Headless CMS (MDX/Sanity) integration and automated AI-driven integrations.
+- **[ES]** Vercel (`vercel.json`). `main` es producción. No hay pipelines de CI/CD en el repositorio más allá de esa configuración.
+- **[EN]** Vercel (`vercel.json`). `main` is production. There are no CI/CD pipelines in the repository beyond that configuration.

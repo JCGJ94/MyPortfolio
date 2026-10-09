@@ -1,120 +1,87 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
-import { MagneticPillButton } from '@/components/ui/MagneticPillButton';
+import { FlowDiagram } from '@/components/ui/FlowDiagram';
+import { nutriflowFlow } from '@/data/diagrams';
+import { CaseHeader, CaseLayout, CaseSection } from '@/components/ui/CaseHeader';
 
 export default function NutriflowPage() {
   return (
-    <div className="min-h-screen bg-background pt-24 pb-20">
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-        <Link
-          href="/#projects"
-          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-8 animate-fade-in"
+    <main className="pv3-section pv3-detail">
+      <div className="pv3-section__inner">
+        <CaseHeader
+          id="nutriflow"
+          tier="SaaS B2B"
+          title="NutriFlow"
+          lede="NutriFlow — Plataforma SaaS inteligente y en fase de crecimiento (Beta) diseñada para la gestión integral de la salud nutricional. Permite a los usuarios recibir dietas personalizadas y planes de ejercicio adaptados en tiempo real mediante el motor de IA Gemini 2.0. Actualmente el producto se encuentra en fase de expansión, optimizando la experiencia de usuario y la escalabilidad del sistema."
+          summary={{
+ kind: "Proyecto personal",
+            role: "Proyecto personal: SaaS B2B en fase Beta, con frontend, API y base de datos propios.",
+            stack: [
+              "Next.js 16",
+              "NestJS 11",
+              "Supabase (PostgreSQL)",
+              "Gemini 2.0 Flash",
+              "Tailwind CSS",
+              "Railway"
+            ],
+            proves: [
+              "Arquitectura separada: frontend en Next.js 16 y API modular en NestJS 11 desplegada en Railway.",
+              "Autenticación por roles con Row Level Security directamente en la base de datos.",
+              "Integración de IA generativa (Gemini) para generar planes de alimentación basados en macros."
+            ]
+          }}
+          actions={[
+            { label: 'Probar Demo', href: 'https://nutri-flow-mu.vercel.app/' },
+            { label: 'Ver Código', href: 'https://github.com/JCGJ94/NutriFlow-Project' },
+          ]}
         >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Volver a Proyectos
-        </Link>
-        <section className="mb-20 animate-slide-up" style={{ animationDelay: '100ms' }}>
-          <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
-            <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                SaaS B2B
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">NutriFlow</h1>
-              <p className="text-xl text-muted-foreground">
-                NutriFlow — Plataforma SaaS inteligente y en fase de crecimiento (Beta) diseñada para la gestión integral de la salud nutricional.
-                Permite a los usuarios recibir dietas personalizadas y planes de ejercicio adaptados en tiempo real mediante el motor de IA Gemini 2.0.
-                Actualmente el producto se encuentra en fase de expansión, optimizando la experiencia de usuario y la escalabilidad del sistema.
-              </p>
+          <Image
+            src="/projects/nutriflow.png"
+            alt="NutriFlow Dashboard"
+            width={1485}
+            height={1075}
+            className="pv3-detail__img"
+            sizes="(max-width: 1024px) 100vw, 40vw"
+            priority
+          />
+        </CaseHeader>
 
-              <div className="flex flex-wrap gap-4 pt-4">
-                <MagneticPillButton
-                  href="https://nutri-flow-mu.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  label="Probar Demo"
-                  variant="primary"
-                  className="px-6 py-2.5"
-                />
-                <MagneticPillButton
-                  href="https://github.com/JCGJ94/NutriFlow-Project"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  label="Ver Código"
-                  variant="ghost"
-                  className="px-6 py-2.5"
-                />
-              </div>
-            </div>
-
-            <div className="flex-1 relative aspect-video bg-muted rounded-2xl overflow-hidden border border-border shadow-2xl">
-              <Image
-                src="/projects/nutriflow.png"
-                alt="NutriFlow Dashboard"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            </div>
-          </div>
+        <section className="pv3-detail__api pv3-detail__arch">
+          <h2 className="pv3-detail__label">Arquitectura</h2>
+          <p className="pv3-detail__apilede">Cómo se conectan el frontend, la API, la base de datos y el motor de IA.</p>
+          <FlowDiagram data={nutriflowFlow} label={nutriflowFlow.label ?? ''} className="pv3-case__diagram" />
         </section>
 
-        <div className="grid md:grid-cols-3 gap-12 border-t border-border pt-20 animate-slide-up" style={{ animationDelay: '200ms' }}>
-          <div className="md:col-span-1 border-r border-border pr-8">
-            <h3 className="text-lg font-bold mb-6">Stack Tecnológico</h3>
-            <ul className="space-y-4">
-              <li className="flex justify-between items-center border-b border-border/50 pb-2">
-                <span className="text-muted-foreground">Frontend</span>
-                <span className="font-medium">Next.js 16 (React 19)</span>
-              </li>
-              <li className="flex justify-between items-center border-b border-border/50 pb-2">
-                <span className="text-muted-foreground">Backend API</span>
-                <span className="font-medium">NestJS 11 (Railway)</span>
-              </li>
-              <li className="flex justify-between items-center border-b border-border/50 pb-2">
-                <span className="text-muted-foreground">Estilos</span>
-                <span className="font-medium">Tailwind CSS 3.4</span>
-              </li>
-              <li className="flex justify-between items-center border-b border-border/50 pb-2">
-                <span className="text-muted-foreground">Base de Datos</span>
-                <span className="font-medium">Supabase (PostgreSQL)</span>
-              </li>
-              <li className="flex justify-between items-center border-b border-border/50 pb-2">
-                <span className="text-muted-foreground">IA Engine</span>
-                <span className="font-medium">Gemini 2.0 Flash</span>
-              </li>
+        <CaseLayout
+          stackTitle="Stack Tecnológico"
+          stack={[
+            ['Frontend', 'Next.js 16 (React 19)'],
+            ['Backend API', 'NestJS 11 (Railway)'],
+            ['Estilos', 'Tailwind CSS 3.4'],
+            ['Base de Datos', 'Supabase (PostgreSQL)'],
+            ['IA Engine', 'Gemini 2.0 Flash'],
+          ]}
+        >
+          <CaseSection title="El Problema">
+            <p className="pv3-detail__pull">
+              Los nutricionistas independientes dedican parte de su tiempo a tareas administrativas.
+            </p>
+            <ul className="pv3-detail__cards">
+              <li>Armar planes de alimentación manualmente.</li>
+              <li>Recordatorios de citas.</li>
+              <li>Gestión de pagos.</li>
             </ul>
-          </div>
-
-          <div className="md:col-span-2 space-y-12">
-            <section>
-              <h2 className="text-2xl font-bold mb-4">El Problema</h2>
-              <div className="prose prose-lg dark:prose-invert text-muted-foreground">
-                <p>
-                  Los nutricionistas independientes invierten cerca del 40% de su tiempo en tareas administrativas
-                  como armar planes de alimentación manualmente, recordatorios de citas y gestión de pagos.
-                </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold mb-4">La Solución Tecnológica</h2>
-              <div className="prose prose-lg dark:prose-invert text-muted-foreground">
-                <p>
-                  Desarrollé un sistema centralizado aprovechando el ecosistema de <strong>Next.js 16</strong> para una velocidad de carga excepcional y <strong>NestJS 11</strong> en el backend para una arquitectura modular y escalable en Railway.
-                  La inteligencia del sistema reside en la integración con <strong>Gemini 2.0 Flash</strong> y el motor en tiempo real de <strong>Supabase</strong>.
-                </p>
-                <ul>
-                  <li>Arquitectura <em>Serverless</em> que reduce el costo de infraestructura en un 80%.</li>
-                  <li>Autenticación por roles usando <strong>RLS (Row Level Security)</strong> directamente en la base de datos para garantizar la privacidad de los pacientes.</li>
-                  <li>Generador de planes de alimentación automatizado basado en macros.</li>
-                </ul>
-              </div>
-            </section>
-          </div>
-        </div>
-      </main>
-    </div >
+          </CaseSection>
+          <CaseSection title="La Solución Tecnológica">
+            <p className="pv3-detail__pull">Un sistema centralizado, con la inteligencia en <strong>Gemini 2.0 Flash</strong> y el motor en tiempo real de <strong>Supabase</strong>.</p>
+            <ul className="pv3-detail__cards">
+              <li><strong>Frontend</strong> Ecosistema de <strong>Next.js 16</strong> para una velocidad de carga excepcional.</li>
+              <li><strong>Backend</strong> <strong>NestJS 11</strong> para una arquitectura modular y escalable en Railway.</li>
+              <li>Autenticación por roles usando <strong>RLS (Row Level Security)</strong> directamente en la base de datos para garantizar la privacidad de los pacientes.</li>
+              <li>Generador de planes de alimentación automatizado basado en macros.</li>
+            </ul>
+          </CaseSection>
+        </CaseLayout>
+      </div>
+    </main>
   );
 }

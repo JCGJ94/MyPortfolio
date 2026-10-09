@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import { TechLabel } from '@/components/ui/TechIcon';
 import { FileText, Download, GraduationCap, Code2, Briefcase } from 'lucide-react';
 
 export default function CVPage() {
     return (
-        <div className="min-h-screen pt-32 pb-20 bg-background overflow-hidden relative">
+        <main className="min-h-screen pt-32 pb-20 bg-background overflow-hidden relative">
             <div className="container mx-auto px-4 relative z-10">
                 {/* Header Section */}
                 <div className="max-w-4xl mx-auto mb-16 animate-slide-up">
@@ -13,14 +14,14 @@ export default function CVPage() {
                             <h2 className="text-2xl font-bold mb-2">Jose Carlos González</h2>
                             <p className="text-primary font-medium mb-4 uppercase tracking-widest text-sm">Full Stack Developer | Product Mindset</p>
                             <p className="text-muted-foreground leading-relaxed italic">
-                                "Desarrollador con base técnica en el ecosistema JavaScript y Python. Mi enfoque se centra en entregar soluciones prácticas y funcionales, priorizando la mantenibilidad y la experiencia de usuario real."
+                                &quot;Desarrollador con base técnica en el ecosistema JavaScript y Python. Mi enfoque se centra en entregar soluciones prácticas y funcionales, priorizando la mantenibilidad y la experiencia de usuario real.&quot;
                             </p>
                         </div>
                         <div className="shrink-0 flex flex-col gap-3">
                             <Link
                                 href="/JoseCarlos-CV.pdf"
                                 target="_blank"
-                                className="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-4 text-sm font-bold uppercase tracking-widest text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
+                                className="inline-flex items-center justify-center pv3-cv-download rounded-xl bg-primary px-6 py-4 text-sm font-bold uppercase tracking-widest text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
                             >
                                 <Download className="mr-2 h-4 w-4" />
                                 Descargar PDF
@@ -42,7 +43,7 @@ export default function CVPage() {
                                     <p className="font-bold mb-2 text-muted-foreground uppercase text-[10px] tracking-widest">Frontend</p>
                                     <div className="flex flex-wrap gap-2">
                                         {['React', 'Next.js', 'Tailwind', 'CSS3', 'Bootstrap'].map(s => (
-                                            <span key={s} className="px-2 py-1 rounded-md bg-secondary text-secondary-foreground font-medium text-xs">{s}</span>
+                                            <span key={s} className="px-2 py-1 rounded-md bg-secondary text-secondary-foreground font-medium text-xs"><TechLabel text={s} /></span>
                                         ))}
                                     </div>
                                 </div>
@@ -50,7 +51,7 @@ export default function CVPage() {
                                     <p className="font-bold mb-2 text-muted-foreground uppercase text-[10px] tracking-widest">Backend & DB</p>
                                     <div className="flex flex-wrap gap-2">
                                         {['Node.js', 'Python', 'Flask', 'PostgreSQL', 'Supabase'].map(s => (
-                                            <span key={s} className="px-2 py-1 rounded-md bg-secondary text-secondary-foreground font-medium text-xs">{s}</span>
+                                            <span key={s} className="px-2 py-1 rounded-md bg-secondary text-secondary-foreground font-medium text-xs"><TechLabel text={s} /></span>
                                         ))}
                                     </div>
                                 </div>
@@ -58,7 +59,7 @@ export default function CVPage() {
                                     <p className="font-bold mb-2 text-muted-foreground uppercase text-[10px] tracking-widest">Otras</p>
                                     <div className="flex flex-wrap gap-2">
                                         {['JWT', 'Git', 'Testing (Jest/Vitest)', 'IA Tooling'].map(s => (
-                                            <span key={s} className="px-2 py-1 rounded-md bg-secondary text-secondary-foreground font-medium text-xs">{s}</span>
+                                            <span key={s} className="px-2 py-1 rounded-md bg-secondary text-secondary-foreground font-medium text-xs"><TechLabel text={s} /></span>
                                         ))}
                                     </div>
                                 </div>
@@ -111,6 +112,6 @@ export default function CVPage() {
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
-        </div>
+        </main>
     );
 }

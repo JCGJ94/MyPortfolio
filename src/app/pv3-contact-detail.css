@@ -1,0 +1,182 @@
+/* Portfolio v3 — contact panel (C1) and at-a-glance case pages (D1).
+ * Loaded after globals.css so these rules refine the T04 base without touching it. */
+
+/* ---------- C1: Contact ---------- */
+.pv3-contact__panel {
+  --pv3-panel-pad: clamp(1.25rem, 4vw, 3rem);
+  --pv3-panel-surface: color-mix(in srgb, var(--pv3-color-ink) 3%, var(--pv3-color-canvas));
+  display: grid;
+  gap: var(--pv3-space-10);
+  margin-block-start: var(--pv3-space-8);
+  padding: var(--pv3-panel-pad);
+  border: 1px solid transparent;
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(var(--pv3-panel-surface), var(--pv3-panel-surface)) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--pv3-color-accent) 70%, transparent), var(--pv3-color-rule) 38%, var(--pv3-color-rule) 70%, color-mix(in srgb, var(--pv3-color-accent) 45%, transparent)) border-box;
+  box-shadow: 0 30px 80px -50px color-mix(in srgb, var(--pv3-color-accent) 55%, transparent);
+}
+.pv3-contact__head { display: grid; gap: var(--pv3-space-3); align-content: start; min-width: 0; }
+.pv3-contact__head .pv3-contact__lede { margin: 0 0 var(--pv3-space-2); }
+.pv3-contact__head .pv3-contact__label { margin-block-start: var(--pv3-space-4); }
+.pv3-contact__avail { display: inline-flex; align-items: center; gap: var(--pv3-space-3); margin: 0; justify-self: start; padding: var(--pv3-space-2) var(--pv3-space-4); border: 1px solid var(--pv3-color-rule-strong); border-radius: 999px; font-size: 0.9375rem; font-weight: 600; line-height: 1.35; }
+.pv3-contact__dot { flex: none; inline-size: 0.5rem; block-size: 0.5rem; border-radius: 50%; background: var(--pv3-color-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pv3-color-accent) 22%, transparent); }
+.pv3-contact__mailrow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--pv3-space-3) var(--pv3-space-4); }
+.pv3-contact__head .pv3-contact__mail { margin: 0; font-size: clamp(1.125rem, 4.2vw, 1.75rem); }
+.pv3-contact__head .pv3-contact__place { margin: 0; }
+.pv3-contact__copy { display: inline-flex; align-items: center; gap: var(--pv3-space-2); min-height: 2.5rem; padding-inline: var(--pv3-space-4); border: 1px solid var(--pv3-color-rule-strong); border-radius: 999px; background: transparent; color: var(--pv3-color-ink); font: inherit; font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: border-color 200ms, background-color 200ms, color 200ms; }
+.pv3-contact__copy:hover { border-color: var(--pv3-color-accent); background: color-mix(in srgb, var(--pv3-color-accent) 10%, transparent); color: var(--pv3-color-accent); }
+.pv3-contact__sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.pv3-contact__links { display: flex; flex-wrap: wrap; gap: var(--pv3-space-2) var(--pv3-space-3); margin: 0; padding: 0; list-style: none; }
+.pv3-contact__links a { display: inline-flex; align-items: center; gap: var(--pv3-space-2); min-height: 2.5rem; padding-inline: var(--pv3-space-4); border: 1px solid var(--pv3-color-rule); border-radius: 999px; color: var(--pv3-color-ink); font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: border-color 200ms, color 200ms, background-color 200ms; }
+.pv3-contact__links a:hover { border-color: var(--pv3-color-accent); color: var(--pv3-color-accent); background: color-mix(in srgb, var(--pv3-color-accent) 8%, transparent); }
+
+.pv3-contact__form { align-content: start; gap: var(--pv3-space-6); padding: 0; border: 0; min-width: 0; }
+.pv3-contact__pair { gap: var(--pv3-space-6); }
+.pv3-contact__group { gap: var(--pv3-space-2); }
+.pv3-contact__control { position: relative; }
+.pv3-contact__field { display: block; min-height: 3.5rem; padding: 1.5rem var(--pv3-space-4) var(--pv3-space-2); border: 1px solid var(--pv3-color-rule-strong); border-radius: 0.875rem; background: color-mix(in srgb, var(--pv3-color-canvas) 70%, transparent); transition: border-color 200ms, box-shadow 200ms, background-color 200ms; }
+textarea.pv3-contact__field { min-height: 9rem; line-height: 1.55; resize: vertical; }
+.pv3-contact__field::placeholder { color: transparent; transition: color 200ms; }
+.pv3-contact__field:focus::placeholder { color: var(--pv3-color-muted); }
+.pv3-contact__field:hover { border-color: var(--pv3-color-accent); }
+.pv3-contact__field:focus-visible { outline: 2px solid var(--pv3-color-focus); outline-offset: 2px; border-color: var(--pv3-color-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pv3-color-accent) 24%, transparent), 0 0 32px -6px color-mix(in srgb, var(--pv3-color-accent) 45%, transparent); background: var(--pv3-color-canvas); }
+.pv3-contact__float { position: absolute; inset-block-start: 1.0625rem; inset-inline-start: calc(var(--pv3-space-4) + 1px); max-inline-size: calc(100% - 2rem); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--pv3-color-muted); font-size: 1rem; line-height: 1.2; pointer-events: none; transform-origin: left top; transition: transform 200ms var(--pv3-ease-out), color 200ms; }
+.pv3-contact__field:focus ~ .pv3-contact__float,
+.pv3-contact__field:not(:placeholder-shown) ~ .pv3-contact__float { transform: translateY(-0.6rem) scale(0.82); color: var(--pv3-color-accent); font-weight: 600; }
+.pv3-contact__group[data-state="ok"] .pv3-contact__field { border-color: color-mix(in srgb, var(--pv3-color-accent) 70%, var(--pv3-color-rule)); }
+.pv3-contact__group[data-state="error"] .pv3-contact__field { border-color: var(--pv3-error); box-shadow: 0 0 0 3px color-mix(in srgb, var(--pv3-error) 20%, transparent); }
+.pv3-contact__group[data-state="error"] .pv3-contact__float { color: var(--pv3-error); }
+.pv3-contact__meta { display: flex; justify-content: space-between; align-items: baseline; gap: var(--pv3-space-4); min-block-size: 1.25rem; }
+.pv3-contact__meta .pv3-contact__error { font-size: 0.875rem; }
+.pv3-contact__count { margin-inline-start: auto; color: var(--pv3-color-muted); font-size: 0.8125rem; font-variant-numeric: tabular-nums; white-space: nowrap; transition: color 200ms; }
+.pv3-contact__count[data-met] { color: var(--pv3-color-accent); }
+
+.pv3-contact__submit { position: relative; overflow: hidden; justify-self: stretch; justify-content: center; min-height: 3.25rem; box-shadow: 0 12px 30px -14px color-mix(in srgb, var(--pv3-color-accent) 80%, transparent); }
+.pv3-contact__submit::after { content: ""; position: absolute; inset: auto 0 0 0; block-size: 3px; background: rgb(255 255 255 / 0.85); transform: scaleX(0); transform-origin: left; }
+.pv3-contact__submit[aria-busy="true"] { cursor: progress; opacity: 0.85; }
+.pv3-contact__submit[aria-busy="true"]::after { transform: scaleX(0.9); }
+.pv3-contact__submit svg { transition: transform 260ms var(--pv3-ease-out); }
+
+.pv3-contact__done { display: grid; align-content: center; justify-items: start; gap: var(--pv3-space-3); padding: var(--pv3-space-8); border: 1px dashed var(--pv3-color-rule-strong); border-radius: 1rem; background: color-mix(in srgb, var(--pv3-color-accent) 6%, transparent); }
+.pv3-contact__tick { display: grid; place-items: center; inline-size: 3.5rem; block-size: 3.5rem; border-radius: 50%; background: var(--pv3-color-accent); color: #fff; }
+
+@media (min-width: 64rem) {
+  .pv3-contact__panel { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: stretch; }
+  /* P2: the form column fills the panel; the message field absorbs the spare height so the
+   * submit button sits level with the bottom of the left column. */
+  .pv3-contact__form { display: flex; flex-direction: column; }
+  .pv3-contact__form > .pv3-contact__group:nth-child(2) { flex: 1; grid-template-rows: minmax(9rem, 1fr) auto; }
+  .pv3-contact__group:nth-child(2) textarea.pv3-contact__field { block-size: 100%; }
+  .pv3-contact__form, .pv3-contact__done { padding-inline-start: clamp(2rem, 5vw, 4.5rem); border-inline-start: 1px solid var(--pv3-color-rule); }
+  .pv3-contact__done { border-block: 0; border-inline-end: 0; border-radius: 0; background: none; padding-block: var(--pv3-space-8); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pv3-contact__submit[aria-busy="true"]::after { transition: transform 2.4s cubic-bezier(0.1, 0.7, 0.2, 1); }
+  .pv3-contact__done { animation: pv3-rise 520ms var(--pv3-ease-out) both; }
+  .pv3-contact__tick { animation: pv3-pop 560ms cubic-bezier(0.34, 1.56, 0.64, 1) 120ms both; }
+  .pv3-contact__group[data-state="error"] .pv3-contact__field { animation: pv3-nudge 320ms ease-out; }
+  @keyframes pv3-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes pv3-pop { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+  @keyframes pv3-nudge { 25% { transform: translateX(-4px); } 60% { transform: translateX(4px); } 100% { transform: none; } }
+}
+
+/* ---------- D1/B2: case pages, at-a-glance layout ---------- */
+.pv3-detail__summary {
+  --pv3-summary-surface: color-mix(in srgb, var(--pv3-color-ink) 3%, var(--pv3-color-canvas));
+  margin-block: calc(var(--pv3-space-6) * -1) var(--pv3-space-12);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid transparent;
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(var(--pv3-summary-surface), var(--pv3-summary-surface)) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--pv3-color-accent) 65%, transparent), var(--pv3-color-rule) 40%, var(--pv3-color-rule) 75%, color-mix(in srgb, var(--pv3-color-accent) 40%, transparent)) border-box;
+}
+.pv3-detail__summary:has(+ .pv3-detail__note) { margin-block-end: var(--pv3-space-4); }
+.pv3-detail__summary + .pv3-detail__note { margin-block: 0 var(--pv3-space-12); }
+.pv3-detail__summary-title { margin: 0 0 var(--pv3-space-6); color: var(--pv3-color-accent); font-size: var(--pv3-font-step-label); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.pv3-detail__summary-grid { display: grid; gap: var(--pv3-space-6); margin: 0; }
+.pv3-detail__summary-cell { min-width: 0; }
+.pv3-detail__summary-cell dt { margin-block-end: var(--pv3-space-2); color: var(--pv3-color-muted); font-size: var(--pv3-font-step-label); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.pv3-detail__summary-cell dd { margin: 0; font-size: 1.0625rem; line-height: 1.55; overflow-wrap: anywhere; }
+.pv3-detail__chips, .pv3-detail__proves, .pv3-detail__summary-links { margin: 0; padding: 0; list-style: none; }
+.pv3-detail__chips { display: flex; flex-wrap: wrap; gap: var(--pv3-space-2); }
+.pv3-detail__chips li { padding: 0.25rem var(--pv3-space-3); border: 1px solid var(--pv3-color-rule-strong); border-radius: 999px; font-size: 0.9375rem; font-weight: 600; line-height: 1.4; }
+.pv3-detail__kind { font-weight: 800; color: var(--pv3-color-accent); }
+.pv3-detail__proves-title { margin: var(--pv3-space-8) 0 var(--pv3-space-4); padding-block-start: var(--pv3-space-6); border-block-start: 1px solid var(--pv3-color-rule); color: var(--pv3-color-muted); font-size: var(--pv3-font-step-label); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.pv3-detail__proves { display: grid; gap: var(--pv3-space-4); counter-reset: pv3-prove; }
+.pv3-detail__proves li { position: relative; counter-increment: pv3-prove; padding: var(--pv3-space-4) var(--pv3-space-4) var(--pv3-space-4) var(--pv3-space-4); border: 1px solid var(--pv3-color-rule); border-block-start: 2px solid var(--pv3-color-accent); border-radius: 0.75rem; font-size: 1rem; line-height: 1.5; }
+.pv3-detail__proves li::before { content: counter(pv3-prove, decimal-leading-zero); display: block; margin-block-end: var(--pv3-space-2); color: var(--pv3-color-accent); font-size: var(--pv3-font-step-label); font-weight: 700; letter-spacing: 0.12em; font-variant-numeric: tabular-nums; }
+
+/* B2: sub-heads and scannable cards inside case sections */
+.pv3-detail__prose h3.pv3-detail__sub { margin: var(--pv3-space-8) 0 var(--pv3-space-2); color: var(--pv3-color-accent); font-size: var(--pv3-font-step-label); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.pv3-detail__prose h3.pv3-detail__sub:first-child { margin-block-start: 0; }
+.pv3-detail__prose ul.pv3-detail__cards { display: grid; gap: var(--pv3-space-3); margin: var(--pv3-space-4) 0 0; padding: 0; list-style: none; }
+.pv3-detail__prose ul.pv3-detail__cards > li { padding: var(--pv3-space-3) var(--pv3-space-4); border: 1px solid var(--pv3-color-rule); border-inline-start: 2px solid var(--pv3-color-accent); border-radius: 0.5rem; font-size: 1.0625rem; line-height: 1.55; }
+.pv3-detail__prose ul.pv3-detail__cards > li::before { content: none; }
+.pv3-detail__prose ul.pv3-detail__cards > li > strong:first-child { display: block; color: var(--pv3-color-ink); }
+.pv3-detail__prose mark { padding: 0 0.2em; border-radius: 3px; background: color-mix(in srgb, var(--pv3-color-accent) 18%, transparent); color: inherit; font-weight: 600; }
+.pv3-detail__prose .pv3-detail__pull { padding-inline-start: var(--pv3-space-4); border-inline-start: 2px solid var(--pv3-color-accent); font-size: 1.25rem; font-weight: 600; line-height: 1.45; }
+.pv3-detail__summary-links { display: flex; flex-wrap: wrap; gap: var(--pv3-space-2) var(--pv3-space-4); }
+.pv3-detail__summary-links a { display: inline-flex; align-items: center; min-height: 2.5rem; color: var(--pv3-color-accent); font-weight: 700; text-decoration: underline; text-underline-offset: 0.25em; }
+.pv3-detail__summary-links a:hover { color: var(--pv3-color-ink); }
+
+/* Reading comfort: wider line-height, 68ch measure, numbered h2 hierarchy, centred media. */
+.pv3-detail__media { margin-inline: auto; justify-self: center; inline-size: 100%; }
+.pv3-detail__steps { max-inline-size: 68ch; counter-reset: pv3-sec; }
+.pv3-detail__step { padding-block-end: var(--pv3-space-16); counter-increment: pv3-sec; scroll-margin-block-start: 6rem; }
+.pv3-detail__step:last-child { padding-block-end: 0; }
+.pv3-detail__step > .pv3-detail__label { display: flex; flex-direction: column; gap: var(--pv3-space-1); margin: 0 0 var(--pv3-space-4); color: var(--pv3-color-ink); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; text-transform: none; text-wrap: balance; }
+.pv3-detail__step > .pv3-detail__label::before { content: counter(pv3-sec, decimal-leading-zero); color: var(--pv3-color-accent); font-size: var(--pv3-font-step-label); font-weight: 700; letter-spacing: 0.12em; font-variant-numeric: tabular-nums; }
+.pv3-detail__prose { font-size: 1.125rem; line-height: 1.72; }
+.pv3-detail__prose > * + * { margin-block-start: var(--pv3-space-4); }
+.pv3-detail__prose ul { gap: var(--pv3-space-4); }
+.pv3-detail__prose li::before { inset-block-start: 0.85em; }
+
+.pv3-detail__toc { display: none; }
+@media (min-width: 64rem) {
+  .pv3-detail__summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--pv3-space-8) var(--pv3-space-12); }
+  .pv3-detail__summary-cell:nth-child(n+3) { grid-column: 1 / -1; }
+  .pv3-detail__proves { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pv3-detail__stack { position: static; align-self: stretch; }
+}
+@media (min-width: 80rem) {
+  .pv3-detail__toc { display: block; position: sticky; inset-block-start: var(--pv3-space-20); margin-block-start: var(--pv3-space-8); padding-block-start: var(--pv3-space-4); border-block-start: 1px solid var(--pv3-color-rule); }
+  .pv3-detail__toc ol { margin: 0; padding: 0; list-style: none; counter-reset: pv3-toc; }
+  .pv3-detail__toc li { counter-increment: pv3-toc; }
+  .pv3-detail__toc a { display: flex; gap: var(--pv3-space-3); padding-block: var(--pv3-space-2); color: var(--pv3-color-muted); font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: color 200ms; }
+  .pv3-detail__toc a::before { content: counter(pv3-toc, decimal-leading-zero); color: var(--pv3-color-accent); font-variant-numeric: tabular-nums; }
+  .pv3-detail__toc a:hover { color: var(--pv3-color-ink); }
+}
+
+.pv3-contact__form { gap: var(--pv3-space-4); }
+.pv3-contact__pair { gap: var(--pv3-space-4); }
+.pv3-contact__group { gap: var(--pv3-space-1); }
+.pv3-contact__meta { min-block-size: 1.125rem; }
+.pv3-contact { --pv3-error: #b91c1c; }
+.dark .pv3-contact { --pv3-error: #fca5a5; }
+.pv3-contact__error, .pv3-contact__error--form { color: var(--pv3-error); border-color: var(--pv3-error); }
+
+/* ---------- Contact icons: decorative, static by default; motion only for hover-capable, no-preference users ---------- */
+.pv3-contact__fi { position: absolute; inset-block-start: 1.0625rem; inset-inline-start: var(--pv3-space-4); color: var(--pv3-color-muted); pointer-events: none; transition: color 200ms; }
+.pv3-contact__control:has(.pv3-contact__field) .pv3-contact__field { padding-inline-start: 2.75rem; }
+.pv3-contact__control .pv3-contact__float { inset-inline-start: 2.75rem; max-inline-size: calc(100% - 3.5rem); }
+.pv3-contact__control:focus-within .pv3-contact__fi, .pv3-contact__group[data-state="ok"] .pv3-contact__fi { color: var(--pv3-color-accent); }
+.pv3-contact__group[data-state="error"] .pv3-contact__fi { color: var(--pv3-error); }
+.pv3-contact__error { display: inline-flex; align-items: flex-start; gap: var(--pv3-space-2); }
+.pv3-contact__error svg { flex: none; margin-block-start: 0.2em; }
+.pv3-contact__badge { display: inline-grid; place-items: center; flex: none; inline-size: 2.5rem; block-size: 2.5rem; border-radius: 0.75rem; background: color-mix(in srgb, var(--pv3-color-accent) 14%, transparent); color: var(--pv3-color-accent); }
+.pv3-contact__place { display: inline-flex; align-items: center; gap: var(--pv3-space-2); }
+.pv3-contact__place svg { flex: none; color: var(--pv3-color-accent); }
+.pv3-contact__links .pv3-ti { inline-size: 1rem; block-size: 1rem; }
+.pv3-contact__in { color: #0a66c2; }
+.dark .pv3-contact__in { color: #70b5f9; }
+.pv3-contact__head .pv3-contact__lede { font-size: 1.0625rem; line-height: 1.5; }
+.pv3-contact__links a:focus-visible, .pv3-contact__copy:focus-visible { outline: 2px solid var(--pv3-color-focus); outline-offset: 2px; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pv3-contact__links a, .pv3-contact__copy { transition: border-color 200ms, color 200ms, background-color 200ms, transform 200ms var(--pv3-ease-out); }
+  .pv3-contact__links a:hover, .pv3-contact__copy:hover { transform: translateY(-2px); }
+  .pv3-contact__submit:hover:not(:disabled) svg, .pv3-contact__submit:focus-visible svg { animation: pv3-send 700ms var(--pv3-ease-out) infinite; }
+  @keyframes pv3-send { 0%, 100% { transform: none; } 50% { transform: translate(4px, -4px); } }
+}

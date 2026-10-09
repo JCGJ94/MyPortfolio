@@ -1,0 +1,11 @@
+/* Tech icons (TechIcon / TechLabel): inline brand glyphs or neutral Lucide fallbacks, shared by Stack, Projects, Hero,
+ * About, case pages and /cv. Fixed box = no layout shift; fully opaque so they stay crisp. Brand colour per theme via
+ * --ti-d / --ti-l, else the text colour (which keeps AA contrast). */
+.pv3-ti { flex: none; inline-size: 1.1em; block-size: 1.1em; color: var(--ti-l, currentColor); }
+.dark .pv3-ti { color: var(--ti-d, currentColor); }
+.pv3-tl { display: inline-flex; align-items: center; gap: 0.4em; vertical-align: middle; }
+.pv3-about__facts .pv3-ti { inline-size: 1.15em; block-size: 1.15em; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pv3-tl .pv3-ti { transition: transform 160ms; }
+  .pv3-tl:hover .pv3-ti, .pv3-detail__chips li:hover .pv3-ti, .pv3-case__chain li:hover .pv3-ti { transform: scale(1.15); }
+}

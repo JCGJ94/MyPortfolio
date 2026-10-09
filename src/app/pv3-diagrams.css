@@ -1,0 +1,72 @@
+/* Flow diagrams (FlowDiagram.tsx). Nodes are HTML buttons over inline-SVG edges; the layout (wide snake / tall
+ * two-column snake) is picked by a container query on the diagram itself, so it fits any parent. Colours come from
+ * the site tokens, so both themes work. Non-interactive: the loop runs by itself. Motion is opt-in: reduced motion keeps static arrows and a colour-only highlight. */
+.pv3-flow { container: flow / inline-size; display: grid; gap: var(--pv3-space-3); inline-size: 100%; min-inline-size: 0; }
+
+.pv3-flow__stage {
+  --w: min(100cqw, 30rem);
+  position: relative; inline-size: var(--w); aspect-ratio: var(--tr, 0.813); margin-inline: auto;
+  font-size: min(max(calc(var(--w) * 0.042), 0.75rem), 1.05rem); /* titles stay >= 12px on phones */
+}
+.pv3-flow__edges { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; overflow: visible; pointer-events: none; }
+.pv3-flow__edges--wide { display: none; }
+
+.pv3-flow__node {
+  --l: var(--tl); --t: var(--tt); --nw: var(--tw); --nh: var(--th);
+  position: absolute; inset-inline-start: var(--l); inset-block-start: var(--t); inline-size: var(--nw); block-size: var(--nh);
+  box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 0.2em; padding: 0.4em 0.7em;
+  margin: 0; font: inherit; text-align: start; color: var(--pv3-color-ink);
+  border: 1px solid transparent; border-radius: 0.6em;
+  background:
+    linear-gradient(var(--pv3-color-canvas), var(--pv3-color-canvas)) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--pv3-color-accent) 55%, var(--pv3-color-rule-strong)), var(--pv3-color-rule-strong) 70%) border-box;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--pv3-color-ink) 8%, transparent), 0 10px 22px -16px color-mix(in srgb, #000 70%, transparent);
+}
+.pv3-flow__title { display: flex; align-items: center; gap: 0.4em; font-weight: 700; line-height: 1.2; font-size: 1em; }
+.pv3-flow__title .pv3-ti { inline-size: 1.15em; block-size: 1.15em; }
+.pv3-flow__sub { color: var(--pv3-color-muted); font-size: 0.84em; line-height: 1.25; }
+.pv3-flow__node--ci { border: 1px dashed var(--pv3-color-accent); background: color-mix(in srgb, var(--pv3-color-accent) 6%, var(--pv3-color-canvas)); flex-direction: row; align-items: center; justify-content: flex-start; gap: 0.9em; flex-wrap: wrap; }
+
+.pv3-flow__node.is-hot {
+  background: linear-gradient(color-mix(in srgb, var(--pv3-color-accent) 9%, var(--pv3-color-canvas)), color-mix(in srgb, var(--pv3-color-accent) 9%, var(--pv3-color-canvas))) padding-box, linear-gradient(var(--pv3-color-accent), var(--pv3-color-accent)) border-box;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pv3-color-accent) 22%, transparent), 0 12px 28px -10px color-mix(in srgb, var(--pv3-color-accent) 60%, transparent);
+}
+.pv3-flow__node--ci.is-hot { border-color: var(--pv3-color-accent); }
+.pv3-flow__node.is-dim { opacity: 0.6; }
+.pv3-detail__media .pv3-flow { padding: var(--pv3-space-4); box-sizing: border-box; }
+
+.pv3-flow__line { fill: none; stroke: var(--pv3-color-accent); stroke-width: 1.75; }
+.pv3-flow__run { fill: none; stroke: var(--pv3-color-accent); stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 0.1 12; display: none; }
+.pv3-flow__head { fill: var(--pv3-color-accent); }
+.pv3-flow__edge.is-hot .pv3-flow__line { stroke-width: 2.5; }
+.pv3-flow__edge.is-dim { opacity: 0.4; }
+
+.pv3-flow__bar { display: grid; min-block-size: 4.4em; }
+.pv3-flow__caption { grid-area: 1 / 1; margin: 0; color: var(--pv3-color-muted); font-size: 0.875rem; line-height: 1.45; }
+.pv3-flow__caption strong { color: var(--pv3-color-ink); }
+.pv3-flow__caption .pv3-flow__state { color: var(--pv3-color-accent); font-variant-numeric: tabular-nums; }
+.pv3-flow__sr { position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Wide snake: container at least 44rem. The height cap keeps it inside the fixed Projects stage. */
+@container flow (min-width: 44rem) {
+  .pv3-flow__stage { --w: min(100cqw, calc(17rem * var(--wr, 2.905))); aspect-ratio: var(--wr, 2.905); font-size: min(max(calc(var(--w) * 0.0185), 0.875rem), 1rem); }
+  .pv3-flow__edges--tall { display: none; }
+  .pv3-flow__edges--wide { display: block; }
+  .pv3-flow__node { --l: var(--wl); --t: var(--wt); --nw: var(--ww); --nh: var(--wh); }
+  .pv3-flow__bar { min-block-size: 2.9em; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pv3-flow__node.is-hot { transform: scale(1.03); }
+  .pv3-flow__node { transition: transform 180ms var(--pv3-ease-out), box-shadow 180ms var(--pv3-ease-out), opacity 180ms; }
+  .pv3-flow__edge { transition: opacity 180ms; }
+  .pv3-flow__run { display: inline; animation: pv3-flow-run 1.1s linear infinite; }
+    .pv3-flow__edge.is-hot .pv3-flow__run { animation-duration: 0.6s; }
+  .pv3-flow[data-live="0"] .pv3-flow__run { animation-play-state: paused; }
+  .js-reveal .pv3-flow .pv3-flow__line { stroke-dasharray: 1; }
+  .js-reveal .pv3-flow.is-in .pv3-flow__line { transition: stroke-dashoffset 700ms var(--pv3-ease-out) calc(var(--i, 0) * 140ms); }
+  .js-reveal .pv3-flow:not(.is-in) .pv3-flow__line { stroke-dashoffset: 1; }
+  .js-reveal .pv3-flow:not(.is-in) .pv3-flow__run { opacity: 0; }
+  .js-reveal .pv3-flow.is-in .pv3-flow__run { transition: opacity 400ms 900ms; }
+}
+@keyframes pv3-flow-run { to { stroke-dashoffset: -12.1; } }

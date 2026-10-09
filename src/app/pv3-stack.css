@@ -1,0 +1,148 @@
+/* B1 — Stack as an exploded isometric architecture in CSS 3D. Layers = roles; the panel lists the technologies.
+ * >=64rem: layers are coplanar slabs stacked along Z (rig rotateX/rotateZ = isometric), the active slab rises.
+ * <64rem: a column of cards, each tilted on its own and flat when active.
+ * Motion = transform only; JS (Stack3D.tsx) writes --px/--py (pointer), --sc (scroll), --ex (explode 0..1).
+ * No JS / reduced motion keep the static pose: first layer active. */
+@property --lift { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@property --flat { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --face { syntax: "<number>"; inherits: true; initial-value: 0; }
+
+.pv3-s3d {
+  --zg: 1.1rem; --rx0: 26; --rz0: 0; --ax: 4; --az: 0;
+  --a: calc(var(--rx0) + var(--py, 0) * var(--ax) * -1);
+  --b: calc(var(--rz0) + (var(--px, 0) + var(--sc, 0)) * var(--az));
+  display: grid; gap: var(--pv3-space-8); min-width: 0;
+}
+@media (min-width: 64rem) {
+  .pv3-s3d {
+    --zg: 4.6rem; --rx0: 58; --rz0: -38; --ax: 6; --az: 7; --pw: 28rem; --ph: 16rem;
+    grid-template-columns: minmax(0, 1fr) 21rem; gap: var(--pv3-space-10); align-items: start;
+  }
+}
+@media (min-width: 80rem) { .pv3-s3d { --pw: 32rem; --ph: 17rem; } }
+
+.pv3-s3d__stage { overflow: clip; padding-block: var(--pv3-space-4); padding-inline: var(--pv3-space-2); min-width: 0; }
+.pv3-s3d__rig { position: relative; margin: 0; padding: 0; list-style: none; display: grid; gap: var(--pv3-space-4); transform-style: preserve-3d; }
+@media (min-width: 64rem) {
+  .pv3-s3d__stage { overflow: visible; perspective: 2200px; perspective-origin: 50% 40%; min-height: 42rem; display: grid; place-items: center; padding-inline: var(--pv3-space-4); padding-block-start: 8rem; }
+  .pv3-s3d__rig { display: block; inline-size: var(--pw); block-size: var(--ph); transform: rotateX(calc(var(--a) * 1deg)) rotateZ(calc(var(--b) * 1deg)); }
+}
+
+/* Trace: one vertical line through every layer node, standing in 3D space. */
+.pv3-s3d__rig::before {
+  content: ""; position: absolute; inset-inline-start: 1.1rem; inset-block-start: 50%; inline-size: 2px; border-radius: 1px; pointer-events: none;
+  block-size: calc(var(--n) * var(--zg) * (0.3 + 0.7 * var(--ex, 0.7)) + 2.4rem);
+  background: linear-gradient(to bottom, var(--pv3-color-accent), transparent);
+  transform-origin: 50% 0; transform: rotateX(90deg);
+}
+/* Ground glow under the lowest slab. */
+.pv3-s3d__rig::after {
+  content: ""; position: absolute; inset: -14%; pointer-events: none; z-index: -1;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--pv3-color-accent) 34%, transparent), transparent 70%);
+  transform: translateZ(-2.2rem);
+}
+@media (max-width: 63.99rem) { .pv3-s3d__rig::before, .pv3-s3d__rig::after { display: none; } }
+
+.pv3-s3d__layer {
+  --surf: color-mix(in srgb, var(--pv3-color-canvas) 88%, var(--pv3-color-ink) 8%);
+  --edge: color-mix(in srgb, var(--pv3-color-canvas) 62%, var(--pv3-color-ink) 14%);
+  position: relative; min-width: 0; transform-style: preserve-3d; cursor: pointer;
+  display: flex; flex-direction: column; padding: var(--pv3-space-3) var(--pv3-space-4) var(--pv3-space-3) 2.5rem;
+  border: 1px solid var(--pv3-color-rule-strong); border-radius: 10px; background: var(--surf);
+  transform: perspective(900px) rotateX(calc(34deg * (1 - var(--flat)))); /* narrow: each card tilts on its own */
+}
+@media (min-width: 64rem) {
+  .pv3-s3d__layer {
+    position: absolute; inset: 0; flex-direction: column-reverse; padding-block: var(--pv3-space-3);
+    /* --face 0 = slab pose; 1 = the layer cancels the rig tilt (rotations are the exact inverse of the rig's, so the
+     * pointer parallax cannot fight it), rises and comes forward: one continuous transform. */
+    transform: translateZ(calc((var(--k) * var(--zg) * (0.3 + 0.7 * var(--ex, 0.7)) + var(--lift)) * (1 - var(--face))))
+      rotateZ(calc(var(--b) * var(--face) * -1deg)) rotateX(calc(var(--a) * var(--face) * -1deg))
+      translate3d(0, calc(var(--face) * -2rem), calc(var(--face) * 24rem));
+  }
+}
+.pv3-s3d__layer::before, .pv3-s3d__layer::after { /* slab thickness: two darker copies behind the face */
+  content: ""; position: absolute; inset: -1px; border: 1px solid var(--pv3-color-rule-strong); border-radius: 10px; background: var(--edge); pointer-events: none;
+}
+.pv3-s3d__layer::before { transform: translateZ(-0.4rem); }
+.pv3-s3d__layer::after { transform: translateZ(-0.8rem); background: color-mix(in srgb, var(--edge) 80%, #000); box-shadow: 0 1.2rem 1.6rem -0.6rem rgb(0 0 0 / 0.5); }
+.pv3-s3d__layer.is-act { --flat: 1; --lift: calc(var(--zg) * 0.5); border-color: var(--pv3-color-accent); box-shadow: 0 0 0 1px var(--pv3-color-accent), 0 0 2.4rem -0.4rem color-mix(in srgb, var(--pv3-color-accent) 55%, transparent); }
+
+.pv3-s3d__node {
+  position: absolute; inset-inline-start: 1.1rem; inset-block-start: 50%; inline-size: 0.8rem; block-size: 0.8rem; margin: -0.4rem 0 0 -0.4rem; border-radius: 50%;
+  background: var(--pv3-color-muted); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pv3-color-muted) 24%, transparent); transform: translateZ(1px);
+}
+.pv3-s3d__layer.is-act .pv3-s3d__node { background: var(--pv3-color-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pv3-color-accent) 30%, transparent); }
+.pv3-s3d__role { display: flex; align-items: center; margin: 0; color: var(--pv3-color-ink); font-size: 1.25rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.2; }
+@media (min-width: 64rem) { .pv3-s3d__role { align-self: center; inline-size: 60%; } }
+.pv3-s3d__layerbtn { padding: 0.5rem 0; border: 0; background: none; color: inherit; font: inherit; text-align: start; cursor: pointer; }
+.pv3-s3d__count { margin-inline-start: auto; color: var(--pv3-color-muted); font-size: var(--pv3-font-step-label); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* Decorative chips on the slab (the interactive copies live in the panel). */
+.pv3-s3d__ghost { display: none; margin: 0 0 auto; padding: 0; list-style: none; flex-wrap: wrap; gap: 0.35rem; opacity: 0.8; }
+@media (min-width: 64rem) { .pv3-s3d__ghost { display: flex; } }
+.pv3-s3d__ghost li { padding: 0.15rem 0.6rem; border: 1px solid var(--pv3-color-rule-strong); border-radius: 999px; color: var(--pv3-color-ink); font-size: 0.8125rem; font-weight: 600; line-height: 1.3; }
+.pv3-s3d__layer.is-act .pv3-s3d__ghost { opacity: 1; }
+
+/* Panel: real, interactive list of the active layer + the cases of the selected technology. */
+.pv3-s3d__panel { min-width: 0; padding-inline-start: var(--pv3-space-4); border-inline-start: 2px solid var(--pv3-color-accent); }
+@media (min-width: 64rem) { .pv3-s3d__panel { position: sticky; inset-block-start: 7rem; } }
+.pv3-s3d__group + .pv3-s3d__group { margin-block-start: var(--pv3-space-8); }
+.pv3-s3d.is-live .pv3-s3d__group[data-on="false"], .pv3-s3d.is-live .pv3-s3d__set[data-on="false"] { display: none; }
+.pv3-s3d__grouptitle { margin: 0 0 var(--pv3-space-3); color: var(--pv3-color-accent); font-size: var(--pv3-font-step-label); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.pv3-s3d__chips { margin: 0 0 var(--pv3-space-8); padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--pv3-space-2); }
+.pv3-s3d__chip {
+  display: inline-flex; align-items: center; gap: 0.5rem; min-block-size: 2.25rem; padding: 0.3rem 0.8rem;
+  border: 1px solid var(--pv3-color-rule-strong); border-radius: 999px; background: transparent;
+  color: var(--pv3-color-ink); font: inherit; font-size: 0.9375rem; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere;
+}
+.pv3-s3d__chip--linked { cursor: pointer; }
+.pv3-s3d__chip--linked::after { content: ""; flex: none; inline-size: 5px; block-size: 5px; border-radius: 50%; background: var(--pv3-color-accent); }
+.pv3-s3d__chip--linked[aria-pressed="true"] { border-color: var(--pv3-color-accent); background: color-mix(in srgb, var(--pv3-color-accent) 18%, transparent); }
+@media (pointer: coarse) { .pv3-s3d__chip { min-block-size: 2.75rem; } }
+.pv3-s3d__set + .pv3-s3d__set { margin-block-start: var(--pv3-space-5); }
+.pv3-s3d__tech { margin: 0; color: var(--pv3-color-ink); font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
+.pv3-s3d__used { margin: var(--pv3-space-2) 0 var(--pv3-space-1); color: var(--pv3-color-muted); font-size: var(--pv3-font-step-label); letter-spacing: 0.1em; text-transform: uppercase; }
+.pv3-s3d__set ul { margin: 0; padding: 0; list-style: none; }
+.pv3-s3d__set a { display: inline-block; padding-block: 0.4rem; font-size: 1.0625rem; font-weight: 600; }
+
+.pv3-stack__langs { margin: var(--pv3-space-6) 0 0; color: var(--pv3-color-muted); font-size: 1.0625rem; }
+.pv3-stack__langs strong { margin-inline-end: var(--pv3-space-2); color: var(--pv3-color-ink); }
+
+/* Click-to-front: the featured block flies to the front, the others shrink back (individual transform
+ * properties, so the rig/layer transforms stay untouched). No data-feat = the neutral staggered pose. */
+.pv3-s3d__layer.is-feat { --flat: 1; --face: 1; scale: 1.02; border-color: var(--pv3-color-accent); background: color-mix(in srgb, var(--surf) 90%, var(--pv3-color-accent) 10%); box-shadow: 0 0 0 2px var(--pv3-color-accent), 0 0 3.2rem 0 color-mix(in srgb, var(--pv3-color-accent) 60%, transparent); }
+.pv3-s3d[data-feat] .pv3-s3d__layer:not(.is-feat) { scale: 0.86; translate: 0 0 -3rem; }
+.pv3-s3d__layer.is-feat .pv3-s3d__ghost { opacity: 1; }
+.pv3-s3d__layer.is-feat .pv3-s3d__ghost li { font-size: 0.9375rem; padding: 0.25rem 0.75rem; border-color: var(--pv3-color-accent); }
+.pv3-s3d__layerbtn { text-decoration: underline transparent 2px; text-underline-offset: 0.3em; }
+.pv3-s3d__layer.is-feat .pv3-s3d__layerbtn { text-decoration-color: var(--pv3-color-accent); }
+@media (hover: hover) and (min-width: 64rem) {
+  .pv3-s3d__layer:not(.is-act, .is-feat):hover { --lift: calc(var(--zg) * 0.4); border-color: color-mix(in srgb, var(--pv3-color-accent) 70%, var(--pv3-color-rule-strong)); }
+}
+@media (max-width: 63.99rem) {
+  .pv3-s3d__layer.is-feat .pv3-s3d__ghost { display: flex; margin-block: var(--pv3-space-2) 0; }
+  .pv3-s3d[data-feat] .pv3-s3d__layer:not(.is-feat) { padding-block: 0.15rem; }
+  .pv3-s3d[data-feat] .pv3-s3d__layer:not(.is-feat) .pv3-s3d__role { font-size: 1rem; }
+}
+.pv3-s3d__layer:hover { cursor: pointer; }
+.pv3-s3d[data-feat] .pv3-s3d__panel { border-inline-start-width: 4px; }
+
+/* Tech icons in the Stack (base rules: pv3-icons.css): no opacity, so they stay crisp on the tilted slabs. */
+.pv3-s3d__ghost li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.pv3-s3d__chip .pv3-ti { inline-size: 1.25rem; block-size: 1.25rem; }
+.pv3-s3d__layer.is-feat .pv3-s3d__ghost li { gap: 0.5rem; }
+.pv3-s3d__layer.is-feat .pv3-s3d__ghost .pv3-ti { inline-size: 1.2em; block-size: 1.2em; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pv3-s3d__chip .pv3-ti { transition: transform 160ms; }
+  .pv3-s3d__chip--linked:hover .pv3-ti { transform: scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv3-s3d__layer { transition: border-color 200ms, background-color 200ms; } /* crossfade only, no flight */
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pv3-s3d__layer { transition: --flat 850ms var(--pv3-ease-out), --face 850ms var(--pv3-ease-out), --lift 640ms var(--pv3-ease-out), scale 850ms var(--pv3-ease-out), translate 850ms var(--pv3-ease-out), border-color 240ms, box-shadow 400ms, background-color 400ms; }
+  .pv3-s3d__ghost { transition: opacity 300ms; }
+  .pv3-s3d__chip { transition: background-color 160ms, border-color 160ms; }
+}

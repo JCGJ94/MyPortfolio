@@ -1,107 +1,100 @@
 'use client';
 
 import Link from 'next/link';
-import { Github, Linkedin, FileText, ExternalLink } from 'lucide-react';
+import { ArrowUp, ArrowUpRight, Github, Linkedin } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { FooterSignature } from '@/components/ui/FooterSignature';
+import { FooterCodeRain } from '@/components/ui/FooterCodeRain';
+import '@/app/pv3-footer.css';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { IconOrbitButton } from '@/components/ui/IconOrbitButton';
 
 export function Footer() {
     const { t } = useLanguage();
     const currentYear = new Date().getFullYear();
+    const footer = t.footer as typeof t.footer & { top?: string };
+
+    const site = [
+        { href: '/#hero', label: t.nav.home },
+        { href: '/#projects', label: t.nav.projects },
+        { href: '/#about', label: t.nav.about },
+        { href: '/#stack', label: t.nav.stack },
+        { href: '/dashboard', label: t.nav.cta },
+    ];
+    const elsewhere = [
+        { href: 'https://github.com/JCGJ94', label: 'GitHub', icon: Github, external: true },
+        { href: 'https://linkedin.com/in/josecgonzález', label: 'LinkedIn', icon: Linkedin, external: true },
+        { href: '/JoseCarlos-CV.pdf', label: t.hero.downloadCv, icon: null, external: true },
+        { href: '/#contact', label: footer.contact, icon: null, external: false },
+    ];
 
     return (
-        <footer className="w-full border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-12">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-12 md:gap-12 mb-12">
-                    {/* Logo & Info */}
-                    <div className="col-span-2">
-                        <h3 className="text-xl font-bold tracking-tight mb-4">Jose Carlos González</h3>
-                        <p className="text-muted-foreground text-balance max-w-sm mb-6">
-                            {t.footer.description}
-                        </p>
-                        <div className="flex gap-4">
-                            <IconOrbitButton
-                                href="https://linkedin.com/in/josecgonzález"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="LinkedIn"
-                                icon={<Linkedin className="h-5 w-5" />}
-                                hoverIcon={<Linkedin className="h-5 w-5" />}
-                            />
-                            <IconOrbitButton
-                                href="https://github.com/JCGJ94"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="GitHub"
-                                icon={<Github className="h-5 w-5" />}
-                                hoverIcon={<Github className="h-5 w-5" />}
-                            />
-                        </div>
-                    </div>
+        <footer className="pv3-foot">
+            <div className="pv3-foot__inner">
+                <div className="pv3-foot__top">
+                    <p className="pv3-foot__avail">
+                        <span className="pv3-foot__dot" aria-hidden="true" />
+                        {t.hero.badge}
+                    </p>
+                    <a href="#hero" className="pv3-foot__up pv3-focus" aria-label={footer.top ?? 'Back to top'}>
+                        <span className="pv3-foot__up-label">{footer.top ?? 'Back to top'}</span>
+                        <span className="pv3-foot__up-ring" aria-hidden="true"><ArrowUp size={18} /></span>
+                    </a>
+                </div>
 
-                    {/* Sitemaps */}
-                    <div>
-                        <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t.footer.navTitle}</h4>
-                        <ul className="space-y-3 text-sm">
-                            <li>
-                                <Link href="/#hero" className="hover:text-primary transition-colors">{t.nav.home}</Link>
-                            </li>
-                            <li>
-                                <Link href="/#projects" className="hover:text-primary transition-colors">{t.nav.projects}</Link>
-                            </li>
-                            <li>
-                                <Link href="/nutriflow" className="hover:text-primary transition-colors">{t.nav.nutriflow}</Link>
-                            </li>
-                            <li>
-                                <Link href="/dashboard" className="hover:text-primary transition-colors">{t.nav.cta}</Link>
-                            </li>
+                <div className="pv3-foot__sig">
+                    <FooterCodeRain />
+                    <p className="pv3-term pv3-term--cmd" aria-hidden="true">
+                        <span className="pv3-term__ps">$</span> <span className="pv3-term__type">whoami</span>
+                    </p>
+                    <FooterSignature first={t.hero.name.split(' ')[0]} accent={t.hero.name.split(' ').slice(1).join(' ')} />
+                    <p className="pv3-term pv3-term--log" aria-hidden="true">
+                        <span className="pv3-term__line"><span className="pv3-term__ps">&gt;</span> stack: python · fastapi · next.js · react · typescript · postgres · docker</span>
+                        <span className="pv3-term__line pv3-term__line--run"><span className="pv3-term__ps">$</span> <span className="pv3-term__type">docker compose up</span><span className="pv3-term__caret" /></span>
+                    </p>
+                </div>
+                <div className="pv3-foot__trace" aria-hidden="true" />
+
+                <div className="pv3-foot__grid">
+                    <p className="pv3-foot__about">{footer.description}</p>
+
+                    <nav aria-label={footer.navTitle}>
+                        <h2 className="pv3-foot__h">{footer.navTitle}</h2>
+                        <ul className="pv3-foot__list">
+                            {site.map((item) => (
+                                <li key={item.href}>
+                                    <Link href={item.href} className="pv3-foot__link pv3-focus"><span>{item.label}</span></Link>
+                                </li>
+                            ))}
                         </ul>
-                    </div>
+                    </nav>
 
-                    {/* Resources */}
                     <div>
-                        <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t.footer.resourcesTitle}</h4>
-                        <ul className="space-y-3 text-sm">
-                            <li>
-                                <Link
-                                    href="/JoseCarlos-CV.pdf"
-                                    target="_blank"
-                                    className="flex items-center hover:text-primary transition-colors"
-                                >
-                                    <FileText className="mr-2 h-4 w-4" />
-                                    {t.hero.downloadCv}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="https://nutri-flow-mu.vercel.app/"
-                                    target="_blank"
-                                    className="flex items-center hover:text-primary transition-colors"
-                                >
-                                    <ExternalLink className="mr-2 h-4 w-4" />
-                                    NutriFlow Demo
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/#contact" className="hover:text-primary transition-colors">{t.footer.contact}</Link>
-                            </li>
+                        <h2 className="pv3-foot__h">{footer.resourcesTitle}</h2>
+                        <ul className="pv3-foot__list">
+                            {elsewhere.map(({ href, label, icon: Icon, external }) => (
+                                <li key={href}>
+                                    <a
+                                        href={href}
+                                        className="pv3-foot__link pv3-focus"
+                                        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                    >
+                                        {Icon && <Icon aria-hidden="true" size={16} />}
+                                        <span>{label}</span>
+                                        {external && <ArrowUpRight aria-hidden="true" size={14} className="pv3-foot__arrow" />}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-muted-foreground">
+                <div className="pv3-foot__bottom">
                     <p>© {currentYear} Jose Carlos González. {t.footer.rights}.</p>
-
-                    <div className="flex items-center gap-6">
+                    <div className="pv3-foot__meta">
                         <LanguageSwitcher />
-
-                        <div className="flex items-center gap-1">
-                            <span>Built with</span>
-                            <span className="font-semibold text-foreground">Next.js</span>
-                            <span>&</span>
-                            <span className="font-semibold text-foreground">Supabase</span>
-                        </div>
+                        <p>
+                            Built with <strong>Next.js</strong> &amp; <strong>Supabase</strong>
+                        </p>
                     </div>
                 </div>
             </div>

@@ -1,146 +1,317 @@
 'use client';
 
-import * as React from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore, type KeyboardEvent } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { projects, type Project } from '@/data/projects';
-import { ProjectHoverPreview } from '@/components/ui/ProjectHoverPreview';
+import { flows } from '@/data/diagrams';
+import { projects, type CaseStep, type Project } from '@/data/projects';
+import { TechLabel } from '@/components/ui/TechIcon';
+import { SectionLabel } from '@/components/ui/SectionLabel';
+import { FlowDiagram } from '@/components/ui/FlowDiagram';
+import { SquaadsArchitecture } from '@/components/ui/SquaadsArchitecture';
 import { useLanguage } from '@/context/LanguageContext';
-import { MagneticPillButton } from '@/components/ui/MagneticPillButton';
+
+// Real component chain of each project, taken from its stack and highlights in projects.ts.
+const architecture: Record<string, string[]> = {
+  'squaads-meeting-bot': ['Next.js', 'Postgres · cola', 'Worker · Puppeteer + FFmpeg', 'S3 / MinIO', 'IA con fallback'],
+  nutriflow: ['Next.js', 'NestJS', 'Supabase · RLS', 'Gemini'],
+  'clinical-ai': ['Router de triage', 'Agentes en paralelo', 'RAG · pgvector', 'Salida tipada'],
+  tallercardonal: ['React', 'Vite', 'Vercel'],
+  jegstudio: ['React', 'Next.js', 'Git Flow'],
+  sportbarleague: ['React', 'Flask · JWT', 'SQLAlchemy', 'PostgreSQL'],
+};
+
+const steps: CaseStep[] = ['problem', 'solution', 'decisions', 'evidence'];
+
+// Below 64rem, decisions beyond this many collapse into a native <details>; all text stays in the DOM.
+const VISIBLE_DECISIONS = 3;
+
+// Desktop layout (vertical tablist) from 64rem; the same breakpoint as the CSS.
+const WIDE = '(min-width: 64rem)';
+const noopSubscribe = () => () => {};
+const subscribeWide = (cb: () => void) => {
+  const mq = window.matchMedia(WIDE);
+  mq.addEventListener('change', cb);
+  return () => mq.removeEventListener('change', cb);
+};
+
+const pad =(n: number) => String(n + 1).padStart(2, '0');
+
+/** Case stage: product screen first, architecture flow one tab away (both stay in the DOM). */
+function CaseMedia({ project }: { project: Project }) {
+  const { t } = useLanguage();
+  const c = t.projects.case;
+  const [tab, setTab] = useState<'product' | 'architecture'>('product');
+  const flow = flows[project.id];
+  const tabs = [
+    { id: 'product', label: c.tabProduct },
+    { id: 'architecture', label: c.tabArchitecture },
+  ] as const;
+
+  return (
+    <>
+      <div className="pv3-case__tabs" role="tablist" aria-label={`${c.tabProduct} / ${c.tabArchitecture}`}>
+        {tabs.map(({ id, label }) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            id={`${project.id}-tab-${id}`}
+            aria-selected={tab === id}
+            aria-controls={`${project.id}-panel-${id}`}
+            tabIndex={tab === id ? 0 : -1}
+            className="pv3-case__tab pv3-focus"
+            onClick={() => setTab(id)}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                const next = id === 'product' ? 'architecture' : 'product';
+                setTab(next);
+                document.getElementById(`${project.id}-tab-${next}`)?.focus();
+              }
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      <div role="tabpanel" id={`${project.id}-panel-product`} aria-labelledby={`${project.id}-tab-product`} hidden={tab !== 'product'} className="pv3-case__panel">
+        {project.media === 'diagram' ? (
+          <Image
+            src="/projects/squaads-login.webp"
+            alt={c.screenshotAlt}
+            width={1111}
+            height={1064}
+            sizes="(min-width: 48rem) 32rem, 90vw"
+            className="pv3-case__shot"
+          />
+        ) : (
+          <div className="pv3-case__frame">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(min-width: 64rem) 45vw, (min-width: 48rem) 40rem, 100vw"
+              className="pv3-case__img"
+            />
+          </div>
+        )}
+      </div>
+      <div role="tabpanel" id={`${project.id}-panel-architecture`} aria-labelledby={`${project.id}-tab-architecture`} hidden={tab !== 'architecture'} className="pv3-case__panel">
+        {project.media === 'diagram' ? (
+          <SquaadsArchitecture label={c.diagramAlt} />
+        ) : (
+          <FlowDiagram data={flow} label={flow.label ?? project.title} className="pv3-case__diagram" />
+        )}
+      </div>
+    </>
+  );
+}
+
+/** One case = one tabpanel. Rendered for every project (SSR/no-JS keep all of them); `hidden` is applied after hydration. */
+function CaseFile({ project, index, hidden }: { project: Project; index: number; hidden: boolean }) {
+  const { t } = useLanguage();
+  const c = project.case;
+  const chain = architecture[project.id] ?? [];
+
+  return (
+    <div
+      id={`caso-${project.id}`}
+      role="tabpanel"
+      className="pv3-case"
+      aria-labelledby={`tab-${project.id}`}
+      hidden={hidden}
+      tabIndex={hidden ? undefined : 0}
+    >
+      <header className="pv3-case__head">
+        <span className="pv3-case__num" aria-hidden="true">{pad(index)}</span>
+        <p className="pv3-case__meta">
+          <span>{project.badge}</span>
+          <span aria-hidden="true">/</span>
+          <span><TechLabel text={project.tags.slice(0, 3).join(' · ')} /></span>
+        </p>
+        <h3 id={`caso-${project.id}-title`} className="pv3-case__title">{project.title}</h3>
+        <p className="pv3-case__sub">{project.subtitle}</p>
+      </header>
+
+      <ol className="pv3-case__chain" aria-label={project.title}>
+        {chain.map((node) => (
+          <li key={node}><TechLabel text={node} /></li>
+        ))}
+      </ol>
+
+      <div className="pv3-case__media">
+        <CaseMedia project={project} />
+      </div>
+
+      <ol className="pv3-trace pv3-case__steps">
+        {steps.map((step) => {
+          const value = c?.[step];
+          const isPending = !c || c.pending.includes(step);
+          const items = Array.isArray(value) ? value : value ? [value] : [];
+          return (
+            <li key={step} data-step={step} className={`pv3-case__step${isPending ? ' is-pending' : ''}`}>
+              <span className="pv3-trace__node" aria-hidden="true" />
+              <h4 className="pv3-case__label">{t.projects.case[step]}</h4>
+              {step === 'decisions' && items.length > VISIBLE_DECISIONS ? (
+                <div className="pv3-case__decisions">
+                  <ul className="pv3-case__list">
+                    {items.slice(0, VISIBLE_DECISIONS).map((it) => <li key={it}>{it}</li>)}
+                  </ul>
+                  <details className="pv3-case__more">
+                    <summary className="pv3-focus">
+                      {t.projects.case.moreDecisions.replace('{n}', String(items.length - VISIBLE_DECISIONS))}
+                    </summary>
+                    <ul className="pv3-case__list">
+                      {items.slice(VISIBLE_DECISIONS).map((it) => <li key={it}>{it}</li>)}
+                    </ul>
+                  </details>
+                </div>
+              ) : items.length > 1 || Array.isArray(value) ? (
+                <ul className="pv3-case__list">
+                  {items.map((it) => <li key={it}>{it}</li>)}
+                </ul>
+              ) : (
+                items[0] && <p className="pv3-case__text">{items[0]}</p>
+              )}
+              {isPending && <p className="pv3-case__pending">{t.projects.case.pending}</p>}
+            </li>
+          );
+        })}
+      </ol>
+
+      <footer className="pv3-case__links">
+        <Link href={project.detailPath ?? `/${project.id}`} className="pv3-case__cta pv3-focus">
+          {t.projects.viewProject}
+          <ArrowUpRight aria-hidden="true" size={18} />
+        </Link>
+        {project.internalProject && <p className="pv3-case__internal pv3-case__note">{t.projects.case.internal}</p>}
+        {project.demoUrl && (
+          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="pv3-case__ext pv3-focus">
+            Demo<span className="sr-only"> — {project.title}</span>
+          </a>
+        )}
+        {project.repoUrl && (
+          <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="pv3-case__ext pv3-focus">
+            GitHub<span className="sr-only"> — {project.title}</span>
+          </a>
+        )}
+      </footer>
+    </div>
+  );
+}
 
 export function Projects() {
-  const { t } = useLanguage();
-  const [activeProject, setActiveProject] = React.useState<Project | null>(null);
-  const [isHovering, setIsHovering] = React.useState(false);
-  const [position, setPosition] = React.useState({ x: 0, y: 0 });
+  const { t, language } = useLanguage();
+  const [selected, setSelected] = useState(projects[0].id);
+  // `ready` flips after hydration: until then (and without JS) every case is visible and indexable.
+  const ready = useSyncExternalStore(noopSubscribe, () => true, () => false);
+  const [switched, setSwitched] = useState(false);
+  const vertical = useSyncExternalStore(subscribeWide, () => window.matchMedia(WIDE).matches, () => true);
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
-  const handlePointerEnter = (project: Project, e?: React.PointerEvent) => {
-    if (e && (e.target as HTMLElement).closest('.project-btn-container')) {
-      return;
-    }
-    setActiveProject(project);
-    setIsHovering(true);
+  const select = (id: string, focus = false) => {
+    setSelected(id);
+    setSwitched(true);
+    // replaceState: the URL is shareable (/#caso-<id>) without a jump or a history entry per click.
+    history.replaceState(null, '', `#caso-${id}`);
+    if (focus) document.getElementById(`tab-${id}`)?.focus();
   };
 
-  const handlePointerLeave = () => {
-    setIsHovering(false);
-  };
+  // Deep links (/#caso-<id>, also from the Stack panel and the case pages) select that case and land on the section.
+  useEffect(() => {
+    const fromHash = () => {
+      const id = decodeURIComponent(window.location.hash).replace(/^#caso-/, '');
+      if (!window.location.hash.startsWith('#caso-') || !projects.some((p) => p.id === id)) return;
+      setSelected(id);
+      setSwitched(true);
+      requestAnimationFrame(() => document.getElementById('projects')?.scrollIntoView());
+    };
+    const raf = requestAnimationFrame(fromHash);
+    window.addEventListener('hashchange', fromHash);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('hashchange', fromHash);
+    };
+  }, []);
 
-  const handlePointerMove = (e: React.PointerEvent, project: Project) => {
-    if ((e.target as HTMLElement).closest('.project-btn-container')) {
-      if (isHovering) setIsHovering(false);
-      return;
-    }
-    if (!isHovering || activeProject?.id !== project.id) {
-      setActiveProject(project);
-      setIsHovering(true);
-    }
-    setPosition({ x: e.clientX + 24, y: e.clientY + 24 });
+  // Chip row (< 64rem): keep the selected chip visible and, if the reader was deep in a long case, bring the new one into view.
+  useEffect(() => {
+    const row = tabsRef.current;
+    const a = row?.querySelector<HTMLElement>('[aria-selected="true"]');
+    if (!row || !a || vertical) return;
+    if (row.scrollWidth > row.clientWidth) row.scrollTo({ left: a.offsetLeft - (row.clientWidth - a.offsetWidth) / 2 });
+    if (switched && (listRef.current?.getBoundingClientRect().top ?? 0) < 0) listRef.current?.scrollIntoView();
+  }, [selected, switched, vertical]);
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    const keys = vertical ? ['ArrowUp', 'ArrowDown'] : ['ArrowLeft', 'ArrowRight'];
+    const i = projects.findIndex((p) => p.id === selected);
+    let next = -1;
+    if (e.key === keys[0]) next = (i - 1 + projects.length) % projects.length;
+    else if (e.key === keys[1]) next = (i + 1) % projects.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = projects.length - 1;
+    if (next < 0) return;
+    e.preventDefault();
+    select(projects[next].id, true);
   };
 
   return (
-    <section id="projects" className="py-6 lg:py-12 relative overflow-hidden flex flex-col justify-center min-h-[100dvh]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 md:mb-12 text-center">
-          <motion.h2
-            className="text-3xl md:text-5xl font-black tracking-tighter mb-4 relative inline-block overflow-hidden text-balance"
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 100, damping: 15 }}
-          >
-            {t.projects.title} <span className="text-primary">{t.projects.titleSpan}</span>
-            <motion.span
-              className="absolute bottom-0 left-0 w-full h-1 bg-primary/20 -z-10"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-            />
-          </motion.h2>
-          <motion.p
-            className="text-base text-muted-foreground max-w-xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            {t.projects.description}
-          </motion.p>
-        </div>
+    <section id="projects" className="pv3-section pv3-cases">
+      <div className="pv3-section__inner">
+        <header className="pv3-cases__head">
+          <SectionLabel index="02" label={t.sectionLabel.projects} meta={`${t.projects.case.index} · ${String(projects.length).padStart(2, '0')}`} />
+          <h2 className="pv3-cases__title">
+            {t.projects.title} <span>{t.projects.titleSpan}</span>
+          </h2>
+          <p className="pv3-cases__lede">{t.projects.description}</p>
+          {language !== 'es' && <p className="pv3-cases__note">{t.projects.case.spanishOnly}</p>}
+        </header>
 
-        <div className="flex flex-col border-t border-border" onPointerLeave={handlePointerLeave}>
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.id}
-              className="group relative flex flex-col md:flex-row md:items-center justify-between py-5 border-b border-border transition-all duration-500"
-              initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
-              onPointerEnter={(e) => handlePointerEnter(project, e)}
-              onPointerMove={(e) => handlePointerMove(e, project)}
+        <div className="pv3-cases__layout">
+          <div className="pv3-case-index">
+            <p className="pv3-case-index__cap" aria-hidden="true">{t.projects.case.index}</p>
+            {/* Anchors with role=tab: without JS they still jump to the (visible) case. */}
+            <div
+              ref={tabsRef}
+              role="tablist"
+              aria-label={t.projects.case.index}
+              aria-orientation={vertical ? 'vertical' : 'horizontal'}
+              className="pv3-case-index__tabs"
+              onKeyDown={onKeyDown}
             >
-              <div className="max-w-xl transition-transform duration-500">
-                {project.badge && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + (i * 0.1) }}
-                    className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[9px] font-black mb-2 uppercase tracking-widest
-                    ${project.tier === 'flagship' ? 'bg-primary/10 text-primary border-primary/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]' :
-                        project.clientProject ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
-                          project.teamProject ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
-                            'bg-secondary/50 text-muted-foreground border-border'}
-                  `}>
-                    <span className="mr-1">{project.badgeEmoji}</span> {project.badge}
-                  </motion.div>
-                )}
+              {projects.map((p, i) => (
+                <a
+                  key={p.id}
+                  id={`tab-${p.id}`}
+                  href={`#caso-${p.id}`}
+                  role="tab"
+                  aria-selected={selected === p.id}
+                  aria-controls={`caso-${p.id}`}
+                  tabIndex={selected === p.id ? 0 : -1}
+                  className="pv3-focus"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    select(p.id);
+                  }}
+                >
+                  <span className="pv3-case-index__n">{pad(i)}</span>
+                  <span className="pv3-case-index__t">{p.title}</span>
+                  <span className="pv3-case-index__tier">{p.badge}</span>
+                </a>
+              ))}
+            </div>
+          </div>
 
-                <h3 className={`font-black tracking-tighter mb-1 group-hover:text-primary transition-all duration-300 ${project.tier === 'secondary' ? 'text-lg md:text-xl' : 'text-xl md:text-3xl'}`}>
-                  {project.title}
-                </h3>
-
-                <p className="text-muted-foreground text-xs md:text-sm mb-2 line-clamp-1 opacity-100 transition-all duration-500 font-medium">
-                  {project.subtitle}
-                </p>
-
-                <div className="flex flex-wrap gap-2 md:mt-1">
-                  {project.tags.slice(0, 5).map(tag => (
-                    <span key={tag} className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/50 transition-colors group-hover:text-primary/70 border border-transparent group-hover:border-primary/10 px-1.5 py-0.5 rounded cursor-default">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="project-btn-container mt-6 md:mt-0 md:ml-auto flex items-center justify-start md:justify-end shrink-0 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-500">
-                <MagneticPillButton
-                  href={`/${project.id}`}
-                  label={t.projects.viewProject}
-                  variant="ghost"
-                  className="py-3 px-6 text-sm bg-background/50 border-border hover:border-primary/50 dark:bg-white/5 dark:border-white/10"
-                />
-              </div>
-
-              {/* Background gradient on hover */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-            </motion.div>
-          ))}
+          <div ref={listRef} className="pv3-cases__list" data-ready={ready || undefined} data-switched={switched || undefined}>
+            {projects.map((p, i) => (
+              <CaseFile key={p.id} project={p} index={i} hidden={ready && selected !== p.id} />
+            ))}
+          </div>
         </div>
-
-        {/* Hover Preview Overlay */}
-        <ProjectHoverPreview
-          activeProject={activeProject}
-          isVisible={isHovering}
-          position={position}
-        />
       </div>
-
-      {/* Side background decoration */}
-      <div className="absolute top-1/4 -left-64 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-1/4 -right-64 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] -z-10" />
     </section>
   );
 }

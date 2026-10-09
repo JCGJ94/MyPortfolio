@@ -1,0 +1,44 @@
+/* Footer code layer: code rain (canvas, FooterCodeRain.tsx) + terminal lines around the typed signature.
+ * Decorative only (aria-hidden, pointer-events none). The rain is dimmed behind the name by a mask;
+ * hidden/animated states exist only under no-preference. Reduced motion shows a static code texture. */
+.pv3-foot__sig { position: relative; isolation: isolate; min-block-size: 13rem; padding-block: var(--pv3-space-6); margin-block-end: var(--pv3-space-6); overflow: clip; }
+.pv3-foot__sig > :not(.pv3-rain) { position: relative; z-index: 1; }
+.pv3-foot__sig .pv3-foot__brand { margin-block: 0.35rem 0.6rem; }
+
+.pv3-rain { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.95; color: var(--pv3-color-accent);
+  -webkit-mask: linear-gradient(90deg, rgb(0 0 0 / 0.22), rgb(0 0 0 / 0.3) 42%, #000 82%), linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
+  -webkit-mask-composite: source-in;
+  mask: linear-gradient(90deg, rgb(0 0 0 / 0.22), rgb(0 0 0 / 0.3) 42%, #000 82%) intersect, linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
+  mask-composite: intersect; }
+.pv3-rain__canvas { display: block; inline-size: 100%; block-size: 100%; }
+.pv3-rain__static { display: none; position: absolute; inset-block: 0; inset-inline: 38% 0; margin: 0; column-count: 2; column-gap: 1.5rem; padding: var(--pv3-space-4) var(--pv3-space-2); font: 0.75rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .pv3-rain__canvas { display: none; }
+  .pv3-rain__static { display: block; }
+}
+:root:not(.dark) .pv3-rain { opacity: 0.75; }
+
+.pv3-term { margin: 0; font: 0.8125rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--pv3-color-muted); }
+.pv3-term__ps { color: var(--pv3-color-accent); font-weight: 700; }
+.pv3-term__line { display: block; }
+.pv3-term--log { display: grid; gap: 0.15rem; }
+.pv3-term__type { white-space: nowrap; }
+.pv3-term__caret { display: inline-block; inline-size: 0.55ch; block-size: 1.05em; margin-inline-start: 0.2ch; vertical-align: text-bottom; background: var(--pv3-color-accent); }
+@media (max-width: 39.999rem) { .pv3-foot__sig { min-block-size: 11rem; } .pv3-term { font-size: 0.75rem; } }
+
+/* Entrance: command types first, the name follows (existing X3), then the log lines. */
+@keyframes pv3-term-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes pv3-term-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pv3-term-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal .pv3-foot__inner:not(.is-in) .pv3-term__type { clip-path: inset(0 100% 0 0); }
+  .js-reveal .pv3-foot__inner:not(.is-in) .pv3-term__line:not(.pv3-term__line--run), .js-reveal .pv3-foot__inner:not(.is-in) .pv3-term__caret { opacity: 0; }
+  .js-reveal .pv3-foot__inner.is-in .pv3-term--cmd .pv3-term__type { animation: pv3-term-type 420ms steps(6, end) 150ms both; }
+  .js-reveal .pv3-foot__inner.is-in .pv3-term__line:not(.pv3-term__line--run) { animation: pv3-term-fade 500ms linear 1.5s both; }
+  .js-reveal .pv3-foot__inner.is-in .pv3-term__line--run .pv3-term__type { animation: pv3-term-type 900ms steps(17, end) 2.1s both; }
+  .js-reveal .pv3-foot__inner.is-in .pv3-term__caret { animation: pv3-term-fade 1ms linear 2.1s both, pv3-term-blink 1.2s steps(1) 3s 4; }
+}
+/* Reduced motion / no JS: everything visible, caret blinks slowly a few times then rests (WCAG 2.2.2). */
+@media (prefers-reduced-motion: reduce) {
+  .pv3-term__caret { animation: pv3-term-blink 2.4s steps(1) 0s 2; }
+}

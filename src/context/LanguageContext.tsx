@@ -1,7 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useSyncExternalStore } from 'react';
 import { type Language, translations } from '@/data/translations';
+import { createLanguageStore } from './language-store';
 
 type LanguageContextType = {
     language: Language;
@@ -10,26 +11,20 @@ type LanguageContextType = {
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const languageStore = createLanguageStore();
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-    const [language, setLanguageState] = useState<Language>('es');
-
-    useEffect(() => {
-        const savedLang = localStorage.getItem('language') as Language;
-        if (savedLang && translations[savedLang]) {
-            setLanguageState(savedLang);
-        }
-    }, []);
-
-    const setLanguage = (lang: Language) => {
-        setLanguageState(lang);
-        localStorage.setItem('language', lang);
-    };
+    const language = useSyncExternalStore(
+        languageStore.subscribe,
+        languageStore.getSnapshot,
+        languageStore.getServerSnapshot,
+    );
+    const setLanguage = languageStore.setLanguage;
 
     const value = {
         language,
         setLanguage,
-        t: translations[language] || translations.es
+        t: translations[language]
     };
 
     return (

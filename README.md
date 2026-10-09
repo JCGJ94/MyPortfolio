@@ -1,56 +1,56 @@
-# José Carlos - Software Engineer Portfolio v2
+# José Carlos — Portfolio (V3)
 
-> **[ES]** *"Este desarrollador no solo hace páginas. Construye sistemas."*
-> **[EN]** *"This developer doesn't just build pages. He builds systems."*
+Portafolio de ingeniería de software: una landing con seis casos de proyecto, rutas de detalle y currículum. Rediseño V3 en la rama `feat/portfolio-v3`; `main` es producción (Vercel).
 
-**[ES]** Bienvenido al código fuente de mi portafolio v2. Este proyecto nació con una visión clara: dejar de ser un currículum digital estático para convertirse en **una plataforma interactiva que funciona como un producto real**.
-**[EN]** Welcome to the source code of my portfolio v2. This project was born with a clear vision: to evolve from a static digital resume into **an interactive platform that acts as a real product**.
+## Stack
 
-## 🚀 La Evolución (De v1 a v2) / Evolution (From v1 to v2)
+- Next.js 16.1.6 (App Router, Turbopack), React 19.2.3, TypeScript
+- Tailwind CSS 4, framer-motion 12, next-themes, Inter (`next/font`), Lucide
+- Zod y EmailJS (formulario de contacto, cargados bajo demanda), Resend (`/api/contact`), Supabase (`@supabase/ssr`, autenticación)
+- Despliegue en Vercel
+- Bun como gestor (`bun.lock`); los scripts también funcionan con npm
 
-**[ES]** La versión original (Vite/React SPA) cumplía su función visual, pero no reflejaba mi progreso hacia el desarrollo Full Stack avanzado orientado a IA y sistemas robustos. Esta **v2** es una reescritura arquitectónica 100% enfocada en escalabilidad y rendimiento Edge.
-**[EN]** The original version (Vite/React SPA) fulfilled its visual role but didn't reflect my progress toward advanced, AI-oriented Full Stack development and robust systems. This **v2** is a 100% architectural rewrite focused on scalability and Edge performance.
+## Rutas
 
-## 🛠 Stack Técnico / Technical Stack (2026 Standards)
+| Ruta | Contenido |
+| --- | --- |
+| `/` | Hero, Proyectos (un caso a la vez, enlaces `/#caso-<id>`), Sobre mí, Stack 3D, Contacto y pie |
+| `/squaads` | Squaads Meeting Bot (proyecto de empresa, sin demo pública) |
+| `/nutriflow`, `/clinical-ai`, `/sportbarleague`, `/jegstudio`, `/tallercardonal` | Casos de proyecto |
+| `/cv` | Currículum con vista previa del PDF |
+| `/login`, `/register`, `/dashboard` | Autenticación y panel |
+| `/api/contact`, `/api/auth/signout` | APIs |
 
-### Core & Framework
-- Next.js 16.1 (App Router)
-- React 19.2 (Server Components, Actions)
-- TypeScript (Strict Mode)
+## Características
 
-### Base de Datos & Autenticación / Database & Auth
-- Supabase (PostgreSQL, Row Level Security)
-- Cookies & Middleware Auth
-- Zero-Trust Architecture
+- Hero con nombre tecleado, retrato de cristal 3D y una única entrada cinematográfica.
+- Diagramas de arquitectura automáticos y no interactivos por caso; iconos oficiales de marca (Simple Icons, CC0).
+- Tema oscuro por defecto, con selector claro/oscuro.
+- Cinco idiomas de interfaz: español, inglés, alemán, francés e italiano.
+- `prefers-reduced-motion` respetado (el texto tecleado se mantiene; la entrada es solo opacidad).
 
-### Diseño & Herramientas / Styling & Tooling
-- Tailwind CSS 4.0 (CSS-First)
-- Framer Motion (60fps Animations)
-- Bun (Runtime & Package Manager)
-- Zod (Runtime Validation)
+Limitaciones conocidas: los textos de los casos, el Stack y los diagramas están solo en español; `<html lang>` es siempre `es`; el rendimiento móvil de la home no alcanza el objetivo (78; ver [`docs/portfolio-v3/rendimiento.md`](./docs/portfolio-v3/rendimiento.md)).
 
-## 🏃‍♂️ Quick Start / Instalación Rápida
+## Desarrollo
 
 ```bash
-# 1. Clonar el repositorio / Clone repository
-git clone <repo-url>
-cd mi-cv/v2
-
-# 2. Instalar dependencias / Install dependencies
 bun install
-
-# 3. Variables de Entorno / Environment variables
-cp .env.example .env.local
-
-# 4. Iniciar Localmente / Start Local Server
-bun dev
+cp .env.example .env.local   # completa tus propios valores
+bun dev                      # desarrollo
+bun run build                # build de producción
+bun run start                # servir el build
+bun run lint
+bun run typecheck
+bun run ci                   # lint + typecheck
 ```
 
-## 📚 Documentación Técnica / Technical Documentation
+Comprobaciones específicas de V3: `node scripts/portfolio-v3/<script>` (lista en [`docs/portfolio-v3/README.md`](./docs/portfolio-v3/README.md)).
 
-- 🏗 **[Architecture & System Design](./docs/architecture.md)**
-- 🚀 **[Vision & Technical Strategy](./docs/vision-and-strategy.md)**
-- 💻 **[Development & Integration Guide](./docs/development-guide.md)**
+## Despliegue
 
----
-*Diseñado y desarrollado por José Carlos - 2026 / Designed and developed by José Carlos - 2026*
+Vercel (`vercel.json`: `bun install --frozen-lockfile`, `bun run build`, framework Next.js). `main` = producción. No hay pipelines de CI/CD definidos en el repositorio más allá de esa configuración.
+
+## Documentación
+
+- [Portfolio V3](./docs/portfolio-v3/README.md): estado, dirección de diseño, scripts, [secciones](./docs/portfolio-v3/secciones.md), [rendimiento](./docs/portfolio-v3/rendimiento.md) e [investigación del Stack 3D](./docs/portfolio-v3/stack-3d-research.md)
+- [Arquitectura](./docs/architecture.md), [guía de desarrollo](./docs/development-guide.md) y [visión y estrategia](./docs/vision-and-strategy.md)

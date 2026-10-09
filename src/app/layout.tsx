@@ -1,16 +1,23 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import './pv3-contact-detail.css';
+import './pv3-icons.css';
+import './pv3-diagrams.css';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { Navbar } from '@/components/layout/Navbar';
 import { JsonLd } from '@/components/layout/JsonLd';
 import { Footer } from '@/components/layout/Footer';
+import { MotionProvider } from '@/components/layout/MotionProvider';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { DevTools } from '@/components/dev/DevTools';
 import { LanguageProvider } from '@/context/LanguageContext';
 
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
+  display: 'swap',
+  preload: false,
 });
 
 const siteUrl =
@@ -54,16 +61,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" className="dark" suppressHydrationWarning>
       <body suppressHydrationWarning className={`${inter.variable} font-sans antialiased bg-background text-foreground flex flex-col min-h-screen`}>
         <LanguageProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+            <MotionProvider>
+            <ScrollReveal />
             <JsonLd />
             <Navbar />
             <div className="flex-grow">
               {children}
             </div>
             <Footer />
+            </MotionProvider>
           </ThemeProvider>
         </LanguageProvider>
         {process.env.NODE_ENV === 'development' && <DevTools />}

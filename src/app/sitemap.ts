@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '',
         '/nutriflow',
         '/clinical-ai',
+        '/squaads',
         '/login',
         '/register',
     ].map((route) => ({

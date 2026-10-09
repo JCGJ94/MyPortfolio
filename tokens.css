@@ -1,0 +1,48 @@
+/* T03 prototype tokens: aliases preserve the established light/dark palette. */
+:root {
+  --pv3-color-canvas: var(--background);
+  --pv3-color-ink: var(--foreground);
+  --pv3-color-muted: var(--muted-foreground);
+  --pv3-color-rule: var(--border);
+  --pv3-color-accent: var(--primary);
+  --pv3-color-focus: var(--ring);
+  --pv3-font-ui: var(--font-inter, Inter, system-ui, sans-serif);
+
+  --pv3-space-1: 0.25rem;
+  --pv3-space-2: 0.5rem;
+  --pv3-space-3: 0.75rem;
+  --pv3-space-4: 1rem;
+  --pv3-space-6: 1.5rem;
+  --pv3-space-8: 2rem;
+  --pv3-space-10: 2.5rem;
+  --pv3-space-12: 3rem;
+  --pv3-space-16: 4rem;
+  --pv3-space-20: 5rem;
+
+  --pv3-content-width: 82rem;
+  --pv3-copy-width: 40rem;
+  --pv3-media-width: 36rem;
+  --pv3-radius-control: 999px;
+  --pv3-radius-menu: 1rem;
+  --pv3-duration-short: 180ms;
+  --pv3-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --pv3-z-navigation: 200;
+
+  /* T04 section tokens: extend the T03 set; no Tailwind or global overrides. */
+  --pv3-space-24: 6rem;
+  --pv3-space-section: clamp(var(--pv3-space-16), 9vw, var(--pv3-space-24));
+  --pv3-measure: 58ch;
+  --pv3-index-width: 16rem;
+  --pv3-trace-width: 1px;
+  --pv3-trace-node: 0.5rem;
+  --pv3-color-rule-strong: color-mix(in srgb, var(--primary) 32%, var(--border));
+  --pv3-duration-trace: 520ms;
+  --pv3-font-step-lede: clamp(1.25rem, 2.2vw, 1.75rem);
+  --pv3-font-step-label: 0.8125rem;
+}
+
+/* V1 section bands: low-contrast surface that works in both themes. */
+:root {
+  --pv3-space-band: clamp(var(--pv3-space-20), 12vw, 9rem);
+  --pv3-color-band: color-mix(in srgb, var(--pv3-color-ink) 3.5%, var(--pv3-color-canvas));
+}
