@@ -30,7 +30,7 @@ export default function JEGStudioPage() {
           }}
           actions={[
             { label: 'Ver Demo', href: 'https://www.jegsdev.com/' },
-            { label: 'Ver Repositorio', href: 'https://github.com/JCGJ94/CodeNinja' },
+            { label: 'Ver Repositorio', href: 'https://github.com/SergioGala/CodeNinja' },
           ]}
         >
           <Image

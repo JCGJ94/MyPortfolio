@@ -160,7 +160,7 @@ export const projects: Project[] = [
             'Desarrollo colaborativo estructurado'
         ],
         demoUrl: 'https://www.jegsdev.com/',
-        repoUrl: 'https://github.com/JCGJ94/JEG-Studio',
+        repoUrl: 'https://github.com/SergioGala/CodeNinja',
         teamProject: true,
         case: {
             problem: 'Captación de talento y de clientes freelance.',
@@ -185,7 +185,7 @@ export const projects: Project[] = [
             'Modelado de base de datos relacional complejo con SQLAlchemy',
             'Arquitectura backend robusta con Python'
         ],
-        repoUrl: 'https://github.com/JCGJ94/SportBarLeague',
+        repoUrl: 'https://github.com/JCGJ94/JCGJ94-SportBarLeague',
         case: {
             problem: 'Gestión de ligas deportivas.',
             solution: 'Backend en Python con Flask y frontend en React.',
