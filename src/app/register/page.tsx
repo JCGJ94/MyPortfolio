@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Lock, Mail, ArrowRight, AlertCircle, CheckCircle2, UserPlus } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { registerAction } from './actions';
@@ -40,7 +40,7 @@ export default function RegisterPage() {
         }}
       />
 
-      <motion.div
+      <m.div
         className="relative z-10 w-full max-w-md"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
@@ -48,14 +48,14 @@ export default function RegisterPage() {
       >
         {/* Header */}
         <div className="mb-8 text-center">
-          <motion.div
+          <m.div
             className="mx-auto mb-6 h-16 w-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1, duration: 0.5 }}
           >
             <UserPlus className="h-7 w-7 text-emerald-500" />
-          </motion.div>
+          </m.div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
             {a.register.title}
           </h1>
@@ -68,26 +68,26 @@ export default function RegisterPage() {
         <div className="rounded-2xl border border-border/60 bg-card/80 backdrop-blur-xl shadow-xl shadow-black/[0.03] p-8">
           {/* Error message */}
           {state.error && (
-            <motion.div
+            <m.div
               className="mb-6 flex items-center gap-3 rounded-xl bg-destructive/5 border border-destructive/15 p-4 text-sm text-destructive"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
             >
               <AlertCircle className="h-4 w-4 shrink-0" />
               {errors[state.error] ?? state.error}
-            </motion.div>
+            </m.div>
           )}
 
           {/* Success message */}
           {state.success && (
-            <motion.div
+            <m.div
               className="mb-6 flex items-center gap-3 rounded-xl bg-emerald-500/5 border border-emerald-500/15 p-4 text-sm text-emerald-600 dark:text-emerald-400"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
             >
               <CheckCircle2 className="h-4 w-4 shrink-0" />
               {successes[state.success] ?? state.success}
-            </motion.div>
+            </m.div>
           )}
 
           <form action={formAction} className="space-y-5">
@@ -184,7 +184,7 @@ export default function RegisterPage() {
         <p className="mt-8 text-center text-xs text-muted-foreground/60">
           {a.footer}
         </p>
-      </motion.div>
+      </m.div>
     </main>
   );
 }

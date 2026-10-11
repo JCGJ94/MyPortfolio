@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Award, GraduationCap, Download, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
@@ -29,7 +29,7 @@ export function Certifications() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                 {/* Cerificaciones Panel */}
-                <motion.div
+                <m.div
                     className="border-l-4 border-emerald-500 bg-card/60 backdrop-blur-sm shadow-sm rounded-r-2xl rounded-bl-2xl p-6"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -64,10 +64,10 @@ export function Certifications() {
                             </div>
                         ))}
                     </div>
-                </motion.div>
+                </m.div>
 
                 {/* Formación Panel */}
-                <motion.div
+                <m.div
                     className="border-l-4 border-cyan-500 bg-card/60 backdrop-blur-sm shadow-sm rounded-r-2xl rounded-bl-2xl p-6"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -104,7 +104,7 @@ export function Certifications() {
                             {c.download}
                         </a>
                     </div>
-                </motion.div>
+                </m.div>
             </div>
         </section>
     );

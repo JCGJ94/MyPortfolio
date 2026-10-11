@@ -35,7 +35,7 @@ export function Footer() {
                         <span className="pv3-foot__dot" aria-hidden="true" />
                         {t.hero.badge}
                     </p>
-                    <Link href="/#hero" className="pv3-foot__up pv3-focus" aria-label={footer.top}>
+                    <Link href="/#hero" prefetch={false} className="pv3-foot__up pv3-focus" aria-label={footer.top}>
                         <span className="pv3-foot__up-label">{footer.top}</span>
                         <span className="pv3-foot__up-ring" aria-hidden="true"><ArrowUp size={18} /></span>
                     </Link>
@@ -62,7 +62,7 @@ export function Footer() {
                         <ul className="pv3-foot__list">
                             {site.map((item) => (
                                 <li key={item.href}>
-                                    <Link href={item.href} className="pv3-foot__link pv3-focus"><span>{item.label}</span></Link>
+                                    <Link href={item.href} prefetch={false} className="pv3-foot__link pv3-focus"><span>{item.label}</span></Link>
                                 </li>
                             ))}
                         </ul>

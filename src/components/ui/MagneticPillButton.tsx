@@ -1,11 +1,11 @@
 "use client";
 
-import { motion, type MotionProps } from "framer-motion";
+import { m, type MotionProps } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-const MotionLink = motion.create(Link);
+const MotionLink = m.create(Link);
 
 type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof MotionProps | "href"> & MotionProps & { href?: "" | undefined };
 type LinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof MotionProps | "href"> & MotionProps & { href: string };
@@ -40,7 +40,7 @@ export function MagneticPillButton({ label, variant = "primary", className, ...p
     const children = (
         <>
             {/* Capa de fondo animada (Swipe effect) */}
-            <motion.div
+            <m.div
                 className={cn("absolute inset-0 z-0", variant === "primary" ? "bg-white/20" : "bg-primary")}
                 variants={{
                     initial: { x: "-100%" },
@@ -62,7 +62,7 @@ export function MagneticPillButton({ label, variant = "primary", className, ...p
             </span>
 
             {/* Círculo (sphere-jump-forward) */}
-            <motion.div
+            <m.div
                 className={cn(
                     "relative z-10 flex h-8 w-8 items-center justify-center rounded-full overflow-hidden shrink-0",
                     variant === "ghost"
@@ -75,7 +75,7 @@ export function MagneticPillButton({ label, variant = "primary", className, ...p
                 }}
             >
                 {/* Flecha con loop infinito (arrow-fast-loop) */}
-                <motion.div
+                <m.div
                     className="flex items-center justify-center"
                     variants={{
                         initial: { x: 0, opacity: 1 },
@@ -91,8 +91,8 @@ export function MagneticPillButton({ label, variant = "primary", className, ...p
                     }}
                 >
                     <ArrowRight className="w-4 h-4" />
-                </motion.div>
-            </motion.div>
+                </m.div>
+            </m.div>
         </>
     );
 
@@ -104,5 +104,5 @@ export function MagneticPillButton({ label, variant = "primary", className, ...p
     // A string may be empty at runtime; the original truthy-href branch treated that as a button.
     const nativeButtonProps = buttonProps as Omit<ButtonProps, "href">;
     const buttonRootProps = { ...nativeButtonProps, href: _href };
-    return <motion.button {...shared} {...buttonRootProps}>{children}</motion.button>;
+    return <m.button {...shared} {...buttonRootProps}>{children}</m.button>;
 }

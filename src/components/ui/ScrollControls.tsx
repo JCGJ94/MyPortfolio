@@ -2,7 +2,7 @@
 
 import { useSectionScroll } from '@/hooks/useSectionScroll';
 import { ChevronsUp, ChevronsDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 
 const SECTIONS = ['hero', 'about', 'projects', 'stack', 'contact'];
 
@@ -13,7 +13,7 @@ export function ScrollControls() {
         <div className="fixed bottom-8 right-2 z-[60] hidden min-[90rem]:flex flex-col gap-3">
             <AnimatePresence>
                 {!isFirst && (
-                    <motion.button
+                    <m.button
                         aria-label="Scroll Up"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -24,12 +24,12 @@ export function ScrollControls() {
                         className="flex items-center justify-center w-11 h-11 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground"
                     >
                         <ChevronsUp className="w-6 h-6" />
-                    </motion.button>
+                    </m.button>
                 )}
             </AnimatePresence>
             <AnimatePresence>
                 {!isLast && (
-                    <motion.button
+                    <m.button
                         aria-label="Scroll Down"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -40,7 +40,7 @@ export function ScrollControls() {
                         className="flex items-center justify-center w-11 h-11 rounded-full border border-border/50 bg-background/50 backdrop-blur shadow-md text-foreground"
                     >
                         <ChevronsDown className="w-6 h-6" />
-                    </motion.button>
+                    </m.button>
                 )}
             </AnimatePresence>
         </div>

@@ -52,14 +52,14 @@ export function Navbar() {
     <header className={cn('portfolio-nav', scrolled && 'is-scrolled', isOpen && 'is-open')}>
       <NavTrace />
       <div className="portfolio-nav__inner">
-        <Link href="/" className="portfolio-nav__brand" aria-label={t.ui.homeAria}>
+        <Link href="/" prefetch={false} className="portfolio-nav__brand" aria-label={t.ui.homeAria}>
           <span className="portfolio-nav__mark">JC</span>
           <span className="portfolio-nav__domain">.dev</span>
         </Link>
 
         <nav className="portfolio-nav__links" aria-label={t.ui.mainNav}>
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="portfolio-nav__link">
+            <Link key={item.href} href={item.href} prefetch={false} className="portfolio-nav__link">
               {item.name}
             </Link>
           ))}
@@ -94,6 +94,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={false}
                 className="portfolio-nav__mobile-link"
                 onClick={() => setIsOpen(false)}
               >

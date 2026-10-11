@@ -1,10 +1,10 @@
 "use client";
 
-import { motion, type MotionProps } from "framer-motion";
+import { m, type MotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-const MotionLink = motion.create(Link);
+const MotionLink = m.create(Link);
 
 type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof MotionProps | "href"> & MotionProps & { href?: "" | undefined };
 type LinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof MotionProps | "href"> & MotionProps & { href: string };
@@ -32,7 +32,7 @@ export function IconOrbitButton({ icon, hoverIcon, className, ...props }: IconOr
     const children = (
         <>
             {/* Fondo que se expande */}
-            <motion.span
+            <m.span
                 className="absolute inset-0 z-0 bg-primary opacity-0"
                 variants={{
                     initial: { opacity: 0, scale: 0.5 },
@@ -40,9 +40,9 @@ export function IconOrbitButton({ icon, hoverIcon, className, ...props }: IconOr
                 }}
             />
 
-            <motion.div className="relative z-10 flex items-center justify-center text-foreground group-hover:text-primary-foreground transition-colors duration-300 pointer-events-none">
+            <m.div className="relative z-10 flex items-center justify-center text-foreground group-hover:text-primary-foreground transition-colors duration-300 pointer-events-none">
                 {!hoverIcon ? (
-                    <motion.div
+                    <m.div
                         variants={{
                             initial: { x: 0 },
                             hover: {
@@ -56,10 +56,10 @@ export function IconOrbitButton({ icon, hoverIcon, className, ...props }: IconOr
                         }}
                     >
                         {icon}
-                    </motion.div>
+                    </m.div>
                 ) : (
-                    <motion.div className="relative">
-                        <motion.span
+                    <m.div className="relative">
+                        <m.span
                             className="absolute inset-0 flex items-center justify-center"
                             variants={{
                                 initial: { x: 0, opacity: 1 },
@@ -67,8 +67,8 @@ export function IconOrbitButton({ icon, hoverIcon, className, ...props }: IconOr
                             }}
                         >
                             {icon}
-                        </motion.span>
-                        <motion.span
+                        </m.span>
+                        <m.span
                             className="flex items-center justify-center"
                             variants={{
                                 initial: { x: -30, opacity: 0 },
@@ -80,10 +80,10 @@ export function IconOrbitButton({ icon, hoverIcon, className, ...props }: IconOr
                             }}
                         >
                             {hoverIcon}
-                        </motion.span>
-                    </motion.div>
+                        </m.span>
+                    </m.div>
                 )}
-            </motion.div>
+            </m.div>
         </>
     );
 
@@ -95,5 +95,5 @@ export function IconOrbitButton({ icon, hoverIcon, className, ...props }: IconOr
     // A string may be empty at runtime; the original truthy-href branch treated that as a button.
     const nativeButtonProps = buttonProps as Omit<ButtonProps, "href">;
     const buttonRootProps = { ...nativeButtonProps, href: _href };
-    return <motion.button {...shared} {...buttonRootProps}>{children}</motion.button>;
+    return <m.button {...shared} {...buttonRootProps}>{children}</m.button>;
 }
