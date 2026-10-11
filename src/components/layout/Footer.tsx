@@ -11,7 +11,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 export function Footer() {
     const { t } = useLanguage();
     const currentYear = new Date().getFullYear();
-    const footer = t.footer as typeof t.footer & { top?: string };
+    const footer = t.footer;
 
     const site = [
         { href: '/#hero', label: t.nav.home },
@@ -35,8 +35,8 @@ export function Footer() {
                         <span className="pv3-foot__dot" aria-hidden="true" />
                         {t.hero.badge}
                     </p>
-                    <Link href="/#hero" className="pv3-foot__up pv3-focus" aria-label={footer.top ?? 'Back to top'}>
-                        <span className="pv3-foot__up-label">{footer.top ?? 'Back to top'}</span>
+                    <Link href="/#hero" className="pv3-foot__up pv3-focus" aria-label={footer.top}>
+                        <span className="pv3-foot__up-label">{footer.top}</span>
                         <span className="pv3-foot__up-ring" aria-hidden="true"><ArrowUp size={18} /></span>
                     </Link>
                 </div>
@@ -93,7 +93,7 @@ export function Footer() {
                     <div className="pv3-foot__meta">
                         <LanguageSwitcher />
                         <p>
-                            Built with <strong>Next.js</strong> &amp; <strong>Supabase</strong>
+                            {t.ui.builtWith} <strong>Next.js</strong> {t.ui.and} <strong>Supabase</strong>
                         </p>
                     </div>
                 </div>

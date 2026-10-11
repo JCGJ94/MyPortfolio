@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 import { ArrowLeft } from 'lucide-react';
 import { Children, isValidElement, type ReactElement, type ReactNode } from 'react';
 import { TechLabel } from '@/components/ui/TechIcon';
@@ -10,11 +13,12 @@ type Action = { label: string; href: string };
 export function CaseHeader({ id, tier, title, lede, actions, summary, children }: {
   id: string; tier: string; title: string; lede: string; actions: Action[]; summary?: CaseAtAGlanceData; children: ReactNode;
 }) {
+  const { t } = useLanguage();
   return (
     <>
       <Link href={`/#caso-${id}`} className="pv3-detail__back pv3-focus">
         <ArrowLeft aria-hidden="true" size={16} />
-        Volver a Proyectos
+        {t.caseUi.back}
       </Link>
       <header className="pv3-detail__head">
         <div className="pv3-detail__copy">
@@ -45,7 +49,8 @@ export const slug = (title: string) =>
 export function CaseLayout({ stackTitle, stack, children }: {
   stackTitle: string; stack: [string, string][]; children: ReactNode;
 }) {
-  const titles = Children.toArray(children)
+  const { t } = useLanguage();
+  const titles =Children.toArray(children)
     .filter((c): c is ReactElement<{ title: string }> => isValidElement(c) && typeof (c.props as { title?: unknown }).title === 'string')
     .map((c) => c.props.title);
   return (
@@ -61,10 +66,10 @@ export function CaseLayout({ stackTitle, stack, children }: {
           ))}
         </dl>
         {titles.length > 1 && (
-          <nav className="pv3-detail__toc" aria-label="En esta página">
+          <nav className="pv3-detail__toc" aria-label={t.caseUi.onThisPage}>
             <ol>
-              {titles.map((t) => (
-                <li key={t}><a href={`#${slug(t)}`} className="pv3-focus">{t}</a></li>
+              {titles.map((title) => (
+                <li key={title}><a href={`#${slug(title)}`} className="pv3-focus">{title}</a></li>
               ))}
             </ol>
           </nav>
@@ -72,6 +77,22 @@ export function CaseLayout({ stackTitle, stack, children }: {
       </aside>
       <div className="pv3-trace pv3-detail__steps">{children}</div>
     </div>
+  );
+}
+
+// Body of the 404 page; lives here because it is a client component (the page file keeps `metadata`).
+export function NotFoundContent() {
+  const { t } = useLanguage();
+  return (
+    <main id="main-content" className="pv3-section pv3-detail">
+      <div className="pv3-section__inner">
+        <h1 className="pv3-detail__label">404</h1>
+        <p className="pv3-detail__pull">{t.notFound.text}</p>
+        <Link href="/" className="pv3-detail__back pv3-focus">
+          {t.notFound.back}
+        </Link>
+      </div>
+    </main>
   );
 }
 

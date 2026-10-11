@@ -52,12 +52,12 @@ export function Navbar() {
     <header className={cn('portfolio-nav', scrolled && 'is-scrolled', isOpen && 'is-open')}>
       <NavTrace />
       <div className="portfolio-nav__inner">
-        <Link href="/" className="portfolio-nav__brand" aria-label="JC.dev, página de inicio">
+        <Link href="/" className="portfolio-nav__brand" aria-label={t.ui.homeAria}>
           <span className="portfolio-nav__mark">JC</span>
           <span className="portfolio-nav__domain">.dev</span>
         </Link>
 
-        <nav className="portfolio-nav__links" aria-label="Navegación principal">
+        <nav className="portfolio-nav__links" aria-label={t.ui.mainNav}>
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className="portfolio-nav__link">
               {item.name}
@@ -74,7 +74,7 @@ export function Navbar() {
             type="button"
             onClick={() => setIsOpen((open) => !open)}
             className="portfolio-nav__toggle"
-            aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-label={isOpen ? t.ui.closeMenu : t.ui.openMenu}
             aria-expanded={isOpen}
             aria-controls={mobileNavigationId}
           >
@@ -87,7 +87,7 @@ export function Navbar() {
       {isOpen && (
         <nav
           id={mobileNavigationId}
-          aria-label="Navegación móvil"
+          aria-label={t.ui.mobileNav}
           className="portfolio-nav__mobile"
         >
             {navItems.map((item) => (

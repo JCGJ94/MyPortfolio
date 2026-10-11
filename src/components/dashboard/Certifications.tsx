@@ -4,49 +4,26 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Award, GraduationCap, Download, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-
-const certs = [
-    {
-        title: 'Python Backend con Flask',
-        org: 'Udemy',
-        year: '2025',
-        link: '#',
-    },
-    {
-        title: 'Full Stack Developer',
-        org: '4Geeks Academy',
-        year: '2025',
-        link: '/certificates/Bootcamp-4geeks.pdf',
-    },
-    {
-        title: 'Técnico en Microinformática y Redes',
-        org: 'MINISTERIO FORMACIÓN PROFESIONAL',
-        year: '2024',
-        link: '/certificates/homologacion-informatica.pdf',
-    },
-];
-
-const education = [
-    {
-        title: 'Bootcamp Full Stack',
-        org: '4Geeks Academy',
-        year: '2025',
-        detail: 'React, JS, APIs REST, Flask y SQL.',
-    },
-    {
-        title: 'Cursos Complementarios',
-        org: 'Varios',
-        year: '2023–2025',
-        detail: 'Git, Testing, Accesibilidad, Despliegue.',
-    },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 export function Certifications() {
+    const { t } = useLanguage();
+    const c = t.certs;
+    const certs = [
+        { title: c.python, org: 'Udemy', year: '2025', link: '#' },
+        { title: 'Full Stack Developer', org: '4Geeks Academy', year: '2025', link: '/certificates/Bootcamp-4geeks.pdf' },
+        { title: c.micro, org: c.ministry, year: '2024', link: '/certificates/homologacion-informatica.pdf' },
+    ];
+    const education = [
+        { title: c.bootcamp, org: '4Geeks Academy', year: '2025', detail: c.bootcampDetail },
+        { title: c.courses, org: c.several, year: '2023–2025', detail: c.coursesDetail },
+    ];
+
     return (
         <section className="py-8 w-full">
             <div className="text-center mb-10">
                 <h2 className="text-2xl font-bold tracking-tight text-orange-500 mb-2">
-                    Certificaciones & Formación
+                    {c.heading}
                 </h2>
             </div>
 
@@ -60,7 +37,7 @@ export function Certifications() {
                 >
                     <div className="flex items-center gap-3 mb-6">
                         <Award className="h-6 w-6 text-yellow-500" />
-                        <h3 className="text-xl font-bold">Certificaciones</h3>
+                        <h3 className="text-xl font-bold">{c.certsTitle}</h3>
                     </div>
 
                     <div className="space-y-6">
@@ -80,7 +57,7 @@ export function Certifications() {
                                         target="_blank"
                                         className="text-xs text-blue-500 hover:text-blue-600 flex items-center mt-1 w-fit"
                                     >
-                                        Ver credencial
+                                        {c.view}
                                         <ExternalLink className="h-3 w-3 ml-1" />
                                     </Link>
                                 )}
@@ -98,7 +75,7 @@ export function Certifications() {
                 >
                     <div className="flex items-center gap-3 mb-6">
                         <GraduationCap className="h-6 w-6 text-cyan-500" />
-                        <h3 className="text-xl font-bold">Formación</h3>
+                        <h3 className="text-xl font-bold">{c.eduTitle}</h3>
                     </div>
 
                     <div className="space-y-6">
@@ -124,7 +101,7 @@ export function Certifications() {
                             className="inline-flex items-center text-sm text-foreground hover:text-primary transition-colors"
                         >
                             <Download className="h-4 w-4 mr-2" />
-                            Descargar CV (PDF)
+                            {c.download}
                         </a>
                     </div>
                 </motion.div>

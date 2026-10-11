@@ -36,8 +36,8 @@ check("no phone number text and no new personal data", () => {
   const emails = new Set(tsx.match(/[\w.+-]+@[\w-]+\.[\w.]+/g));
   assert.deepEqual([...emails], ["jcdevelopment94@gmail.com"]);
 });
-check("translations.ts and package.json unchanged vs HEAD", () => {
-  const diff = execSync("git diff --stat HEAD -- src/data/translations.ts package.json package-lock.json", { encoding: "utf8" });
+check("package.json unchanged vs HEAD", () => {
+  const diff = execSync("git diff --stat HEAD -- package.json package-lock.json", { encoding: "utf8" });
   assert.equal(diff.trim(), "");
 });
 check("animated send icon and lift only under hover + no-preference", () => {

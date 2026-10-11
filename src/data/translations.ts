@@ -164,6 +164,71 @@ export const translations = {
             contact: 'Contacto',
             rights: 'Todos los derechos reservados',
             top: 'Volver arriba'
+        },
+        ui: {
+            homeAria: "JC.dev, página de inicio",
+            mainNav: "Navegación principal",
+            openMenu: "Abrir menú",
+            closeMenu: "Cerrar menú",
+            mobileNav: "Navegación móvil",
+            toggleTheme: "Cambiar tema",
+            builtWith: "Hecho con",
+            and: "y",
+            avatarAlt: "Retrato de Jose Carlos"
+        },
+        caseUi: {
+            back: "Volver a Proyectos",
+            onThisPage: "En esta página",
+            glance: "De un vistazo",
+            kind: "Tipo de proyecto",
+            role: "Rol",
+            stack: "Stack",
+            links: "Enlaces",
+            proves: "Qué demuestra"
+        },
+        notFound: {
+            text: "Esta página no existe o se ha movido.",
+            back: "Volver al inicio"
+        },
+        certs: {
+            heading: "Certificaciones & Formación",
+            certsTitle: "Certificaciones",
+            eduTitle: "Formación",
+            view: "Ver credencial",
+            download: "Descargar CV (PDF)",
+            python: "Python Backend con Flask",
+            micro: "Técnico en Microinformática y Redes",
+            ministry: "MINISTERIO FORMACIÓN PROFESIONAL",
+            bootcamp: "Bootcamp Full Stack",
+            bootcampDetail: "React, JS, APIs REST, Flask y SQL.",
+            courses: "Cursos Complementarios",
+            several: "Varios",
+            coursesDetail: "Git, Testing, Accesibilidad, Despliegue."
+        },
+        cv: {
+            title: "C.V.",
+            titleSpan: "Digital",
+            tagline: "Full Stack Developer | Product Mindset",
+            quote: "Desarrollador con base técnica en el ecosistema JavaScript y Python. Mi enfoque se centra en entregar soluciones prácticas y funcionales, priorizando la mantenibilidad y la experiencia de usuario real.",
+            download: "Descargar PDF",
+            techStack: "Tech Stack",
+            frontend: "Frontend",
+            backend: "Backend & DB",
+            other: "Otras",
+            education: "Formación",
+            bootcamp: "Bootcamp Full Stack",
+            tecnico: "Técnico Microinformática",
+            fp: "FP Grado Medio",
+            original: "Documento Original",
+            viewer: "Visualizador PDF",
+            iframeTitle: "Vista previa del currículum de Jose Carlos González (PDF)"
+        },
+        mail: {
+            adminSubject: (name: string) => `[Portfolio] Mensaje de ${name}`,
+            adminBody: (name: string, email: string, message: string) => `Nuevo mensaje desde el portfolio\n\nNombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`,
+            replySubject: () => `Gracias por tu mensaje`,
+            replyBody: (name: string) => `Hola ${name},\n\nGracias por ponerte en contacto conmigo a través de mi portfolio.\nHe recibido tu mensaje correctamente y te responderé lo antes posible.\n\nUn saludo,\nJC\nDesarrollador Full Stack`,
+            unexpected: "EmailJS respondió con estado no esperado"
         }
     },
     en: {
@@ -329,6 +394,71 @@ export const translations = {
             contact: 'Contact',
             rights: 'All rights reserved',
             top: 'Back to top'
+        },
+        ui: {
+            homeAria: "JC.dev, home page",
+            mainNav: "Main navigation",
+            openMenu: "Open menu",
+            closeMenu: "Close menu",
+            mobileNav: "Mobile navigation",
+            toggleTheme: "Toggle theme",
+            builtWith: "Built with",
+            and: "&",
+            avatarAlt: "Portrait of Jose Carlos"
+        },
+        caseUi: {
+            back: "Back to Projects",
+            onThisPage: "On this page",
+            glance: "At a glance",
+            kind: "Project type",
+            role: "Role",
+            stack: "Stack",
+            links: "Links",
+            proves: "What it demonstrates"
+        },
+        notFound: {
+            text: "This page does not exist or has moved.",
+            back: "Back to home"
+        },
+        certs: {
+            heading: "Certifications & Training",
+            certsTitle: "Certifications",
+            eduTitle: "Training",
+            view: "View credential",
+            download: "Download CV (PDF)",
+            python: "Python Backend with Flask",
+            micro: "IT Support and Networking Technician",
+            ministry: "MINISTERIO FORMACIÓN PROFESIONAL",
+            bootcamp: "Full Stack Bootcamp",
+            bootcampDetail: "React, JS, REST APIs, Flask and SQL.",
+            courses: "Complementary Courses",
+            several: "Various",
+            coursesDetail: "Git, Testing, Accessibility, Deployment."
+        },
+        cv: {
+            title: "Digital",
+            titleSpan: "Résumé",
+            tagline: "Full Stack Developer | Product Mindset",
+            quote: "Developer with a technical foundation in the JavaScript and Python ecosystem. My focus is on delivering practical, working solutions, prioritising maintainability and a real user experience.",
+            download: "Download PDF",
+            techStack: "Tech Stack",
+            frontend: "Frontend",
+            backend: "Backend & DB",
+            other: "Other",
+            education: "Education",
+            bootcamp: "Full Stack Bootcamp",
+            tecnico: "IT Support Technician",
+            fp: "Vocational Training (Intermediate Level)",
+            original: "Original Document",
+            viewer: "PDF Viewer",
+            iframeTitle: "Preview of the résumé of Jose Carlos González (PDF)"
+        },
+        mail: {
+            adminSubject: (name: string) => `[Portfolio] Message from ${name}`,
+            adminBody: (name: string, email: string, message: string) => `New message from the portfolio\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+            replySubject: () => `Thank you for your message`,
+            replyBody: (name: string) => `Hello ${name},\n\nThank you for getting in touch through my portfolio.\nI have received your message and will reply as soon as possible.\n\nBest regards,\nJC\nFull Stack Developer`,
+            unexpected: "EmailJS responded with an unexpected status"
         }
     },
     de: {
@@ -484,6 +614,71 @@ export const translations = {
             contact: 'Kontakt',
             rights: 'Alle Rechte vorbehalten',
             top: 'Nach oben'
+        },
+        ui: {
+            homeAria: "JC.dev, Startseite",
+            mainNav: "Hauptnavigation",
+            openMenu: "Menü öffnen",
+            closeMenu: "Menü schließen",
+            mobileNav: "Mobile Navigation",
+            toggleTheme: "Design wechseln",
+            builtWith: "Entwickelt mit",
+            and: "und",
+            avatarAlt: "Porträt von Jose Carlos"
+        },
+        caseUi: {
+            back: "Zurück zu den Projekten",
+            onThisPage: "Auf dieser Seite",
+            glance: "Auf einen Blick",
+            kind: "Projektart",
+            role: "Rolle",
+            stack: "Stack",
+            links: "Links",
+            proves: "Was es zeigt"
+        },
+        notFound: {
+            text: "Diese Seite existiert nicht oder wurde verschoben.",
+            back: "Zurück zur Startseite"
+        },
+        certs: {
+            heading: "Zertifizierungen & Ausbildung",
+            certsTitle: "Zertifizierungen",
+            eduTitle: "Ausbildung",
+            view: "Zertifikat ansehen",
+            download: "Lebenslauf herunterladen (PDF)",
+            python: "Python-Backend mit Flask",
+            micro: "Techniker für Mikroinformatik und Netzwerke",
+            ministry: "MINISTERIO FORMACIÓN PROFESIONAL",
+            bootcamp: "Full-Stack-Bootcamp",
+            bootcampDetail: "React, JS, REST-APIs, Flask und SQL.",
+            courses: "Ergänzende Kurse",
+            several: "Verschiedene",
+            coursesDetail: "Git, Testing, Barrierefreiheit, Deployment."
+        },
+        cv: {
+            title: "Digitaler",
+            titleSpan: "Lebenslauf",
+            tagline: "Full Stack Developer | Product Mindset",
+            quote: "Entwickler mit technischer Basis im JavaScript- und Python-Ökosystem. Mein Fokus liegt auf praxisnahen, funktionierenden Lösungen mit Schwerpunkt auf Wartbarkeit und echter Nutzererfahrung.",
+            download: "PDF herunterladen",
+            techStack: "Tech Stack",
+            frontend: "Frontend",
+            backend: "Backend & DB",
+            other: "Weitere",
+            education: "Ausbildung",
+            bootcamp: "Full-Stack-Bootcamp",
+            tecnico: "Techniker Mikroinformatik",
+            fp: "Berufsausbildung (mittlere Stufe)",
+            original: "Originaldokument",
+            viewer: "PDF-Viewer",
+            iframeTitle: "Vorschau des Lebenslaufs von Jose Carlos González (PDF)"
+        },
+        mail: {
+            adminSubject: (name: string) => `[Portfolio] Nachricht von ${name}`,
+            adminBody: (name: string, email: string, message: string) => `Neue Nachricht über das Portfolio\n\nName: ${name}\nE-Mail: ${email}\n\nNachricht:\n${message}`,
+            replySubject: () => `Danke für deine Nachricht`,
+            replyBody: (name: string) => `Hallo ${name},\n\nvielen Dank, dass du dich über mein Portfolio bei mir gemeldet hast.\nIch habe deine Nachricht erhalten und antworte dir so schnell wie möglich.\n\nViele Grüße\nJC\nFull-Stack-Entwickler`,
+            unexpected: "EmailJS hat mit einem unerwarteten Status geantwortet"
         }
     },
     fr: {
@@ -639,6 +834,71 @@ export const translations = {
             contact: 'Contact',
             rights: 'Tous droits réservés',
             top: 'Haut de page'
+        },
+        ui: {
+            homeAria: "JC.dev, page d'accueil",
+            mainNav: "Navigation principale",
+            openMenu: "Ouvrir le menu",
+            closeMenu: "Fermer le menu",
+            mobileNav: "Navigation mobile",
+            toggleTheme: "Changer de thème",
+            builtWith: "Réalisé avec",
+            and: "et",
+            avatarAlt: "Portrait de Jose Carlos"
+        },
+        caseUi: {
+            back: "Retour aux projets",
+            onThisPage: "Sur cette page",
+            glance: "En un coup d'œil",
+            kind: "Type de projet",
+            role: "Rôle",
+            stack: "Stack",
+            links: "Liens",
+            proves: "Ce que cela démontre"
+        },
+        notFound: {
+            text: "Cette page n'existe pas ou a été déplacée.",
+            back: "Retour à l'accueil"
+        },
+        certs: {
+            heading: "Certifications & Formation",
+            certsTitle: "Certifications",
+            eduTitle: "Formation",
+            view: "Voir le certificat",
+            download: "Télécharger le CV (PDF)",
+            python: "Backend Python avec Flask",
+            micro: "Technicien en micro-informatique et réseaux",
+            ministry: "MINISTERIO FORMACIÓN PROFESIONAL",
+            bootcamp: "Bootcamp Full Stack",
+            bootcampDetail: "React, JS, API REST, Flask et SQL.",
+            courses: "Cours complémentaires",
+            several: "Divers",
+            coursesDetail: "Git, tests, accessibilité, déploiement."
+        },
+        cv: {
+            title: "C.V.",
+            titleSpan: "Numérique",
+            tagline: "Full Stack Developer | Product Mindset",
+            quote: "Développeur avec une base technique dans l'écosystème JavaScript et Python. Mon approche consiste à livrer des solutions pratiques et fonctionnelles, en privilégiant la maintenabilité et l'expérience utilisateur réelle.",
+            download: "Télécharger le PDF",
+            techStack: "Tech Stack",
+            frontend: "Frontend",
+            backend: "Backend & DB",
+            other: "Autres",
+            education: "Formation",
+            bootcamp: "Bootcamp Full Stack",
+            tecnico: "Technicien en micro-informatique",
+            fp: "Formation professionnelle (niveau intermédiaire)",
+            original: "Document original",
+            viewer: "Visionneuse PDF",
+            iframeTitle: "Aperçu du CV de Jose Carlos González (PDF)"
+        },
+        mail: {
+            adminSubject: (name: string) => `[Portfolio] Message de ${name}`,
+            adminBody: (name: string, email: string, message: string) => `Nouveau message depuis le portfolio\n\nNom : ${name}\nE-mail : ${email}\n\nMessage :\n${message}`,
+            replySubject: () => `Merci pour votre message`,
+            replyBody: (name: string) => `Bonjour ${name},\n\nMerci de m'avoir contacté via mon portfolio.\nJ'ai bien reçu votre message et je vous répondrai dès que possible.\n\nCordialement,\nJC\nDéveloppeur Full Stack`,
+            unexpected: "EmailJS a répondu avec un statut inattendu"
         }
     },
     it: {
@@ -794,6 +1054,71 @@ export const translations = {
             contact: 'Contatto',
             rights: 'Tutti i diritti riservati',
             top: 'Torna su'
+        },
+        ui: {
+            homeAria: "JC.dev, pagina iniziale",
+            mainNav: "Navigazione principale",
+            openMenu: "Apri il menu",
+            closeMenu: "Chiudi il menu",
+            mobileNav: "Navigazione mobile",
+            toggleTheme: "Cambia tema",
+            builtWith: "Realizzato con",
+            and: "e",
+            avatarAlt: "Ritratto di Jose Carlos"
+        },
+        caseUi: {
+            back: "Torna ai progetti",
+            onThisPage: "In questa pagina",
+            glance: "A colpo d'occhio",
+            kind: "Tipo di progetto",
+            role: "Ruolo",
+            stack: "Stack",
+            links: "Link",
+            proves: "Cosa dimostra"
+        },
+        notFound: {
+            text: "Questa pagina non esiste o è stata spostata.",
+            back: "Torna all'inizio"
+        },
+        certs: {
+            heading: "Certificazioni & Formazione",
+            certsTitle: "Certificazioni",
+            eduTitle: "Formazione",
+            view: "Vedi certificato",
+            download: "Scarica il CV (PDF)",
+            python: "Backend Python con Flask",
+            micro: "Tecnico di microinformatica e reti",
+            ministry: "MINISTERIO FORMACIÓN PROFESIONAL",
+            bootcamp: "Bootcamp Full Stack",
+            bootcampDetail: "React, JS, API REST, Flask e SQL.",
+            courses: "Corsi complementari",
+            several: "Vari",
+            coursesDetail: "Git, testing, accessibilità, deployment."
+        },
+        cv: {
+            title: "C.V.",
+            titleSpan: "Digitale",
+            tagline: "Full Stack Developer | Product Mindset",
+            quote: "Sviluppatore con una solida base tecnica nell'ecosistema JavaScript e Python. Il mio approccio punta a consegnare soluzioni pratiche e funzionali, dando priorità alla manutenibilità e all'esperienza utente reale.",
+            download: "Scarica il PDF",
+            techStack: "Tech Stack",
+            frontend: "Frontend",
+            backend: "Backend & DB",
+            other: "Altre",
+            education: "Formazione",
+            bootcamp: "Bootcamp Full Stack",
+            tecnico: "Tecnico di microinformatica",
+            fp: "Formazione professionale (livello intermedio)",
+            original: "Documento originale",
+            viewer: "Visualizzatore PDF",
+            iframeTitle: "Anteprima del CV di Jose Carlos González (PDF)"
+        },
+        mail: {
+            adminSubject: (name: string) => `[Portfolio] Messaggio da ${name}`,
+            adminBody: (name: string, email: string, message: string) => `Nuovo messaggio dal portfolio\n\nNome: ${name}\nE-mail: ${email}\n\nMessaggio:\n${message}`,
+            replySubject: () => `Grazie per il tuo messaggio`,
+            replyBody: (name: string) => `Ciao ${name},\n\ngrazie per avermi contattato tramite il mio portfolio.\nHo ricevuto correttamente il tuo messaggio e ti risponderò il prima possibile.\n\nUn saluto,\nJC\nSviluppatore Full Stack`,
+            unexpected: "EmailJS ha risposto con uno stato imprevisto"
         }
     }
 };

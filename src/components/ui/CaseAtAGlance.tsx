@@ -1,4 +1,7 @@
+'use client';
+
 import { TechLabel } from '@/components/ui/TechIcon';
+import { useLanguage } from '@/context/LanguageContext';
 
 export type CaseAtAGlanceData = {
   kind: string;
@@ -11,20 +14,22 @@ type Action = { label: string; href: string };
 
 // "De un vistazo": key facts as a grid, then what the case shows as short numbered cards. Facts already on the page only.
 export function CaseAtAGlance({ data, actions }: { data: CaseAtAGlanceData; actions: Action[] }) {
+  const { t } = useLanguage();
+  const c = t.caseUi;
   return (
     <section className="pv3-detail__summary" aria-labelledby="de-un-vistazo">
-      <h2 id="de-un-vistazo" className="pv3-detail__summary-title">De un vistazo</h2>
+      <h2 id="de-un-vistazo" className="pv3-detail__summary-title">{c.glance}</h2>
       <dl className="pv3-detail__summary-grid">
         <div className="pv3-detail__summary-cell">
-          <dt>Tipo de proyecto</dt>
+          <dt>{c.kind}</dt>
           <dd className="pv3-detail__kind">{data.kind}</dd>
         </div>
         <div className="pv3-detail__summary-cell">
-          <dt>Rol</dt>
+          <dt>{c.role}</dt>
           <dd>{data.role}</dd>
         </div>
         <div className="pv3-detail__summary-cell">
-          <dt>Stack</dt>
+          <dt>{c.stack}</dt>
           <dd>
             <ul className="pv3-detail__chips">
               {data.stack.map((s) => <li key={s}><TechLabel text={s} /></li>)}
@@ -32,7 +37,7 @@ export function CaseAtAGlance({ data, actions }: { data: CaseAtAGlanceData; acti
           </dd>
         </div>
         <div className="pv3-detail__summary-cell">
-          <dt>Enlaces</dt>
+          <dt>{c.links}</dt>
           <dd>
             <ul className="pv3-detail__summary-links">
               {actions.map((a) => (
@@ -44,7 +49,7 @@ export function CaseAtAGlance({ data, actions }: { data: CaseAtAGlanceData; acti
           </dd>
         </div>
       </dl>
-      <h3 className="pv3-detail__proves-title">Qué demuestra</h3>
+      <h3 className="pv3-detail__proves-title">{c.proves}</h3>
       <ol className="pv3-detail__proves">
         {data.proves.map((p) => <li key={p}>{p}</li>)}
       </ol>

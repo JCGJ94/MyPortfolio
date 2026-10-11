@@ -15,9 +15,10 @@ const fieldIcons = { name: User, email: Mail, message: MessageSquare } as const;
 const loadSchema = () =>
   import('zod').then(({ z }) => {
     const contactSchema = z.object({
-      name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
-      email: z.string().email('Correo electrónico no válido'),
-      message: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres'),
+      // Messages are shown from t.contact.errors, so the schema only validates.
+      name: z.string().min(2),
+      email: z.string().email(),
+      message: z.string().min(10),
     });
     return contactSchema;
   });
@@ -65,15 +66,15 @@ export function Contact() {
 
       const adminParams = {
         to_email: 'jcdevelopment94@gmail.com',
-        subject: `[Portfolio] Mensaje de ${formData.name}`,
-        contenido: `Nuevo mensaje desde el portfolio\n\nNombre: ${formData.name}\nEmail: ${formData.email}\n\nMensaje:\n${formData.message}`,
+        subject: t.mail.adminSubject(formData.name),
+        contenido: t.mail.adminBody(formData.name, formData.email, formData.message),
         reply_to: formData.email,
       };
 
       const autoReplyParams = {
         to_email: formData.email,
-        subject: "Gracias por tu mensaje",
-        contenido: `Hola ${formData.name},\n\nGracias por ponerte en contacto conmigo a través de mi portfolio.\nHe recibido tu mensaje correctamente y te responderé lo antes posible.\n\nUn saludo,\nJC\nDesarrollador Full Stack`,
+        subject: t.mail.replySubject(),
+        contenido: t.mail.replyBody(formData.name),
         reply_to: 'jcdevelopment94@gmail.com',
       };
 
@@ -87,7 +88,7 @@ export function Contact() {
       if (r1.status === 200 && r2.status === 200) {
         setIsSuccess(true);
       } else {
-        throw new Error("EmailJS respondió con estado no esperado");
+        throw new Error(t.mail.unexpected);
       }
     } catch (error) {
       console.error('EmailJS Error:', error);

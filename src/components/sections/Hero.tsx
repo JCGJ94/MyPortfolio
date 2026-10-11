@@ -153,7 +153,7 @@ export function Hero() {
                   <Image {...portrait} alt="" loading="eager" fetchPriority="high" />
                 </div>
                 <div className="hero-glass__face">
-                  <Image {...portrait} alt="Jose Carlos Avatar" preload fetchPriority="high" />
+                  <Image {...portrait} alt={t.ui.avatarAlt} preload fetchPriority="high" />
                 </div>
               </div>
             </div>
