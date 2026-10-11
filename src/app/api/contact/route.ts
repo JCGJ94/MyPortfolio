@@ -44,7 +44,7 @@ export async function POST(request: Request) {
         const ip = request.headers.get('x-forwarded-for') ?? 'anonymous';
         if (isRateLimited(ip)) {
             return NextResponse.json(
-                { error: 'Too many requests. Please try again later.' },
+                { error: 'Too many requests. Please try again later.', code: 'rate_limited' },
                 { status: 429 }
             );
         }
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
         const result = contactSchema.safeParse(body);
         if (!result.success) {
             return NextResponse.json(
-                { error: 'Invalid payload', details: result.error.issues },
+                { error: 'Invalid payload', code: 'invalid_payload', details: result.error.issues },
                 { status: 400 }
             );
         }
@@ -88,10 +88,11 @@ export async function POST(request: Request) {
         return NextResponse.json({ success: true }, { status: 200 });
 
     } catch (error) {
+        // `error` stays an English fallback; `code` is the stable key clients can translate.
         // Avoid exposing stack traces in production response
         console.error('Contact API Error:', error);
         return NextResponse.json(
-            { error: 'Internal Server Error. Please try again later.' },
+            { error: 'Internal Server Error. Please try again later.', code: 'internal_error' },
             { status: 500 }
         );
     }

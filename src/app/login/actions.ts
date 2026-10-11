@@ -3,6 +3,8 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 
+// `error` and `success` carry stable message codes (see t.auth.failures / t.auth.success); the client translates them.
+// An unmapped Supabase message is passed through as is.
 export type AuthState = {
     error?: string;
     success?: string;
@@ -16,7 +18,7 @@ export async function loginAction(
     const password = formData.get('password') as string;
 
     if (!email || !password) {
-        return { error: 'Email y contraseña son obligatorios.' };
+        return { error: 'required' };
     }
 
     try {
@@ -28,17 +30,17 @@ export async function loginAction(
         });
 
         if (error) {
-            // Map common Supabase errors to Spanish
+            // Map common Supabase errors to message codes
             const errorMap: Record<string, string> = {
-                'Invalid login credentials': 'Credenciales incorrectas. Verifica tu email y contraseña.',
-                'Email not confirmed': 'Tu email aún no ha sido verificado. Revisa tu bandeja de entrada.',
-                'Too many requests': 'Demasiados intentos. Espera un momento antes de volver a intentar.',
+                'Invalid login credentials': 'invalid_credentials',
+                'Email not confirmed': 'email_not_confirmed',
+                'Too many requests': 'too_many_requests',
             };
             return { error: errorMap[error.message] || error.message };
         }
     } catch (err) {
         console.error('[LOGIN_ACTION]', err);
-        return { error: 'No se pudo conectar con el servidor de autenticación. Verifica que el servicio de Supabase está activo.' };
+        return { error: 'unreachable' };
     }
 
     redirect('/dashboard');

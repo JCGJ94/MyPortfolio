@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Lock, Mail, ArrowRight, AlertCircle, Terminal } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 import { loginAction, type AuthState } from './actions';
 
 const initialState: AuthState = {};
@@ -11,6 +12,9 @@ const initialState: AuthState = {};
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(loginAction, initialState);
   const emailRef = useRef<HTMLInputElement>(null);
+  const { t } = useLanguage();
+  const a = t.auth;
+  const errors: Record<string, string> = a.failures;
 
   useEffect(() => {
     emailRef.current?.focus();
@@ -51,10 +55,10 @@ export default function LoginPage() {
             <Terminal className="h-7 w-7 text-primary" />
           </motion.div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
-            Inicia Sesión
+            {a.login.title}
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Accede al panel técnico de gestión
+            {a.login.subtitle}
           </p>
         </div>
 
@@ -68,7 +72,7 @@ export default function LoginPage() {
               animate={{ opacity: 1, y: 0 }}
             >
               <AlertCircle className="h-4 w-4 shrink-0" />
-              {state.error}
+              {errors[state.error] ?? state.error}
             </motion.div>
           )}
 
@@ -79,7 +83,7 @@ export default function LoginPage() {
                 htmlFor="login-email"
                 className="mb-2 block text-xs font-semibold uppercase tracking-widest text-muted-foreground"
               >
-                Email
+                {a.email}
               </label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/60 transition-colors group-focus-within:text-primary" />
@@ -90,7 +94,9 @@ export default function LoginPage() {
                   type="email"
                   autoComplete="email"
                   required
-                  placeholder="tu@email.com"
+                  placeholder={a.emailPlaceholder}
+                  onInvalid={(e) => e.currentTarget.setCustomValidity(e.currentTarget.validity.valueMissing ? a.validation.emailRequired : a.validation.emailInvalid)}
+                  onInput={(e) => e.currentTarget.setCustomValidity('')}
                   className="block w-full rounded-xl border border-border/60 bg-muted/30 py-3.5 pl-12 pr-4 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-200 focus:border-primary/40 focus:bg-muted/50 focus:ring-2 focus:ring-primary/10"
                 />
               </div>
@@ -102,7 +108,7 @@ export default function LoginPage() {
                 htmlFor="login-password"
                 className="mb-2 block text-xs font-semibold uppercase tracking-widest text-muted-foreground"
               >
-                Contraseña
+                {a.password}
               </label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/60 transition-colors group-focus-within:text-primary" />
@@ -113,6 +119,8 @@ export default function LoginPage() {
                   autoComplete="current-password"
                   required
                   placeholder="••••••••"
+                  onInvalid={(e) => e.currentTarget.setCustomValidity(a.validation.passwordRequired)}
+                  onInput={(e) => e.currentTarget.setCustomValidity('')}
                   className="block w-full rounded-xl border border-border/60 bg-muted/30 py-3.5 pl-12 pr-4 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-200 focus:border-primary/40 focus:bg-muted/50 focus:ring-2 focus:ring-primary/10"
                 />
               </div>
@@ -128,7 +136,7 @@ export default function LoginPage() {
                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground" />
               ) : (
                 <>
-                  Iniciar Sesión
+                  {a.login.button}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </>
               )}
@@ -138,25 +146,25 @@ export default function LoginPage() {
           {/* Divider */}
           <div className="mt-6 flex items-center gap-4">
             <div className="h-px flex-1 bg-border/60" />
-            <span className="text-xs text-muted-foreground">o</span>
+            <span className="text-xs text-muted-foreground">{a.or}</span>
             <div className="h-px flex-1 bg-border/60" />
           </div>
 
           {/* Register link */}
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            ¿No tienes cuenta?{' '}
+            {a.login.noAccount}{' '}
             <Link
               href="/register"
               className="font-semibold text-primary hover:text-primary/80 transition-colors"
             >
-              Crea una cuenta
+              {a.login.createAccount}
             </Link>
           </p>
         </div>
 
         {/* Footer */}
         <p className="mt-8 text-center text-xs text-muted-foreground/60">
-          Protegido por Supabase Auth · JWT + SSR
+          {a.footer}
         </p>
       </motion.div>
     </div>

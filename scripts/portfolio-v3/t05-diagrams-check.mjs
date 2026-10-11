@@ -71,11 +71,13 @@ await check("every case has a diagram on its detail page and in the Projects sta
   assert.ok(/resolveTechIconKey/.test(tsx) && /TechIcon/.test(tsx));
   assert.ok(/FlowDiagram/.test(read("src/components/ui/SquaadsArchitecture.tsx")));
   assert.ok(/getFlow\(project\.id, language\)/.test(read("src/components/sections/Projects.tsx")));
-  for (const [route, key] of [["nutriflow", "nutriflowFlow"], ["clinical-ai", "clinicalFlow"], ["tallercardonal", "tallerFlow"], ["jegstudio", "jegFlow"], ["sportbarleague", "sportbarFlow"]]) {
-    const page = read(`src/app/${route}/page.tsx`);
-    assert.ok(page.includes("<FlowDiagram") && page.includes(key), route);
+  // The page body lives in the *Content.tsx client component; it asks getFlow for its own flow id.
+  for (const [route, file] of [["nutriflow", "NutriflowContent"], ["clinical-ai", "ClinicalAiContent"], ["tallercardonal", "TallerCardonalContent"], ["jegstudio", "JegStudioContent"], ["sportbarleague", "SportBarLeagueContent"]]) {
+    const page = read(`src/app/${route}/${file}.tsx`);
+    assert.ok(page.includes("<FlowDiagram") && page.includes(`getFlow('${route}'`), route);
   }
-  assert.ok(/<FlowDiagram/.test(read("src/app/squaads/page.tsx")) || /SquaadsArchitecture/.test(read("src/app/squaads/page.tsx")));
+  const squaads = read("src/app/squaads/SquaadsContent.tsx");
+  assert.ok(/<FlowDiagram/.test(squaads) || /SquaadsArchitecture/.test(squaads));
 });
 await check("data: six flows, edges and boxes reference existing nodes, one path per edge, labelled, no steps for non-lifecycles", () => {
   assert.deepEqual(Object.keys(flows).sort(), ["clinical-ai", "jegstudio", "nutriflow", "sportbarleague", "squaads-meeting-bot", "tallercardonal"]);

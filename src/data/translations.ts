@@ -231,6 +231,29 @@ export const translations = {
             replySubject: () => `Gracias por tu mensaje`,
             replyBody: (name: string) => `Hola ${name},\n\nGracias por ponerte en contacto conmigo a través de mi portfolio.\nHe recibido tu mensaje correctamente y te responderé lo antes posible.\n\nUn saludo,\nJC\nDesarrollador Full Stack`,
             unexpected: "EmailJS respondió con estado no esperado"
+        },
+        auth: {
+            email: "Email",
+            password: "Contraseña",
+            emailPlaceholder: "tu@email.com",
+            or: "o",
+            footer: "Protegido por Supabase Auth · JWT + SSR",
+            login: { title: "Inicia Sesión", subtitle: "Accede al panel técnico de gestión", button: "Iniciar Sesión", noAccount: "¿No tienes cuenta?", createAccount: "Crea una cuenta" },
+            register: { title: "Crear Cuenta", subtitle: "Únete al entorno técnico de gestión", passwordPlaceholder: "Mínimo 6 caracteres", passwordHint: "Mínimo 6 caracteres", button: "Crear Cuenta", haveAccount: "¿Ya tienes una cuenta?", signIn: "Inicia sesión" },
+            validation: { emailRequired: "Introduce tu email.", emailInvalid: "Introduce un email válido.", passwordRequired: "Introduce tu contraseña.", passwordShort: "La contraseña debe tener al menos 6 caracteres." },
+            // Keys are the stable codes returned by the login/register server actions.
+            failures: {
+                required: "Email y contraseña son obligatorios.",
+                password_short: "La contraseña debe tener al menos 6 caracteres.",
+                invalid_credentials: "Credenciales incorrectas. Verifica tu email y contraseña.",
+                email_not_confirmed: "Tu email aún no ha sido verificado. Revisa tu bandeja de entrada.",
+                too_many_requests: "Demasiados intentos. Espera un momento antes de volver a intentar.",
+                register_too_many_requests: "Demasiados intentos. Espera un momento.",
+                user_exists: "Este email ya tiene una cuenta registrada.",
+                invalid_password: "Proporciona una contraseña válida.",
+                unreachable: "No se pudo conectar con el servidor de autenticación. Verifica que el servicio de Supabase está activo."
+            },
+            success: { account_created: "¡Cuenta creada! Revisa tu email para confirmar tu cuenta." }
         }
     },
     en: {
@@ -463,6 +486,29 @@ export const translations = {
             replySubject: () => `Thank you for your message`,
             replyBody: (name: string) => `Hello ${name},\n\nThank you for getting in touch through my portfolio.\nI have received your message and will reply as soon as possible.\n\nBest regards,\nJC\nFull Stack Developer`,
             unexpected: "EmailJS responded with an unexpected status"
+        },
+        auth: {
+            email: "Email",
+            password: "Password",
+            emailPlaceholder: "you@example.com",
+            or: "or",
+            footer: "Protected by Supabase Auth · JWT + SSR",
+            login: { title: "Sign In", subtitle: "Access the technical management dashboard", button: "Sign In", noAccount: "Don't have an account?", createAccount: "Create an account" },
+            register: { title: "Create Account", subtitle: "Join the technical management environment", passwordPlaceholder: "At least 6 characters", passwordHint: "At least 6 characters", button: "Create Account", haveAccount: "Already have an account?", signIn: "Sign in" },
+            validation: { emailRequired: "Enter your email.", emailInvalid: "Enter a valid email address.", passwordRequired: "Enter your password.", passwordShort: "The password must be at least 6 characters long." },
+            // Keys are the stable codes returned by the login/register server actions.
+            failures: {
+                required: "Email and password are required.",
+                password_short: "The password must be at least 6 characters long.",
+                invalid_credentials: "Incorrect credentials. Check your email and password.",
+                email_not_confirmed: "Your email hasn't been verified yet. Check your inbox.",
+                too_many_requests: "Too many attempts. Please wait a moment before trying again.",
+                register_too_many_requests: "Too many attempts. Please wait a moment.",
+                user_exists: "This email already has a registered account.",
+                invalid_password: "Please provide a valid password.",
+                unreachable: "Could not connect to the authentication server. Make sure the Supabase service is running."
+            },
+            success: { account_created: "Account created! Check your email to confirm your account." }
         }
     },
     de: {
@@ -685,6 +731,29 @@ export const translations = {
             replySubject: () => `Danke für deine Nachricht`,
             replyBody: (name: string) => `Hallo ${name},\n\nvielen Dank, dass du dich über mein Portfolio bei mir gemeldet hast.\nIch habe deine Nachricht erhalten und antworte dir so schnell wie möglich.\n\nViele Grüße\nJC\nFull-Stack-Entwickler`,
             unexpected: "EmailJS hat mit einem unerwarteten Status geantwortet"
+        },
+        auth: {
+            email: "E-Mail",
+            password: "Passwort",
+            emailPlaceholder: "du@beispiel.de",
+            or: "oder",
+            footer: "Geschützt durch Supabase Auth · JWT + SSR",
+            login: { title: "Anmelden", subtitle: "Zugriff auf das technische Verwaltungs-Dashboard", button: "Anmelden", noAccount: "Noch kein Konto?", createAccount: "Konto erstellen" },
+            register: { title: "Konto erstellen", subtitle: "Tritt der technischen Verwaltungsumgebung bei", passwordPlaceholder: "Mindestens 6 Zeichen", passwordHint: "Mindestens 6 Zeichen", button: "Konto erstellen", haveAccount: "Du hast bereits ein Konto?", signIn: "Anmelden" },
+            validation: { emailRequired: "Gib deine E-Mail-Adresse ein.", emailInvalid: "Gib eine gültige E-Mail-Adresse ein.", passwordRequired: "Gib dein Passwort ein.", passwordShort: "Das Passwort muss mindestens 6 Zeichen lang sein." },
+            // Keys are the stable codes returned by the login/register server actions.
+            failures: {
+                required: "E-Mail und Passwort sind erforderlich.",
+                password_short: "Das Passwort muss mindestens 6 Zeichen lang sein.",
+                invalid_credentials: "Ungültige Zugangsdaten. Prüfe deine E-Mail-Adresse und dein Passwort.",
+                email_not_confirmed: "Deine E-Mail-Adresse wurde noch nicht bestätigt. Sieh in deinem Posteingang nach.",
+                too_many_requests: "Zu viele Versuche. Warte einen Moment, bevor du es erneut versuchst.",
+                register_too_many_requests: "Zu viele Versuche. Bitte warte einen Moment.",
+                user_exists: "Für diese E-Mail-Adresse existiert bereits ein Konto.",
+                invalid_password: "Bitte gib ein gültiges Passwort ein.",
+                unreachable: "Verbindung zum Authentifizierungsserver fehlgeschlagen. Prüfe, ob der Supabase-Dienst läuft."
+            },
+            success: { account_created: "Konto erstellt! Bestätige dein Konto über den Link in deiner E-Mail." }
         }
     },
     fr: {
@@ -907,6 +976,29 @@ export const translations = {
             replySubject: () => `Merci pour votre message`,
             replyBody: (name: string) => `Bonjour ${name},\n\nMerci de m'avoir contacté via mon portfolio.\nJ'ai bien reçu votre message et je vous répondrai dès que possible.\n\nCordialement,\nJC\nDéveloppeur Full Stack`,
             unexpected: "EmailJS a répondu avec un statut inattendu"
+        },
+        auth: {
+            email: "E-mail",
+            password: "Mot de passe",
+            emailPlaceholder: "vous@exemple.fr",
+            or: "ou",
+            footer: "Protégé par Supabase Auth · JWT + SSR",
+            login: { title: "Connexion", subtitle: "Accédez au tableau de bord technique de gestion", button: "Se connecter", noAccount: "Vous n'avez pas de compte ?", createAccount: "Créer un compte" },
+            register: { title: "Créer un compte", subtitle: "Rejoignez l'environnement technique de gestion", passwordPlaceholder: "6 caractères minimum", passwordHint: "6 caractères minimum", button: "Créer un compte", haveAccount: "Vous avez déjà un compte ?", signIn: "Se connecter" },
+            validation: { emailRequired: "Saisissez votre adresse e-mail.", emailInvalid: "Saisissez une adresse e-mail valide.", passwordRequired: "Saisissez votre mot de passe.", passwordShort: "Le mot de passe doit contenir au moins 6 caractères." },
+            // Keys are the stable codes returned by the login/register server actions.
+            failures: {
+                required: "L'e-mail et le mot de passe sont obligatoires.",
+                password_short: "Le mot de passe doit contenir au moins 6 caractères.",
+                invalid_credentials: "Identifiants incorrects. Vérifiez votre e-mail et votre mot de passe.",
+                email_not_confirmed: "Votre e-mail n'a pas encore été vérifié. Consultez votre boîte de réception.",
+                too_many_requests: "Trop de tentatives. Patientez un instant avant de réessayer.",
+                register_too_many_requests: "Trop de tentatives. Patientez un instant.",
+                user_exists: "Un compte est déjà enregistré avec cet e-mail.",
+                invalid_password: "Veuillez saisir un mot de passe valide.",
+                unreachable: "Impossible de se connecter au serveur d'authentification. Vérifiez que le service Supabase est actif."
+            },
+            success: { account_created: "Compte créé ! Consultez votre e-mail pour confirmer votre compte." }
         }
     },
     it: {
@@ -1129,6 +1221,29 @@ export const translations = {
             replySubject: () => `Grazie per il tuo messaggio`,
             replyBody: (name: string) => `Ciao ${name},\n\ngrazie per avermi contattato tramite il mio portfolio.\nHo ricevuto correttamente il tuo messaggio e ti risponderò il prima possibile.\n\nUn saluto,\nJC\nSviluppatore Full Stack`,
             unexpected: "EmailJS ha risposto con uno stato imprevisto"
+        },
+        auth: {
+            email: "Email",
+            password: "Password",
+            emailPlaceholder: "tu@esempio.it",
+            or: "o",
+            footer: "Protetto da Supabase Auth · JWT + SSR",
+            login: { title: "Accedi", subtitle: "Accedi al pannello tecnico di gestione", button: "Accedi", noAccount: "Non hai un account?", createAccount: "Crea un account" },
+            register: { title: "Crea account", subtitle: "Unisciti all'ambiente tecnico di gestione", passwordPlaceholder: "Minimo 6 caratteri", passwordHint: "Minimo 6 caratteri", button: "Crea account", haveAccount: "Hai già un account?", signIn: "Accedi" },
+            validation: { emailRequired: "Inserisci la tua email.", emailInvalid: "Inserisci un indirizzo email valido.", passwordRequired: "Inserisci la tua password.", passwordShort: "La password deve contenere almeno 6 caratteri." },
+            // Keys are the stable codes returned by the login/register server actions.
+            failures: {
+                required: "Email e password sono obbligatorie.",
+                password_short: "La password deve contenere almeno 6 caratteri.",
+                invalid_credentials: "Credenziali non corrette. Controlla email e password.",
+                email_not_confirmed: "La tua email non è ancora stata verificata. Controlla la posta in arrivo.",
+                too_many_requests: "Troppi tentativi. Attendi un attimo prima di riprovare.",
+                register_too_many_requests: "Troppi tentativi. Attendi un attimo.",
+                user_exists: "Questa email ha già un account registrato.",
+                invalid_password: "Inserisci una password valida.",
+                unreachable: "Impossibile connettersi al server di autenticazione. Verifica che il servizio Supabase sia attivo."
+            },
+            success: { account_created: "Account creato! Controlla la tua email per confermare l'account." }
         }
     }
 };

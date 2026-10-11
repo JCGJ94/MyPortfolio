@@ -115,7 +115,7 @@ await check("X4: Squaads screenshot is optimized, has alt in 5 languages and res
   assert.ok(/width=\{1111\}\s+height=\{1064\}/.test(tsx) && /role="tablist"/.test(tsx));
   const tr = read("src/data/translations.ts");
   for (const k of ["tabProduct", "tabArchitecture", "screenshotAlt"]) assert.equal((tr.match(new RegExp(`\\b${k}:`, "g")) ?? []).length, 5, k);
-  assert.ok(/squaads-login\.webp/.test(read("src/app/squaads/page.tsx")));
+  assert.ok(/squaads-login\.webp/.test(read("src/app/squaads/SquaadsContent.tsx")));
 });
 
 if (failures.length) { console.log(`\n${failures.length} check(s) failed`); process.exit(1); }

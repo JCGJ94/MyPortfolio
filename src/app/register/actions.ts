@@ -11,11 +11,11 @@ export async function registerAction(
     const password = formData.get('password') as string;
 
     if (!email || !password) {
-        return { error: 'Email y contraseña son obligatorios.' };
+        return { error: 'required' };
     }
 
     if (password.length < 6) {
-        return { error: 'La contraseña debe tener al menos 6 caracteres.' };
+        return { error: 'password_short' };
     }
 
     try {
@@ -28,17 +28,17 @@ export async function registerAction(
 
         if (error) {
             const errorMap: Record<string, string> = {
-                'User already registered': 'Este email ya tiene una cuenta registrada.',
-                'Password should be at least 6 characters': 'La contraseña debe tener al menos 6 caracteres.',
-                'Too many requests': 'Demasiados intentos. Espera un momento.',
-                'Signup requires a valid password': 'Proporciona una contraseña válida.',
+                'User already registered': 'user_exists',
+                'Password should be at least 6 characters': 'password_short',
+                'Too many requests': 'register_too_many_requests',
+                'Signup requires a valid password': 'invalid_password',
             };
             return { error: errorMap[error.message] || error.message };
         }
     } catch (err) {
         console.error('[REGISTER_ACTION]', err);
-        return { error: 'No se pudo conectar con el servidor de autenticación. Verifica que el servicio de Supabase está activo.' };
+        return { error: 'unreachable' };
     }
 
-    return { success: '¡Cuenta creada! Revisa tu email para confirmar tu cuenta.' };
+    return { success: 'account_created' };
 }
