@@ -47,6 +47,7 @@ export function Navbar() {
 
   return (
     <>
+    <a href="#main-content" className="pv3-skip">{t.nav.skip}</a>
     <div className="portfolio-nav-veil" aria-hidden="true" />
     <header className={cn('portfolio-nav', scrolled && 'is-scrolled', isOpen && 'is-open')}>
       <NavTrace />

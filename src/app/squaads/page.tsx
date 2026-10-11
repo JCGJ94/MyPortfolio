@@ -21,7 +21,7 @@ const pipeline = [
 
 export default function SquaadsPage() {
   return (
-    <main className="pv3-section pv3-detail">
+    <main id="main-content" className="pv3-section pv3-detail">
       <div className="pv3-section__inner">
         <CaseHeader
           id="squaads-meeting-bot"

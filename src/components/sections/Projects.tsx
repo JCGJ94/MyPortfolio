@@ -51,7 +51,7 @@ function CaseMedia({ project }: { project: Project }) {
 
   return (
     <>
-      <div className="pv3-case__tabs" role="tablist" aria-label={`${c.tabProduct} / ${c.tabArchitecture}`}>
+      <div className="pv3-case__tabs" role="tablist" aria-orientation="horizontal" aria-label={`${c.tabProduct} / ${c.tabArchitecture}`}>
         {tabs.map(({ id, label }) => (
           <button
             key={id}
@@ -64,8 +64,13 @@ function CaseMedia({ project }: { project: Project }) {
             className="pv3-case__tab pv3-focus"
             onClick={() => setTab(id)}
             onKeyDown={(e) => {
-              if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                const next = id === 'product' ? 'architecture' : 'product';
+              const next =
+                e.key === 'ArrowRight' || e.key === 'ArrowLeft' ? (id === 'product' ? 'architecture' : 'product')
+                : e.key === 'Home' ? 'product'
+                : e.key === 'End' ? 'architecture'
+                : null;
+              if (next) {
+                e.preventDefault();
                 setTab(next);
                 document.getElementById(`${project.id}-tab-${next}`)?.focus();
               }

@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import { TechLabel } from '@/components/ui/TechIcon';
-import { FileText, Download, GraduationCap, Code2, Briefcase } from 'lucide-react';
+import { FileText, Download, GraduationCap, Code2 } from 'lucide-react';
 
 export const metadata = {
     title: 'C.V. Digital',
@@ -11,7 +10,7 @@ export const metadata = {
 
 export default function CVPage() {
     return (
-        <main className="min-h-screen pt-32 pb-20 bg-background overflow-hidden relative">
+        <main id="main-content" className="min-h-screen pt-32 pb-20 bg-background overflow-hidden relative">
             <div className="container mx-auto px-4 relative z-10">
                 {/* Header Section */}
                 <div className="max-w-4xl mx-auto mb-16 animate-slide-up">
@@ -25,14 +24,15 @@ export default function CVPage() {
                             </p>
                         </div>
                         <div className="shrink-0 flex flex-col gap-3">
-                            <Link
+                            <a
                                 href="/JoseCarlos-CV.pdf"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center pv3-cv-download rounded-xl bg-primary px-6 py-4 text-sm font-bold uppercase tracking-widest text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
                             >
                                 <Download className="mr-2 h-4 w-4" />
                                 Descargar PDF
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@ export default function CVPage() {
                                 <iframe
                                     src="/JoseCarlos-CV.pdf#toolbar=0"
                                     className="w-full h-full min-h-[600px]"
-                                    title="Jose Carlos González CV"
+                                    title="Vista previa del currículum de Jose Carlos González (PDF)"
                                 />
                             </div>
                         </div>

@@ -76,7 +76,7 @@
     --secondary-foreground: #0f172a;
 
     --muted: #f1f5f9;
-    --muted-foreground: #64748b;
+    --muted-foreground: #5b6b80; /* >= 4.97:1 on #fff and #f1f5f9 (AA) */
 
     --accent: #f1f5f9;
     --accent-foreground: #0f172a;
@@ -614,6 +614,13 @@
 
 }
 
+/* Narrow phones (320px): the technical-area link is already in the mobile menu; hiding it stops the toolbar overflowing. */
+@media (max-width: 26rem) {
+  .portfolio-nav__technical-link {
+    display: none;
+  }
+}
+
 @media (max-width: 16rem) {
   .hero-workbench__title {
     font-size: clamp(1.5rem, 14vw, 1.75rem);
@@ -733,6 +740,25 @@
 .pv3-focus:focus-visible {
   outline: 2px solid var(--pv3-color-focus);
   outline-offset: 3px;
+}
+
+.pv3-skip {
+  position: fixed;
+  inset-block-start: 0.5rem;
+  inset-inline-start: 0.5rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--pv3-color-accent);
+  color: var(--primary-foreground);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.pv3-skip:focus,
+.pv3-skip:focus-visible {
+  transform: none;
 }
 
 

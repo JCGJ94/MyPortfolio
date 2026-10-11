@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function JEGStudioPage() {
   return (
-    <main className="pv3-section pv3-detail">
+    <main id="main-content" className="pv3-section pv3-detail">
       <div className="pv3-section__inner">
         <CaseHeader
           id="jegstudio"

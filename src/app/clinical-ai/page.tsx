@@ -32,7 +32,7 @@ const architecture = `POST /clinical-case/analyze
 
 export default function ClinicalAiPage() {
     return (
-        <main className="pv3-section pv3-detail">
+        <main id="main-content" className="pv3-section pv3-detail">
             <div className="pv3-section__inner">
                 <CaseHeader
                     id="clinical-ai"

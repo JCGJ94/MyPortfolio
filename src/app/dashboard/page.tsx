@@ -45,7 +45,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-secondary/10 pt-24 pb-20">
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <main id="main-content" className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Header */}
         <header className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>

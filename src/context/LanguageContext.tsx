@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useSyncExternalStore } from 'react';
+import React, { createContext, useContext, useEffect, useSyncExternalStore } from 'react';
 import { type Language, translations } from '@/data/translations';
 import { createLanguageStore } from './language-store';
 
@@ -20,6 +20,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         languageStore.getServerSnapshot,
     );
     const setLanguage = languageStore.setLanguage;
+
+    // SSR keeps lang="es"; mirror the selected language on <html> afterwards (DOM write, no state).
+    useEffect(() => {
+        document.documentElement.lang = language;
+    }, [language]);
 
     const value = {
         language,

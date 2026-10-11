@@ -3,6 +3,8 @@ export type Language = 'es' | 'en' | 'de' | 'fr' | 'it';
 export const translations = {
     es: {
         nav: {
+            skip: 'Saltar al contenido',
+            language: 'Idioma',
             home: 'Inicio',
             projects: 'Proyectos',
             about: 'Sobre mí',
@@ -166,6 +168,8 @@ export const translations = {
     },
     en: {
         nav: {
+            skip: 'Skip to content',
+            language: 'Language',
             home: 'Home',
             projects: 'Projects',
             about: 'About',
@@ -328,7 +332,7 @@ export const translations = {
         }
     },
     de: {
-        nav: { home: 'Start', projects: 'Projekte', about: 'Über mich', nutriflow: 'NutriFlow', stack: 'Stack', cv: 'CV', cta: 'Technikbereich' },
+        nav: { skip: 'Zum Inhalt springen', language: 'Sprache', home: 'Start', projects: 'Projekte', about: 'Über mich', nutriflow: 'NutriFlow', stack: 'Stack', cv: 'CV', cta: 'Technikbereich' },
         hero: {
             badge: 'Offen für Full Stack / Backend Python Rollen',
             name: "JoseC González",
@@ -483,7 +487,7 @@ export const translations = {
         }
     },
     fr: {
-        nav: { home: 'Accueil', projects: 'Projets', about: 'À propos', nutriflow: 'NutriFlow', stack: 'Stack', cv: 'CV', cta: 'Zone Technique' },
+        nav: { skip: 'Aller au contenu', language: 'Langue', home: 'Accueil', projects: 'Projets', about: 'À propos', nutriflow: 'NutriFlow', stack: 'Stack', cv: 'CV', cta: 'Zone Technique' },
         hero: {
             badge: 'Ouvert aux postes Full Stack / Backend Python',
             name: "JoseC González",
@@ -638,7 +642,7 @@ export const translations = {
         }
     },
     it: {
-        nav: { home: 'Inizio', projects: 'Progetti', about: 'Su di me', nutriflow: 'NutriFlow', stack: 'Stack', cv: 'CV', cta: 'Area Tecnica' },
+        nav: { skip: 'Vai al contenuto', language: 'Lingua', home: 'Inizio', projects: 'Progetti', about: 'Su di me', nutriflow: 'NutriFlow', stack: 'Stack', cv: 'CV', cta: 'Area Tecnica' },
         hero: {
             badge: 'Disponibile per ruoli Full Stack / Backend Python',
             name: "JoseC González",

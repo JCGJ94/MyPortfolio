@@ -35,10 +35,10 @@ export function Footer() {
                         <span className="pv3-foot__dot" aria-hidden="true" />
                         {t.hero.badge}
                     </p>
-                    <a href="#hero" className="pv3-foot__up pv3-focus" aria-label={footer.top ?? 'Back to top'}>
+                    <Link href="/#hero" className="pv3-foot__up pv3-focus" aria-label={footer.top ?? 'Back to top'}>
                         <span className="pv3-foot__up-label">{footer.top ?? 'Back to top'}</span>
                         <span className="pv3-foot__up-ring" aria-hidden="true"><ArrowUp size={18} /></span>
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="pv3-foot__sig">

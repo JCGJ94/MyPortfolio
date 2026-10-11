@@ -7,7 +7,7 @@ import { ScrollControls } from '@/components/ui/ScrollControls';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main id="main-content" className="flex min-h-screen flex-col items-center justify-between">
       <div className="w-full">
         <Hero />
         <About />

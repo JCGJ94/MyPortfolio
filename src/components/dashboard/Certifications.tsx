@@ -117,14 +117,15 @@ export function Certifications() {
                     </div>
 
                     <div className="mt-8 pt-4 border-t border-border/30">
-                        <Link
+                        <a
                             href="/JoseCarlos-CV.pdf"
                             target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center text-sm text-foreground hover:text-primary transition-colors"
                         >
                             <Download className="h-4 w-4 mr-2" />
                             Descargar CV (PDF)
-                        </Link>
+                        </a>
                     </div>
                 </motion.div>
             </div>
