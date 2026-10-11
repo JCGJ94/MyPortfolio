@@ -173,7 +173,7 @@ export const projects: Project[] = [
     {
         id: 'sportbarleague',
         title: 'SportBarLeague',
-        subtitle: 'Full Stack Application with Python Backend',
+        subtitle: 'Aplicación Full Stack con backend en Python',
         description: 'Aplicación de gestión de ligas deportivas con backend completo en Python. Implementación de autenticación JWT, modelado relacional avanzado con SQLAlchemy y API REST diseñada con Flask. Demuestra competencia sólida en arquitectura backend y diseño de bases de datos.',
         image: '/projects/sportbar-league-captura.png',
         tags: ['Python', 'Flask', 'SQLAlchemy', 'PostgreSQL', 'JWT', 'REST API'],

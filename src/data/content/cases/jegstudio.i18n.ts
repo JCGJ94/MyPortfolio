@@ -21,7 +21,7 @@ const es: JegStudioCopy = {
     },
     actions: ['Ver Demo', 'Ver Repositorio'],
   },
-  imageAlt: 'JEG Studio Project',
+  imageAlt: 'Captura del proyecto JEG Studio',
   flowTitle: 'Flujo de Trabajo',
   flowLede: 'Cómo viaja el trabajo del equipo desde una rama hasta main.',
   stackTitle: 'Stack & Prácticas',

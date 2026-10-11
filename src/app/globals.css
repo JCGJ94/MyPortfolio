@@ -389,6 +389,9 @@
   text-decoration: none;
 }
 
+/* Dark theme: the accent blue under white text measured 3.51:1; deepen it to reach AA (same recipe as .pv3-case__cta). */
+.dark .portfolio-nav__mark { background: color-mix(in srgb, var(--pv3-color-accent) 80%, #000); }
+
 .portfolio-nav__mark {
   display: grid;
   min-width: 3rem;
