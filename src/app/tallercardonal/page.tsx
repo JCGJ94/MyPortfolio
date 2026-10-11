@@ -94,7 +94,7 @@ export default function TallerCardonalPage() {
               No todos los proyectos necesitan un monorepo y 10 microservicios. <strong>Saber adaptar la arquitectura al contexto</strong> es una habilidad clave.
               </p>
               <ul className="pv3-detail__cards">
-              <li>Web en producción activa con tráfico real.</li>
+              <li>Web en producción activa.</li>
               <li>Lighthouse (oct. 2026, mediana de 3 ejecuciones): Accesibilidad 98, Buenas prácticas 100 y SEO 100.</li>
               <li>Reducción a cero de la dependencia del cliente de redes sociales como única presencia digital.</li>
               </ul>
