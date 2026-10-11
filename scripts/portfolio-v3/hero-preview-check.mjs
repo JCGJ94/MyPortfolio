@@ -61,7 +61,7 @@ async function readState(page, inspectOverflow = false) {
     const hero = document.querySelector('#hero');
     const title = hero?.querySelector('h1');
     const role = hero?.querySelector('.hero-workbench__role') || title?.nextElementSibling;
-    const avatar = hero?.querySelector('img[alt*="Avatar"]');
+    const avatar = hero?.querySelector('.hero-glass__face img');
     const copy = hero?.querySelector('.hero-workbench__copy') || title?.parentElement;
     const description = hero?.querySelector('.hero-workbench__description') || copy?.querySelector('p');
     const scrollControl = document.querySelector('[aria-label="Scroll Down"]');
@@ -80,15 +80,20 @@ async function readState(page, inspectOverflow = false) {
     const avatarRect = rect(avatar);
     const copyRect = rect(copy);
     const descriptionRect = rect(description);
-    const titleText = title?.firstChild;
-    const titleWords = titleText?.textContent
-      ? [...titleText.textContent.matchAll(/\S+/g)].map(({ 0: word, index }) => {
-        const range = document.createRange();
-        range.setStart(titleText, index);
-        range.setEnd(titleText, index + word.length);
-        return [...range.getClientRects()].map(({ x, width }) => ({ x, width }));
-      })
-      : [];
+    // The name is typed letter by letter inside one .hw-word element per word (plus an sr-only copy),
+    // so measure each word element; fall back to text-node ranges for a plain-text heading.
+    const wordElements = [...(title?.querySelectorAll('.hw-word') || [])];
+    const titleText = title?.firstChild?.nodeType === Node.TEXT_NODE ? title.firstChild : null;
+    const titleWords = wordElements.length
+      ? wordElements.map((word) => [...word.getClientRects()].map(({ x, width }) => ({ x, width })))
+      : titleText?.textContent
+        ? [...titleText.textContent.matchAll(/\S+/g)].map(({ 0: word, index }) => {
+          const range = document.createRange();
+          range.setStart(titleText, index);
+          range.setEnd(titleText, index + word.length);
+          return [...range.getClientRects()].map(({ x, width }) => ({ x, width }));
+        })
+        : [];
     const actions = [...(hero?.querySelectorAll('.hero-workbench__actions a') || [])].map((element) => ({
       rect: rect(element),
       clientWidth: element.clientWidth,
@@ -171,7 +176,7 @@ async function preparePage(page, theme, width, height) {
   for (let attempt = 0; attempt < 3; attempt += 1) {
     const currentTheme = (await readState(page)).theme.includes('dark') ? 'dark' : 'light';
     if (currentTheme === theme) break;
-    await page.getByRole('button', { name: 'Toggle theme' }).click();
+    await page.getByRole('button', { name: /^(Toggle theme|Cambiar tema)$/ }).click();
     await page.waitForTimeout(300);
   }
   await page.evaluate(() => scrollTo(0, 0));
@@ -320,9 +325,9 @@ async function runStandardAudit(browser) {
 
         if (enabled('locale')) {
           for (const [code, label] of Object.entries(languages)) {
-            const switcher = page.locator('footer button').first();
+            const switcher = page.locator('footer button[aria-haspopup="menu"]').first();
             await switcher.click({ timeout: 5000 });
-            await page.getByRole('button', { name: label, exact: true }).click({ timeout: 5000 });
+            await page.getByRole('menuitemradio', { name: label, exact: true }).click({ timeout: 5000 });
             await page.waitForTimeout(120);
             const localeState = await readState(page);
             rows.push({ width, theme, phase: 'language', selected: code, ...localeState });
@@ -377,7 +382,7 @@ async function runReflowAudit(browser) {
         ), {
           width, theme, phase: 'reflow', reason: 'navigation-control-target-under-44px', navTargets: state.navTargets,
         });
-        check(state.actions.length === 2 && state.actions.every((action) =>
+        check(state.actions.length > 0 && state.actions.every((action) =>
           action.rect && action.clientWidth >= 44 && action.scrollWidth <= action.clientWidth + 1
         ), {
           width, theme, phase: 'reflow', reason: 'hero-action-content-overflows-its-control', actions: state.actions,

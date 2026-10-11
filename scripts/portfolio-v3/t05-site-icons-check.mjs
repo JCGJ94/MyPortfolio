@@ -57,7 +57,7 @@ check("pv3-icons.css imported in layout; base rule no longer duplicated in pv3-s
   assert.ok(!/^\.pv3-ti \{/m.test(read("src/app/pv3-stack.css")));
 });
 check("TechLabel is used on every surface", () => {
-  for (const f of ["components/ui/CaseAtAGlance.tsx", "components/ui/CaseHeader.tsx", "components/sections/Hero.tsx", "components/sections/About.tsx", "components/sections/Projects.tsx", "app/cv/page.tsx"])
+  for (const f of ["components/ui/CaseAtAGlance.tsx", "components/ui/CaseHeader.tsx", "components/sections/Hero.tsx", "components/sections/About.tsx", "components/sections/Projects.tsx", "app/cv/CvContent.tsx"])
     assert.ok(/<TechLabel /.test(read(`src/${f}`)), f);
 });
 check("footer, translations, projects data and diagram code untouched; no new dependencies", () => {

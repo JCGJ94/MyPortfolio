@@ -64,7 +64,8 @@ check("Squaads case is first, internal, with no colleague names, vendor, URLs or
   assert.ok(sq.internalProject, "internalProject flag");
   assert.ok(!sq.demoUrl, "no demo link");
   assert.equal(sq.repoUrl, "https://github.com/devs-squaads/tldv-squaads-dev", "only the public repo link");
-  const { repoUrl, ...visible } = sq;
+  const visible = { ...sq };
+  delete visible.repoUrl;
   const text = JSON.stringify(visible);
   assert.ok(!/tldv/i.test(text), "tldv mentioned");
   assert.ok(!/https?:\/\/|www\.|\.(com|io|dev|net|app)\b/i.test(text), "URL or host");
