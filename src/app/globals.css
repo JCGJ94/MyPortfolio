@@ -852,7 +852,7 @@
 .pv3-case__chain {
   grid-area: chain;
   display: flex; flex-wrap: wrap; gap: var(--pv3-space-2) 0;
-  margin: 0; padding: 0; list-style: none;
+  margin: 0; padding: 0; padding-inline-end: calc(var(--pv3-trace-node) / 2); list-style: none; /* keeps the end-of-row connector dot inside the box (no 1px overflow at 320) */
 }
 .pv3-case__chain li {
   display: inline-flex; align-items: center;

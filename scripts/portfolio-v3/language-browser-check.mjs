@@ -111,19 +111,19 @@ async function visit(page, path = "/") {
   await page.goto(new URL(path, base).href, { waitUntil: "domcontentloaded" });
 }
 function languagePicker(page) {
-  return page.locator("button").filter({ has: page.locator("svg.lucide-languages") });
+  return page.locator('button[aria-haspopup="menu"]').filter({ has: page.locator("svg.lucide-languages") });
 }
 async function hydratedLanguage(page, code) {
   const picker = languagePicker(page);
   await picker.waitFor({ state: "visible" });
-  await page.waitForFunction((expected) => Array.from(document.querySelectorAll("button")).some((button) =>
+  await page.waitForFunction((expected) => Array.from(document.querySelectorAll('button[aria-haspopup="menu"]')).some((button) =>
     button.querySelector("svg.lucide-languages") && button.innerText.trim().toLowerCase() === expected
   ), code);
   assert.equal((await picker.innerText()).trim().toLowerCase(), code);
 }
 async function translatedContent(page, code) {
   const expected = translations[code];
-  const homeLink = page.getByRole("navigation", { name: "Navegación principal" }).getByRole("link", { name: expected.nav.home, exact: true });
+  const homeLink = page.getByRole("navigation", { name: expected.ui.mainNav }).getByRole("link", { name: expected.nav.home, exact: true });
   await homeLink.waitFor({ state: "visible" });
   await page.getByRole("link", { name: expected.hero.viewProjects, exact: true }).waitFor({ state: "visible" });
   assert.equal(await homeLink.count(), 1);
@@ -180,7 +180,7 @@ try {
     try {
       await visit(page);
       const es = translations.es;
-      await page.getByRole("navigation", { name: "Navegación principal" }).getByRole("link", { name: es.nav.home, exact: true }).waitFor({ state: "visible" });
+      await page.getByRole("navigation", { name: es.ui.mainNav }).getByRole("link", { name: es.nav.home, exact: true }).waitFor({ state: "visible" });
       await page.getByRole("link", { name: es.hero.viewProjects, exact: true }).waitFor({ state: "visible" });
       assert.equal((await languagePicker(page).innerText()).trim().toLowerCase(), "es");
       assertSignals(signals, "SSR JavaScript-disabled response");
@@ -203,7 +203,7 @@ try {
         const selected = codes[(codes.indexOf(code) + 1) % codes.length];
         await languagePicker(page).click();
         const names = { es: "Español", en: "English", de: "Deutsch", fr: "Français", it: "Italiano" };
-        await page.getByRole("button", { name: names[selected], exact: true }).click();
+        await page.getByRole("menuitemradio", { name: names[selected], exact: true }).click();
         await hydratedLanguage(page, selected);
         await translatedContent(page, selected);
         assert.equal(await page.evaluate(() => localStorage.getItem("language")), selected);
@@ -213,7 +213,8 @@ try {
         await translatedContent(page, selected);
         row.step = "navigate locally to NutriFlow";
         await page.locator('#tab-nutriflow').click();
-        const caseStudy = page.locator('.pv3-case__cta[href="/nutriflow"]').first();
+        await page.locator('#tab-nutriflow[aria-selected="true"]').waitFor();
+        const caseStudy = page.locator('#caso-nutriflow .pv3-case__cta');
         await caseStudy.click();
         await page.waitForURL("**/nutriflow");
         row.step = "return locally to home";
@@ -254,27 +255,28 @@ try {
       try {
         await visit(page);
         if (fault === "property") {
-          row.propertyProbe = await page.evaluate(() => {
+          row.propertyProbe = await page.evaluate((navLabel) => {
             let getterError;
             try { void window.localStorage; } catch (error) {
               getterError = { name: error.name, message: error.message, stack: error.stack, cause: error.cause?.stack };
             }
-            const picker = document.querySelector("button:has(svg.lucide-languages)");
+            const picker = document.querySelector('button[aria-haspopup="menu"]:has(svg.lucide-languages)');
             return {
               url: location.href,
-              navigationText: document.querySelector('nav[aria-label="Navegación principal"]')?.innerText,
+              navigationText: [...document.querySelectorAll("nav")].find((nav) => nav.getAttribute("aria-label") === navLabel)?.innerText,
               pickerCount: document.querySelectorAll("button").length,
               languagePickerText: picker?.innerText,
               getterError,
               propertyAccessStacks: window.__portfolioLanguageAudit.propertyStacks,
               underlyingStoredLanguage: window.__portfolioLanguageAudit.rawLanguage(),
             };
-          });
+          }, translations.es.ui.mainNav);
         }
         const chosen = fault === "write" ? "de" : "es";
         await hydratedLanguage(page, chosen);
         await translatedContent(page, chosen);
         if (fault === "read") {
+          await page.waitForFunction(() => window.__portfolioLanguageAudit.blockedReads() > 0);
           const initialReadEvidence = await page.evaluate(() => ({
             blockedAttempts: window.__portfolioLanguageAudit.blockedReads(),
             persistedValue: window.__portfolioLanguageAudit.rawLanguage(),
@@ -283,7 +285,7 @@ try {
           assert.equal(initialReadEvidence.persistedValue, "de", "the blocked read must leave and observe the original seeded preference");
           row.initialBlockedReadEvidence = initialReadEvidence;
           await languagePicker(page).click();
-          await page.getByRole("button", { name: "English", exact: true }).click();
+          await page.getByRole("menuitemradio", { name: "English", exact: true }).click();
           await hydratedLanguage(page, "en");
           await translatedContent(page, "en");
           const readEvidence = await page.evaluate(() => ({
@@ -295,16 +297,17 @@ try {
           row.blockedReadEvidence = readEvidence;
         } else if (fault === "write") {
           await languagePicker(page).click();
-          await page.getByRole("button", { name: "English", exact: true }).click();
+          await page.getByRole("menuitemradio", { name: "English", exact: true }).click();
           await hydratedLanguage(page, "en");
           await translatedContent(page, "en");
           assert.equal(await page.evaluate(() => Storage.prototype.getItem.call(localStorage, "language")), "de");
           await languagePicker(page).click();
-          await page.getByRole("button", { name: "Italiano", exact: true }).dispatchEvent("click");
+          await page.getByRole("menuitemradio", { name: "Italiano", exact: true }).dispatchEvent("click");
           await hydratedLanguage(page, "it");
           await translatedContent(page, "it");
           await page.locator('#tab-nutriflow').click();
-          await page.locator('.pv3-case__cta[href="/nutriflow"]').first().click();
+          await page.locator('#tab-nutriflow[aria-selected="true"]').waitFor();
+          await page.locator('#caso-nutriflow .pv3-case__cta').click();
           await page.waitForURL("**/nutriflow");
           await page.getByRole("link", { name: translations.it.nav.home, exact: true }).first().click();
           await page.waitForURL((url) => url.pathname === "/");

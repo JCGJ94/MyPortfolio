@@ -6,11 +6,13 @@ import assert from 'node:assert/strict';
 const read = (p) => readFileSync(new URL(`../../${p}`, import.meta.url), 'utf8');
 
 const navbar = read('src/components/layout/Navbar.tsx');
-const brand = navbar.match(/className="portfolio-nav__brand"[^>]*aria-label="([^"]+)"/);
-assert.ok(brand && brand[1].startsWith('JC'), 'brand link accessible name must contain its visible text (JC.dev)');
+const brand = navbar.match(/className="portfolio-nav__brand"[^>]*aria-label=\{t\.ui\.homeAria\}/);
+const homeAria = read('src/data/translations.ts').match(/homeAria:\s*['"`]JC/g) ?? [];
+assert.ok(brand && homeAria.length === 5, 'brand link accessible name must contain its visible text (JC.dev) in all five languages');
 
-assert.match(read('src/app/cv/page.tsx'), /<main[\s>]/, '/cv needs a <main> landmark');
-assert.match(read('src/app/cv/page.tsx'), /pv3-cv-download/, '/cv download button keeps its contrast class');
+// The /cv body lives in the client component; page.tsx only keeps metadata.
+assert.match(read('src/app/cv/CvContent.tsx'), /<main[\s>]/, '/cv needs a <main> landmark');
+assert.match(read('src/app/cv/CvContent.tsx'), /pv3-cv-download/, '/cv download button keeps its contrast class');
 
 const css = read('src/app/globals.css');
 assert.match(css, /\.pv3-case__cta \{[^}]*color-mix\(in srgb, var\(--pv3-color-accent\) 80%, #000\)/s, 'case CTA background deepened for contrast');
