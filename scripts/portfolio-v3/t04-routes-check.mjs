@@ -17,10 +17,22 @@ const groups = {
   sq: ["squaads"],
 };
 const css = read("src/app/globals.css");
+// JSX lives in <Name>Content.tsx and the copy in data/content/cases/<file>.i18n.ts; page.tsx keeps only the metadata.
+const caseFiles = {
+  "squaads": ["SquaadsContent", "squaads"],
+  "nutriflow": ["NutriflowContent", "nutriflow"],
+  "clinical-ai": ["ClinicalAiContent", "clinical-ai"],
+  "tallercardonal": ["TallerCardonalContent", "tallercardonal"],
+  "jegstudio": ["JegStudioContent", "jegstudio"],
+  "sportbarleague": ["SportBarLeagueContent", "sportbarleague"],
+};
+const contentFile = (r) => `src/app/${r}/${caseFiles[r][0]}.tsx`;
+const copyFile = (r) => `src/data/content/cases/${caseFiles[r][1]}.i18n.ts`;
+const caseSrc = (r) => read(contentFile(r)) + "\n" + read(copyFile(r));
 
 for (const [unit, routes] of Object.entries(groups)) {
   for (const r of routes) {
-    const f = `src/app/${r}/page.tsx`;
+    const f = contentFile(r);
     await check(unit, `${r}: shared case header, back link to its home case, no legacy shell`, () => {
       assert.ok(existsSync(resolve(f)), "page exists");
       const src = read(f);
@@ -37,17 +49,17 @@ await check("u7", "CaseHeader links to /#caso-<id> and external actions are noop
   assert.ok(/\.pv3-detail__title/.test(css) && /\.pv3-detail__lede[^{]*\{[^}]*border-inline-start/.test(css));
 });
 await check("u7", "clinical-ai keeps metadata, the architecture flow and scrolls it inside its box", () => {
-  const src = read("src/app/clinical-ai/page.tsx");
-  assert.ok(/export const metadata/.test(src) && /AgentRouter/.test(src) && /AnalyzeOutput/.test(src));
+  const src = caseSrc("clinical-ai");
+  assert.ok(/export const metadata/.test(read("src/app/clinical-ai/page.tsx")) && /AgentRouter/.test(src) && /AnalyzeOutput/.test(src));
   assert.ok(/pv3-detail__code[^>]*tabIndex/.test(src) && /\.pv3-detail__code\s*\{[^}]*overflow-x:\s*auto/.test(css));
 });
 await check("u8", "removed figures are not re-added", () => {
-  const all = ["nutriflow", "jegstudio", "sportbarleague"].map((r) => read(`src/app/${r}/page.tsx`)).join("\n") + read("src/app/tallercardonal/page.tsx");
+  const all = ["nutriflow", "jegstudio", "sportbarleague"].map(caseSrc).join("\n") + caseSrc("tallercardonal");
   assert.ok(!/40\s*%|reduce el costo|Lighthouse\s*(>|\+)\s*90|90\+/i.test(all));
 });
 await check("sq", "squaads page: metadata, only verified content, CI/CD phrase", () => {
-  const src = read("src/app/squaads/page.tsx");
-  assert.ok(/export const metadata/.test(src) && /SquaadsArchitecture/.test(src));
+  const src = caseSrc("squaads");
+  assert.ok(/export const metadata/.test(read("src/app/squaads/page.tsx")) && /SquaadsArchitecture/.test(src));
   assert.ok(!/tldv/i.test(src.replace(/https:\/\/github\.com\/devs-squaads\/tldv-squaads-dev/, "")), "tldv in visible text");
   assert.ok(!/\d+\s*%/.test(src), "percentage");
   assert.ok(/CI en dev y main; despliegue continuo automático solo desde main/.test(src), "CI/CD phrase");
@@ -74,10 +86,10 @@ if (process.env.CHECK_URL) {
 }
 await check("d1", "every detail route has an at-a-glance panel (kind, role, stack, 2-3 proves)", () => {
   for (const r of ["squaads", "clinical-ai", "nutriflow", "sportbarleague", "jegstudio", "tallercardonal"]) {
-    const src = read(`src/app/${r}/page.tsx`);
-    assert.ok(/summary=\{\{/.test(src) && /kind:/.test(src) && /role:/.test(src) && /stack:/.test(src) && /proves:/.test(src), r + ": summary missing");
-    const block = src.match(/proves:\s*\[([\s\S]*?)\n\s*\]/)[1];
-    const n = block.split("\n").filter((l) => l.trim().startsWith('"')).length;
+    const src = caseSrc(r);
+    assert.ok(/summary=\{h\.summary\}/.test(src) && /kind:/.test(src) && /role:/.test(src) && /stack:/.test(src) && /proves:/.test(src), r + ": summary missing");
+    const block = src.match(/proves:\s*\[([\s\S]*?)\n\s*\]/)[1]; // first match is the es copy
+    const n = block.split("\n").filter((l) => /^["']/.test(l.trim())).length;
     assert.ok(n >= 2 && n <= 3, r + ": proves count " + n);
   }
   assert.ok(/De un vistazo/.test(read("src/components/ui/CaseAtAGlance.tsx")));

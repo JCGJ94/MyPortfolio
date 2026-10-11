@@ -98,3 +98,57 @@ export type ClinicalAiCopy = {
   };
   proves: { title: string; pull: [string, string]; items: LeadItem[] };
 };
+
+export type TallerCardonalCopy = {
+  header: CaseHeaderCopy;
+  imageAlt: string;
+  archTitle: string;
+  archLede: string;
+  stackTitle: string;
+  stack: StackRow[];
+  context: { title: string; pull: string; subTitle: string; items: string[] };
+  process: { title: string; items: LeadItem[] };
+  impact: {
+    title: string;
+    /** Text before, inside (<strong>) and after the highlighted phrase. */
+    pull: [string, string, string];
+    items: string[];
+  };
+};
+
+export type JegStudioCopy = {
+  header: CaseHeaderCopy;
+  imageAlt: string;
+  flowTitle: string;
+  flowLede: string;
+  stackTitle: string;
+  stack: StackRow[];
+  /** Text before, inside (<mark>) and after the highlighted phrase. */
+  context: { title: string; pull: string; text: [string, string, string] };
+  team: {
+    title: string;
+    /** Text around <code>feat/</code>, <code>fix/</code> and <code>main</code>: before feat, between feat and fix, between fix and main, after main. */
+    gitFlow: { lead: string; parts: [string, string, string, string] };
+    decisions: LeadItem;
+    coordination: LeadItem;
+    responsibility: LeadItem;
+  };
+  skills: { title: string; items: string[] };
+};
+
+export type SportBarLeagueCopy = {
+  header: CaseHeaderCopy;
+  imageAlt: string;
+  archTitle: string;
+  archLede: string;
+  stackTitle: string;
+  stack: StackRow[];
+  concept: { title: string; pull: string; allowsTitle: string; allows: string[]; requiresTitle: string; requires: string };
+  decisions: { title: string; items: LeadItem[] };
+  evolution: {
+    title: string;
+    /** Text before, inside (<mark>) and after the highlighted phrase. */
+    pull: [string, string, string];
+    text: string;
+  };
+};
