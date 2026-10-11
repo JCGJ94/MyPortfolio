@@ -4,23 +4,14 @@ import { useEffect, useRef, useState, useSyncExternalStore, type KeyboardEvent }
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { flows } from '@/data/diagrams';
+import { getFlow } from '@/data/content/diagrams.i18n';
+import { getProjectChain, getProjects } from '@/data/content/projects.i18n';
 import { projects, type CaseStep, type Project } from '@/data/projects';
 import { TechLabel } from '@/components/ui/TechIcon';
 import { SectionLabel } from '@/components/ui/SectionLabel';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { SquaadsArchitecture } from '@/components/ui/SquaadsArchitecture';
 import { useLanguage } from '@/context/LanguageContext';
-
-// Real component chain of each project, taken from its stack and highlights in projects.ts.
-const architecture: Record<string, string[]> = {
-  'squaads-meeting-bot': ['Next.js', 'Postgres · cola', 'Worker · Puppeteer + FFmpeg', 'S3 / MinIO', 'IA con fallback'],
-  nutriflow: ['Next.js', 'NestJS', 'Supabase · RLS', 'Gemini'],
-  'clinical-ai': ['Router de triage', 'Agentes en paralelo', 'RAG · pgvector', 'Salida tipada'],
-  tallercardonal: ['React', 'Vite', 'Vercel'],
-  jegstudio: ['React', 'Next.js', 'Git Flow'],
-  sportbarleague: ['React', 'Flask · JWT', 'SQLAlchemy', 'PostgreSQL'],
-};
 
 const steps: CaseStep[] = ['problem', 'solution', 'decisions', 'evidence'];
 
@@ -40,10 +31,10 @@ const pad =(n: number) => String(n + 1).padStart(2, '0');
 
 /** Case stage: product screen first, architecture flow one tab away (both stay in the DOM). */
 function CaseMedia({ project }: { project: Project }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const c = t.projects.case;
   const [tab, setTab] = useState<'product' | 'architecture'>('product');
-  const flow = flows[project.id];
+  const flow = getFlow(project.id, language);
   const tabs = [
     { id: 'product', label: c.tabProduct },
     { id: 'architecture', label: c.tabArchitecture },
@@ -115,9 +106,9 @@ function CaseMedia({ project }: { project: Project }) {
 
 /** One case = one tabpanel. Rendered for every project (SSR/no-JS keep all of them); `hidden` is applied after hydration. */
 function CaseFile({ project, index, hidden }: { project: Project; index: number; hidden: boolean }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const c = project.case;
-  const chain = architecture[project.id] ?? [];
+  const chain = getProjectChain(project.id, language);
 
   return (
     <div
@@ -208,6 +199,8 @@ function CaseFile({ project, index, hidden }: { project: Project; index: number;
 
 export function Projects() {
   const { t, language } = useLanguage();
+  // `projects` carries the ids and order; `localized` the same cases with their text in the selected language.
+  const localized = getProjects(language);
   const [selected, setSelected] = useState(projects[0].id);
   // `ready` flips after hydration: until then (and without JS) every case is visible and indexable.
   const ready = useSyncExternalStore(noopSubscribe, () => true, () => false);
@@ -272,7 +265,6 @@ export function Projects() {
             {t.projects.title} <span>{t.projects.titleSpan}</span>
           </h2>
           <p className="pv3-cases__lede">{t.projects.description}</p>
-          {language !== 'es' && <p className="pv3-cases__note">{t.projects.case.spanishOnly}</p>}
         </header>
 
         <div className="pv3-cases__layout">
@@ -287,7 +279,7 @@ export function Projects() {
               className="pv3-case-index__tabs"
               onKeyDown={onKeyDown}
             >
-              {projects.map((p, i) => (
+              {localized.map((p, i) => (
                 <a
                   key={p.id}
                   id={`tab-${p.id}`}
@@ -311,7 +303,7 @@ export function Projects() {
           </div>
 
           <div ref={listRef} className="pv3-cases__list" data-ready={ready || undefined} data-switched={switched || undefined}>
-            {projects.map((p, i) => (
+            {localized.map((p, i) => (
               <CaseFile key={p.id} project={p} index={i} hidden={ready && selected !== p.id} />
             ))}
           </div>

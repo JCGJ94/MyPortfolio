@@ -70,7 +70,7 @@ await check("pv3-diagrams.css is imported by the layout; old dash rules are gone
 await check("every case has a diagram on its detail page and in the Projects stage; icons come from the resolver", () => {
   assert.ok(/resolveTechIconKey/.test(tsx) && /TechIcon/.test(tsx));
   assert.ok(/FlowDiagram/.test(read("src/components/ui/SquaadsArchitecture.tsx")));
-  assert.ok(/flows\[project\.id\]/.test(read("src/components/sections/Projects.tsx")));
+  assert.ok(/getFlow\(project\.id, language\)/.test(read("src/components/sections/Projects.tsx")));
   for (const [route, key] of [["nutriflow", "nutriflowFlow"], ["clinical-ai", "clinicalFlow"], ["tallercardonal", "tallerFlow"], ["jegstudio", "jegFlow"], ["sportbarleague", "sportbarFlow"]]) {
     const page = read(`src/app/${route}/page.tsx`);
     assert.ok(page.includes("<FlowDiagram") && page.includes(key), route);

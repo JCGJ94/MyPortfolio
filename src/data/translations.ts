@@ -87,7 +87,9 @@ export const translations = {
                 screenshotAlt: 'Pantalla de acceso de Squaads Bot en desarrollo: «Tu asistente inteligente para reuniones», botón «Continuar con Google» y lista de permisos (perfil y email, calendario, auto-join).',
                 diagramAlt: 'Diagrama de arquitectura de Squaads Meeting Bot: calendario y extensión, web, cola en Postgres, worker con navegador y FFmpeg, almacenamiento, transcripción, resumen con IA y panel.',
                 moreDecisions: 'Ver {n} decisiones más',
-                spanishOnly: 'Contenido de los casos disponible solo en español.'
+                spanishOnly: 'Contenido de los casos disponible solo en español.',
+                flowNext: 'Siguiente: {n}.',
+                flowEnd: 'Fin del flujo.'
             }
         },
         stack: {
@@ -317,7 +319,9 @@ export const translations = {
                 screenshotAlt: 'Squaads Bot sign-in screen in development: "Your smart assistant for meetings" (in Spanish), a "Continue with Google" button and a permissions list (profile and email, calendar, auto-join).',
                 diagramAlt: 'Architecture diagram of Squaads Meeting Bot: calendar and extension, web app, Postgres queue, worker with browser and FFmpeg, storage, transcription, AI summary and dashboard.',
                 moreDecisions: "Show {n} more decisions",
-                spanishOnly: 'Case content is available in Spanish only.'
+                spanishOnly: 'Case content is available in Spanish only.',
+                flowNext: 'Next: {n}.',
+                flowEnd: 'End of the flow.'
             }
         },
         stack: {
@@ -537,7 +541,9 @@ export const translations = {
                 screenshotAlt: 'Anmeldebildschirm von Squaads Bot in der Entwicklung (auf Spanisch): „Tu asistente inteligente para reuniones“, Schaltfläche „Continuar con Google“ und Liste der Berechtigungen (Profil und E-Mail, Kalender, Auto-Join).',
                 diagramAlt: 'Architekturdiagramm von Squaads Meeting Bot: Kalender und Erweiterung, Web-App, Postgres-Warteschlange, Worker mit Browser und FFmpeg, Speicher, Transkription, KI-Zusammenfassung und Dashboard.',
                 moreDecisions: "{n} weitere Entscheidungen anzeigen",
-                spanishOnly: 'Die Fallinhalte sind nur auf Spanisch verfügbar.'
+                spanishOnly: 'Die Fallinhalte sind nur auf Spanisch verfügbar.',
+                flowNext: 'Weiter: {n}.',
+                flowEnd: 'Ende des Ablaufs.'
             }
         },
         stack: {
@@ -757,7 +763,9 @@ export const translations = {
                 screenshotAlt: "Écran de connexion de Squaads Bot en développement (en espagnol) : « Tu asistente inteligente para reuniones », bouton « Continuar con Google » et liste des autorisations (profil et e-mail, calendrier, auto-join).",
                 diagramAlt: "Schéma d'architecture de Squaads Meeting Bot : calendrier et extension, application web, file Postgres, worker avec navigateur et FFmpeg, stockage, transcription, résumé IA et tableau de bord.",
                 moreDecisions: "Voir {n} décisions de plus",
-                spanishOnly: "Le contenu des cas n'est disponible qu'en espagnol."
+                spanishOnly: "Le contenu des cas n'est disponible qu'en espagnol.",
+                flowNext: 'Suivant : {n}.',
+                flowEnd: 'Fin du flux.'
             }
         },
         stack: {
@@ -977,7 +985,9 @@ export const translations = {
                 screenshotAlt: "Schermata di accesso di Squaads Bot in sviluppo (in spagnolo): «Tu asistente inteligente para reuniones», pulsante «Continuar con Google» ed elenco dei permessi (profilo ed email, calendario, auto-join).",
                 diagramAlt: "Diagramma dell'architettura di Squaads Meeting Bot: calendario ed estensione, app web, coda Postgres, worker con browser e FFmpeg, archiviazione, trascrizione, riassunto IA e dashboard.",
                 moreDecisions: "Mostra altre {n} decisioni",
-                spanishOnly: 'Il contenuto dei casi è disponibile solo in spagnolo.'
+                spanishOnly: 'Il contenuto dei casi è disponibile solo in spagnolo.',
+                flowNext: 'Successivo: {n}.',
+                flowEnd: 'Fine del flusso.'
             }
         },
         stack: {

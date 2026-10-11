@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { TechIcon } from '@/components/ui/TechIcon';
 import { resolveTechIconKey } from '@/data/techIcons';
+import { useLanguage } from '@/context/LanguageContext';
 import type { FlowDiagramData, FlowLayout } from '@/data/diagrams';
 
 const STEP_MS = 1800; // one node per step; never faster than ~2 s so reduced-motion users get no flashing
@@ -35,6 +36,7 @@ function Edges({ data, layout, kind, hotEdge }: { data: FlowDiagramData; layout:
 
 /** Auto-running, non-interactive flow: nodes are plain elements, the loop pauses off-screen and in hidden tabs. */
 export function FlowDiagram({ data, label, className = '' }: { data: FlowDiagramData; label: string; className?: string }) {
+  const { t } = useLanguage();
   const root = useRef<HTMLDivElement>(null);
   const [auto, setAuto] = useState<number | null>(null); // index in `seq` of the highlighted step; null = rest
 
@@ -120,7 +122,7 @@ export function FlowDiagram({ data, label, className = '' }: { data: FlowDiagram
       <ol className="pv3-flow__sr">
         {data.nodes.filter((n) => n.group !== 'ci').map((n) => {
           const to = data.edges.filter((e) => e.from === n.id).map((e) => data.nodes.find((m) => m.id === e.to)?.title).join(', ');
-          return <li key={n.id}>{n.title}, {n.subtitle}. {n.caption}{to ? ` Siguiente: ${to}.` : ' Fin del flujo.'}</li>;
+          return <li key={n.id}>{n.title}, {n.subtitle}. {n.caption} {to ? t.projects.case.flowNext.replace('{n}', to) : t.projects.case.flowEnd}</li>;
         })}
         {data.nodes.filter((n) => n.group === 'ci').map((n) => <li key={n.id}>{n.title}, {n.subtitle}. {n.caption}</li>)}
       </ol>
