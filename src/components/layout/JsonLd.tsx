@@ -1,12 +1,13 @@
 import React from 'react';
+import { siteUrl } from '@/lib/site';
 
 export function JsonLd() {
     const schema = {
         '@context': 'https://schema.org',
         '@type': 'Person',
-        name: 'Jose Carlos',
+        name: 'Jose Carlos González',
         jobTitle: 'Full Stack Developer',
-        url: 'https://mi-cv.vercel.app',
+        url: siteUrl,
         sameAs: [
             'https://github.com/JCGJ94',
             'https://www.linkedin.com/in/josecgonzález',

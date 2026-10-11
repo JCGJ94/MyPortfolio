@@ -3,6 +3,13 @@ import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { tallerFlow } from '@/data/diagrams';
 import { CaseHeader, CaseLayout, CaseSection } from '@/components/ui/CaseHeader';
 
+export const metadata = {
+  title: 'TallerCardonal.es',
+  description: 'Proyecto real entregado a cliente de extremo a extremo con React, Vite y Vercel: requisitos, desarrollo, deploy y handoff.',
+  alternates: { canonical: '/tallercardonal' },
+  openGraph: { url: '/tallercardonal' },
+};
+
 export default function TallerCardonalPage() {
   return (
     <main className="pv3-section pv3-detail">

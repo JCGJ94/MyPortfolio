@@ -3,6 +3,13 @@ import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { sportbarFlow } from '@/data/diagrams';
 import { CaseHeader, CaseLayout, CaseSection } from '@/components/ui/CaseHeader';
 
+export const metadata = {
+  title: 'SportBarLeague',
+  description: 'Plataforma full-stack de ligas y eventos deportivos en bares con React, Flask, PostgreSQL y autenticación JWT.',
+  alternates: { canonical: '/sportbarleague' },
+  openGraph: { url: '/sportbarleague' },
+};
+
 export default function SportBarLeaguePage() {
   return (
     <main className="pv3-section pv3-detail">

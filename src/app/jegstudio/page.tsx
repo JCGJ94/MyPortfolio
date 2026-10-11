@@ -3,6 +3,13 @@ import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { jegFlow } from '@/data/diagrams';
 import { CaseHeader, CaseLayout, CaseSection } from '@/components/ui/CaseHeader';
 
+export const metadata = {
+  title: 'JEG Studio',
+  description: 'Landing page y MVP desarrollados en equipo con Next.js, Git Flow y code review, participando en decisiones de arquitectura y diseño.',
+  alternates: { canonical: '/jegstudio' },
+  openGraph: { url: '/jegstudio' },
+};
+
 export default function JEGStudioPage() {
   return (
     <main className="pv3-section pv3-detail">

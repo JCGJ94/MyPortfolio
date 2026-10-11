@@ -1,4 +1,5 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+import { siteUrl } from '@/lib/site';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import './pv3-contact-detail.css';
@@ -20,13 +21,16 @@ const inter = Inter({
   preload: false,
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'https://mi-cv.vercel.app');
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
+  ],
+};
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: '/' },
   title: {
     default: 'JC | Full Stack · Backend Python & AI',
     template: 'JC | Full Stack · Backend Python & AI | %s'
@@ -42,12 +46,14 @@ export const metadata: Metadata = {
     title: 'JC | Full Stack · Backend Python & AI',
     description: 'Full Stack con foco en Backend Python e IA aplicada. APIs, servicios backend y productos web con LLMs.',
     siteName: 'Jose Carlos González Portfolio',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Jose Carlos González — Full Stack · Backend Python & AI' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'JC | Full Stack · Backend Python & AI',
     description: 'Full Stack Developer con foco en Backend Python e IA aplicada.',
     creator: '@jcgj94',
+    images: ['/opengraph-image'],
   },
   robots: {
     index: true,
