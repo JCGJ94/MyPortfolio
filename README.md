@@ -1,11 +1,11 @@
 # José Carlos — Portfolio (V3)
 
-Portafolio de ingeniería de software: una landing con seis casos de proyecto, rutas de detalle y currículum. Rediseño V3 en la rama `feat/portfolio-v3`; `main` es producción (Vercel).
+Portafolio de ingeniería de software: una landing con seis casos de proyecto, rutas de detalle y currículum. V3 está publicado en https://www.jccode.dev (`main`, Vercel, Node 24.x).
 
 ## Stack
 
 - Next.js 16.1.6 (App Router, Turbopack), React 19.2.3, TypeScript
-- Tailwind CSS 4, framer-motion 12, next-themes, Inter (`next/font`), Lucide
+- Tailwind CSS 4, framer-motion 12 (`LazyMotion`), next-themes, Inter (`next/font`), Lucide
 - Zod y EmailJS (formulario de contacto, cargados bajo demanda), Resend (`/api/contact`), Supabase (`@supabase/ssr`, autenticación)
 - Despliegue en Vercel
 - Bun como gestor (`bun.lock`); los scripts también funcionan con npm
@@ -29,7 +29,7 @@ Portafolio de ingeniería de software: una landing con seis casos de proyecto, r
 - Cinco idiomas de interfaz: español, inglés, alemán, francés e italiano.
 - `prefers-reduced-motion` respetado (el texto tecleado se mantiene; la entrada es solo opacidad).
 
-Limitaciones conocidas: los textos de los casos, el Stack y los diagramas están solo en español; `<html lang>` es siempre `es`; el rendimiento móvil de la home no alcanza el objetivo (78; ver [`docs/portfolio-v3/rendimiento.md`](./docs/portfolio-v3/rendimiento.md)).
+Rendimiento móvil de la home en producción: 85 (76-86), con accesibilidad, buenas prácticas y SEO en 100 ([`rendimiento.md`](./docs/portfolio-v3/rendimiento.md)). Limitaciones: el primer pintado es siempre en español, sin detección del idioma del navegador ([`i18n.md`](./docs/portfolio-v3/i18n.md)).
 
 ## Desarrollo
 
@@ -48,9 +48,9 @@ Comprobaciones específicas de V3: `node scripts/portfolio-v3/<script>` (lista e
 
 ## Despliegue
 
-Vercel (`vercel.json`: `bun install --frozen-lockfile`, `bun run build`, framework Next.js). `main` = producción. No hay pipelines de CI/CD definidos en el repositorio más allá de esa configuración.
+Vercel, proyecto `my-portfolio` (`vercel.json`: `bun install --frozen-lockfile`, `bun run build`, framework Next.js). `main` = producción; sin pipelines de CI/CD más allá de esa configuración. Dominio, variables de entorno y nota de despliegue en [`operaciones.md`](./docs/portfolio-v3/operaciones.md).
 
 ## Documentación
 
-- [Portfolio V3](./docs/portfolio-v3/README.md): estado, dirección de diseño, scripts, [secciones](./docs/portfolio-v3/secciones.md), [rendimiento](./docs/portfolio-v3/rendimiento.md) e [investigación del Stack 3D](./docs/portfolio-v3/stack-3d-research.md)
+- [Portfolio V3](./docs/portfolio-v3/README.md): estado, dirección de diseño, scripts, [secciones](./docs/portfolio-v3/secciones.md), [rendimiento](./docs/portfolio-v3/rendimiento.md), [i18n](./docs/portfolio-v3/i18n.md), [SEO, seguridad y accesibilidad](./docs/portfolio-v3/seo-y-seguridad.md), [operaciones](./docs/portfolio-v3/operaciones.md) e [investigación del Stack 3D](./docs/portfolio-v3/stack-3d-research.md)
 - [Arquitectura](./docs/architecture.md), [guía de desarrollo](./docs/development-guide.md) y [visión y estrategia](./docs/vision-and-strategy.md)

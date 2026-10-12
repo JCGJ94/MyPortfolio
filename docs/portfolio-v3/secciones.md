@@ -9,7 +9,7 @@ Cada entrada resume el estado final de la sección, la razón del diseño y los 
 - **Movimiento**: solo `transform`, `opacity` y `stroke`. `ScrollReveal` (IntersectionObserver, una vez) añade `.is-in`; el estado oculto exige `html.js-reveal` y `prefers-reduced-motion: no-preference`, de modo que sin JS o con movimiento reducido el contenido siempre es visible. `MotionProvider` aplica `reducedMotion="user"` a Framer Motion. Sin scroll hijacking ni cursor propio.
 - **Tema**: `<html className="dark">` en SSR (oscuro por defecto, sin destello); next-themes lo sustituye si el usuario eligió claro.
 - **Contenido**: solo hechos del repositorio o aportados por el autor; sin cifras sin fuente en la home; etiquetas ≥ 13 px; sin desbordamiento horizontal entre 360 y 1440 px en ambos temas.
-- **Idioma**: la interfaz está en es/en/de/fr/it; los textos de los casos, el Stack y los diagramas son solo español (limitación declarada).
+- **Idioma**: interfaz, casos, Stack y diagramas están en es/en/de/fr/it (ver [`i18n.md`](i18n.md)).
 
 ## Hero
 

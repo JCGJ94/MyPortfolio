@@ -31,8 +31,10 @@
 
 ## 4. Idioma / Language
 
-- **[ES]** Cinco idiomas (es/en/de/fr/it) en `src/data/translations.ts`. La preferencia se guarda en `localStorage` y se valida contra una lista blanca; el SSR siempre renderiza español. Limitaciones: los textos de los casos, el Stack y los diagramas están solo en español, y `<html lang>` es siempre `es`.
-- **[EN]** Five languages (es/en/de/fr/it) in `src/data/translations.ts`. The preference is stored in `localStorage` and validated against an allow-list; SSR always renders Spanish. Limitations: case texts, Stack and diagrams are Spanish-only, and `<html lang>` is always `es`.
+- **[ES]** Cinco idiomas (es/en/de/fr/it): cadenas en `src/data/translations.ts` y textos largos en `src/data/content/**/*.i18n.ts`. La preferencia vive en `localStorage` (clave `language`), sin detección del navegador; el primer pintado es siempre español y `<html lang>` sigue al idioma. Metadatos y JSON-LD quedan en español. Detalle en [`portfolio-v3/i18n.md`](./portfolio-v3/i18n.md).
+- **[EN]** Five languages (es/en/de/fr/it): UI strings in `src/data/translations.ts`, long copy in `src/data/content/**/*.i18n.ts`. The preference lives in `localStorage` (key `language`), with no browser detection; first paint is always Spanish and `<html lang>` follows the language. Metadata and JSON-LD stay Spanish. Details in [`portfolio-v3/i18n.md`](./portfolio-v3/i18n.md).
+- **[ES]** Movimiento: `framer-motion` con `LazyMotion` estricto (`m.*`, nunca `motion.*`); las funciones cargan en un chunk asíncrono (`src/components/layout/motionFeatures.ts`). Cifras en [`portfolio-v3/rendimiento.md`](./portfolio-v3/rendimiento.md).
+- **[EN]** Motion: `framer-motion` with strict `LazyMotion` (`m.*`, never `motion.*`); features load in an async chunk (`src/components/layout/motionFeatures.ts`). Figures in [`portfolio-v3/rendimiento.md`](./portfolio-v3/rendimiento.md).
 
 ## 5. Contacto, autenticación y datos / Contact, auth and data
 
@@ -43,5 +45,5 @@
 
 ## 6. Despliegue / Deployment
 
-- **[ES]** Vercel (`vercel.json`). `main` es producción. No hay pipelines de CI/CD en el repositorio más allá de esa configuración.
-- **[EN]** Vercel (`vercel.json`). `main` is production. There are no CI/CD pipelines in the repository beyond that configuration.
+- **[ES]** Vercel (`vercel.json`), https://www.jccode.dev; `main` es producción. Sin pipelines de CI/CD más allá de esa configuración. Cabeceras de seguridad en `next.config.mjs` y SEO en `src/lib/seo.ts` / `src/lib/site.ts`: ver [`portfolio-v3/seo-y-seguridad.md`](./portfolio-v3/seo-y-seguridad.md).
+- **[EN]** Vercel (`vercel.json`), https://www.jccode.dev; `main` is production. No CI/CD pipelines beyond that configuration. Security headers live in `next.config.mjs` and SEO in `src/lib/seo.ts` / `src/lib/site.ts`: see [`portfolio-v3/seo-y-seguridad.md`](./portfolio-v3/seo-y-seguridad.md).

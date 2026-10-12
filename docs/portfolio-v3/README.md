@@ -1,10 +1,10 @@
 # Portfolio V3 — documentación
 
-Rediseño del portafolio en la rama `feat/portfolio-v3`. `main` es producción (Vercel); la integración en `main` la decide el propietario.
+Rediseño del portafolio, publicado en https://www.jccode.dev (`main`, Vercel).
 
 ## Estado
 
-El rediseño está implementado: hero, Proyectos, Sobre mí, Stack, Contacto, pie, rutas de detalle y `/cv`. Queda abierto el rendimiento móvil de la home: el rendimiento (78) y el LCP simulado (5,3 s) no cumplen los objetivos (≥ 90 y ≤ 2,5 s). Detalle y palancas conocidas en [`rendimiento.md`](rendimiento.md).
+V3 está en producción: hero, Proyectos, Sobre mí, Stack, Contacto, pie, rutas de detalle y `/cv`, en cinco idiomas. Rendimiento móvil de la home 85 (76-86); accesibilidad, buenas prácticas y SEO en 100. El propietario lo dio por bueno; cifras y palancas en [`rendimiento.md`](rendimiento.md).
 
 ## Documentos
 
@@ -12,6 +12,9 @@ El rediseño está implementado: hero, Proyectos, Sobre mí, Stack, Contacto, pi
 | --- | --- |
 | [`secciones.md`](secciones.md) | Por sección: qué es, por qué y qué debe seguir cumpliéndose |
 | [`rendimiento.md`](rendimiento.md) | Mediciones con fecha y condiciones, decisiones de rendimiento y objetivos no cumplidos |
+| [`i18n.md`](i18n.md) | Arquitectura de idiomas y reglas de las traducciones |
+| [`seo-y-seguridad.md`](seo-y-seguridad.md) | SEO, cabeceras de seguridad y accesibilidad |
+| [`operaciones.md`](operaciones.md) | Producción, variables de entorno, despliegue y notas de las comprobaciones |
 | [`stack-3d-research.md`](stack-3d-research.md) | Investigación y decisión del Stack en 3D |
 
 ## Dirección de diseño
@@ -35,11 +38,10 @@ El rediseño está implementado: hero, Proyectos, Sobre mí, Stack, Contacto, pi
 
 ## Limitaciones conocidas
 
-- Los textos de los casos, el Stack y los diagramas están solo en español; la interfaz tiene cinco idiomas (es/en/de/fr/it, `src/data/translations.ts`).
-- `<html lang>` es siempre `es`; no sigue al idioma elegido.
+- Cinco idiomas (es/en/de/fr/it) sin detección del navegador: el primer pintado es siempre español. Metadatos y JSON-LD solo en español. Traducciones sin revisión nativa. Ver [`i18n.md`](i18n.md).
 - La inicialización de EmailJS accede a `localStorage` al evaluar el módulo; si el almacenamiento está bloqueado en toda la página, aparece un error de página (el store de idioma sí tolera el bloqueo).
 - Algunas rutas de detalle conservan cifras declaradas por el autor sin fuente verificable en el repositorio (NutriFlow, Taller El Cardonal); no se usan en la home.
-- Rendimiento móvil de la home por debajo del objetivo (ver `rendimiento.md`).
+- Rendimiento móvil con alta varianza entre ejecuciones (ver [`rendimiento.md`](rendimiento.md)).
 
 ## Scripts de comprobación
 

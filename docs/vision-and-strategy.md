@@ -20,9 +20,9 @@
 2. **[ES]** Una sola firma visual (la traza) y movimiento con propósito, limitado a `transform`/`opacity` y respetuoso con `prefers-reduced-motion`. **[EN]** One visual signature (the trace) and purposeful motion, limited to `transform`/`opacity` and respectful of `prefers-reduced-motion`.
 3. **[ES]** Contenido visible sin JavaScript (SSR) y navegación por teclado. **[EN]** Content visible without JavaScript (SSR) and keyboard navigation.
 4. **[ES]** Sin dependencias pesadas para efectos (el 3D es CSS). **[EN]** No heavy dependencies for effects (3D is CSS).
-5. **[ES]** Limitaciones declaradas en lugar de ocultas (idioma de los casos, `html lang`, rendimiento móvil de la home). **[EN]** Limitations stated rather than hidden (case language, `html lang`, home mobile performance).
+5. **[ES]** Limitaciones declaradas en lugar de ocultas (primer pintado en español, rendimiento móvil de la home). **[EN]** Limitations stated rather than hidden (Spanish first paint, home mobile performance).
 
-## 4. Próximos pasos / Next steps
+## 4. Estado y próximos pasos / Status and next steps
 
-- **[ES]** Mejorar el rendimiento móvil de la home (ver [`portfolio-v3/rendimiento.md`](./portfolio-v3/rendimiento.md)); traducir los casos; sincronizar `<html lang>` con el idioma; completar el sitemap.
-- **[EN]** Improve home mobile performance; translate the cases; sync `<html lang>` with the language; complete the sitemap.
+- **[ES]** V3 está en producción (https://www.jccode.dev) con cinco idiomas, SEO y cabeceras de seguridad. El rendimiento móvil se dio por bueno ([`portfolio-v3/rendimiento.md`](./portfolio-v3/rendimiento.md)). Opcionales, sin comprometer: URLs por idioma con `hreflang` ([`portfolio-v3/seo-y-seguridad.md`](./portfolio-v3/seo-y-seguridad.md)) y recortar la capa 3D del hero en móvil.
+- **[EN]** V3 is in production (https://www.jccode.dev) with five languages, SEO and security headers. Mobile performance was judged good. Optional, uncommitted: per-language URLs with `hreflang` and trimming the hero 3D layer on mobile.
