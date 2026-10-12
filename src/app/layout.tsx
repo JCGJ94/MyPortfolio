@@ -30,7 +30,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   alternates: { canonical: '/' },
-  icons: { apple: '/apple-icon.png' },
+  // Declaring `icons` replaces the file-convention <link rel="icon">, so both are listed here.
+  icons: {
+    icon: [{ url: '/icon.png', type: 'image/png', sizes: '128x128' }],
+    apple: '/apple-icon.png',
+  },
   title: {
     default: 'JC | Full Stack · Backend Python & AI',
     template: 'JC | Full Stack · Backend Python & AI | %s'
