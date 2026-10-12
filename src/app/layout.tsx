@@ -7,7 +7,6 @@ import './pv3-icons.css';
 import './pv3-diagrams.css';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { Navbar } from '@/components/layout/Navbar';
-import { JsonLd } from '@/components/layout/JsonLd';
 import { Footer } from '@/components/layout/Footer';
 import { MotionProvider } from '@/components/layout/MotionProvider';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
@@ -31,11 +30,12 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   alternates: { canonical: '/' },
+  icons: { apple: '/apple-icon.png' },
   title: {
     default: 'JC | Full Stack · Backend Python & AI',
     template: 'JC | Full Stack · Backend Python & AI | %s'
   },
-  description: 'Desarrollador Full Stack con foco en Backend Python e IA aplicada. Construyo APIs, servicios backend y productos web con Next.js que integran LLMs y automatización.',
+  description: 'Desarrollador Full Stack con foco en Backend Python e IA aplicada. Construyo APIs, servicios backend y productos web con Next.js que integran LLMs.',
   keywords: ['Full Stack Developer', 'Backend Python Developer', 'Python', 'FastAPI', 'Next.js', 'React', 'TypeScript', 'LLM', 'AI Developer', 'Jose Carlos González'],
   authors: [{ name: 'Jose Carlos González' }],
   creator: 'Jose Carlos González',
@@ -55,10 +55,7 @@ export const metadata: Metadata = {
     creator: '@jcgj94',
     images: ['/opengraph-image'],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  // No root robots: indexable is the default, and a root value leaks next to the 404's own noindex.
 };
 
 export default function RootLayout({
@@ -73,7 +70,6 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
             <MotionProvider>
             <ScrollReveal />
-            <JsonLd />
             <Navbar />
             <div className="flex-grow">
               {children}

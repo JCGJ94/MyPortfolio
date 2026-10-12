@@ -1,11 +1,11 @@
+import { pageMetadata } from '@/lib/seo';
 import { SquaadsContent } from './SquaadsContent';
 
-export const metadata = {
+export const metadata = pageMetadata({
+  path: '/squaads',
   title: 'Squaads Meeting Bot',
-  description: 'Plataforma interna y autoalojada de inteligencia de reuniones: un bot entra a Google Meet y Microsoft Teams, graba, transcribe y resume. Monorepo Bun, cola de trabajos en Postgres, CI/CD con GitHub Actions, Vercel y Railway.',
-  alternates: { canonical: '/squaads' },
-  openGraph: { url: '/squaads', images: ['/opengraph-image'] },
-};
+  description: 'Plataforma autoalojada de inteligencia de reuniones: un bot entra a Google Meet y Teams, graba, transcribe y resume. Monorepo Bun, Postgres y CI/CD.',
+});
 
 export default function SquaadsPage() {
   return <SquaadsContent />;
