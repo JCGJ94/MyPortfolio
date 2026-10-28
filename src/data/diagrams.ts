@@ -136,10 +136,10 @@ export const jegFlow = chainFlow('jegstudio', 'Flujo de trabajo en equipo de JEG
 // Branching cases are laid out by hand: one root on the left (wide) or top (tall), children to the right / below.
 export const nutriflowFlow: FlowDiagramData = {
   id: 'nutriflow',
-  label: 'Arquitectura de NutriFlow: frontend Next.js, API NestJS, base de datos Supabase con Row Level Security y Gemini para los planes.',
+  label: 'Arquitectura de NutriFlow: app Next.js con Route Handlers como API, base de datos Supabase con Row Level Security y Gemini para los planes.',
   nodes: [
-    { id: 'web', title: 'Next.js 16', subtitle: 'Frontend', icon: 'Next.js', caption: 'Frontend en Next.js 16, separado de la API.' },
-    { id: 'api', title: 'NestJS 11', subtitle: 'API en Railway', icon: 'NestJS', caption: 'API modular en NestJS 11 desplegada en Railway.' },
+    { id: 'web', title: 'Next.js 16', subtitle: 'Frontend', icon: 'Next.js', caption: 'Frontend en Next.js 16 (App Router), en la misma app que la API.' },
+    { id: 'api', title: 'Route Handlers', subtitle: 'API en Next.js', icon: 'Next.js', caption: 'API modular en Route Handlers de Next.js, desplegada en Vercel junto al frontend.' },
     { id: 'db', title: 'Supabase', subtitle: 'PostgreSQL · RLS', icon: 'Supabase', caption: 'Base de datos con Row Level Security: la autenticación por roles vive en la propia base.' },
     { id: 'ai', title: 'Gemini 2.0', subtitle: 'Planes por macros', icon: 'Gemini', caption: 'Gemini 2.0 Flash genera los planes de alimentación basados en macros.' },
   ],

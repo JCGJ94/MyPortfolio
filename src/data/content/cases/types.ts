@@ -65,7 +65,7 @@ export type NutriflowCopy = {
     pull: [string, string, string];
     /** Text before and after <strong>Next.js 16</strong>. */
     frontend: { lead: string; before: string; after: string };
-    /** Text after <strong>NestJS 11</strong>. */
+    /** Text after <strong>Next.js Route Handlers</strong>. */
     backend: { lead: string; after: string };
     /** Text before and after <strong>RLS (Row Level Security)</strong>. */
     auth: [string, string];

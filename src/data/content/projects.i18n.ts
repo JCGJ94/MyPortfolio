@@ -18,7 +18,7 @@ export type ProjectText = {
 
 const esChain: Record<ProjectId, string[]> = {
   'squaads-meeting-bot': ['Next.js', 'Postgres · cola', 'Worker · Puppeteer + FFmpeg', 'S3 / MinIO', 'IA con fallback'],
-  nutriflow: ['Next.js', 'NestJS', 'Supabase · RLS', 'Gemini'],
+  nutriflow: ['Next.js', 'Route Handlers', 'Supabase · RLS', 'Gemini'],
   'clinical-ai': ['Router de triage', 'Agentes en paralelo', 'RAG · pgvector', 'Salida tipada'],
   tallercardonal: ['React', 'Vite', 'Vercel'],
   jegstudio: ['React', 'Next.js', 'Git Flow'],
@@ -70,20 +70,20 @@ const en: Record<ProjectId, ProjectText> = {
   nutriflow: {
     title: 'NutriFlow',
     subtitle: 'Intelligent Nutrition and Training Platform',
-    description: 'Advanced SaaS system designed to create 100% personalized meal plans and workout routines. It integrates an AI engine to optimize the user\'s health based on biometric data and specific goals, on a robust NestJS and Next.js architecture.',
+    description: 'Advanced SaaS system designed to create 100% personalized meal plans and workout routines. It integrates an AI engine to optimize the user\'s health based on biometric data and specific goals, on a full-stack Next.js architecture.',
     badge: 'Personal Project',
     highlights: [
-      'Separate Next.js frontend and NestJS API',
+      'Full-stack Next.js app with the API in Route Handlers',
       'Advanced security with Row Level Security',
       'Plan generation with deterministic AI logic',
     ],
     case: {
       problem: 'Meal and exercise plans built by hand by independent nutritionists.',
-      solution: 'SaaS built with Next.js 16, NestJS 11, Supabase and Gemini 2.0 Flash.',
+      solution: 'Full-stack SaaS built with Next.js 16, Supabase and Gemini 2.0 Flash.',
       decisions: ['Row Level Security in the database', 'Plan generation with deterministic AI logic'],
       evidence: ['Public demo and repository', 'Declared Beta status'],
     },
-    chain: ['Next.js', 'NestJS', 'Supabase · RLS', 'Gemini'],
+    chain: ['Next.js', 'Route Handlers', 'Supabase · RLS', 'Gemini'],
   },
   'clinical-ai': {
     title: 'Clinical AI Multi-Agent',
@@ -193,20 +193,20 @@ const de: Record<ProjectId, ProjectText> = {
   nutriflow: {
     title: 'NutriFlow',
     subtitle: 'Intelligente Plattform für Ernährung und Training',
-    description: 'Fortschrittliches SaaS-System zur Erstellung von zu 100 % personalisierten Ernährungsplänen und Trainingsroutinen. Es integriert eine KI-Engine, die die Gesundheit der Nutzer auf Basis biometrischer Daten und konkreter Ziele optimiert, auf einer robusten Architektur mit NestJS und Next.js.',
+    description: 'Fortschrittliches SaaS-System zur Erstellung von zu 100 % personalisierten Ernährungsplänen und Trainingsroutinen. Es integriert eine KI-Engine, die die Gesundheit der Nutzer auf Basis biometrischer Daten und konkreter Ziele optimiert, auf einer Full-Stack-Architektur mit Next.js.',
     badge: 'Persönliches Projekt',
     highlights: [
-      'Getrennte Next.js-Frontend- und NestJS-API',
+      'Full-Stack-Next.js-App mit der API in Route Handlers',
       'Erweiterte Sicherheit mit Row Level Security',
       'Plangenerierung mit deterministischer KI-Logik',
     ],
     case: {
       problem: 'Ernährungs- und Trainingspläne, die unabhängige Ernährungsberater von Hand erstellen.',
-      solution: 'SaaS mit Next.js 16, NestJS 11, Supabase und Gemini 2.0 Flash.',
+      solution: 'Full-Stack-SaaS mit Next.js 16, Supabase und Gemini 2.0 Flash.',
       decisions: ['Row Level Security in der Datenbank', 'Plangenerierung mit deterministischer KI-Logik'],
       evidence: ['Öffentliche Demo und Repository', 'Beta-Status ausdrücklich angegeben'],
     },
-    chain: ['Next.js', 'NestJS', 'Supabase · RLS', 'Gemini'],
+    chain: ['Next.js', 'Route Handlers', 'Supabase · RLS', 'Gemini'],
   },
   'clinical-ai': {
     title: 'Clinical AI Multi-Agent',
@@ -316,20 +316,20 @@ const fr: Record<ProjectId, ProjectText> = {
   nutriflow: {
     title: 'NutriFlow',
     subtitle: "Plateforme intelligente de nutrition et d'entraînement",
-    description: "Système SaaS avancé conçu pour créer des plans nutritionnels et des routines d'exercice 100 % personnalisés. Il intègre un moteur d'IA qui optimise la santé de l'utilisateur à partir de données biométriques et d'objectifs précis, sur une architecture robuste en NestJS et Next.js.",
+    description: "Système SaaS avancé conçu pour créer des plans nutritionnels et des routines d'exercice 100 % personnalisés. Il intègre un moteur d'IA qui optimise la santé de l'utilisateur à partir de données biométriques et d'objectifs précis, sur une architecture full-stack en Next.js.",
     badge: 'Projet personnel',
     highlights: [
-      'Frontend Next.js et API NestJS séparés',
+      "Application Next.js full-stack avec l'API dans des Route Handlers",
       'Sécurité avancée avec Row Level Security',
       "Génération de plans avec une logique d'IA déterministe",
     ],
     case: {
       problem: "Plans nutritionnels et d'exercice créés à la main par des nutritionnistes indépendants.",
-      solution: 'SaaS avec Next.js 16, NestJS 11, Supabase et Gemini 2.0 Flash.',
+      solution: 'SaaS full-stack avec Next.js 16, Supabase et Gemini 2.0 Flash.',
       decisions: ['Row Level Security dans la base de données', "Génération de plans avec une logique d'IA déterministe"],
       evidence: ['Démo publique et dépôt', 'Statut Bêta déclaré'],
     },
-    chain: ['Next.js', 'NestJS', 'Supabase · RLS', 'Gemini'],
+    chain: ['Next.js', 'Route Handlers', 'Supabase · RLS', 'Gemini'],
   },
   'clinical-ai': {
     title: 'Clinical AI Multi-Agent',
@@ -439,20 +439,20 @@ const it: Record<ProjectId, ProjectText> = {
   nutriflow: {
     title: 'NutriFlow',
     subtitle: 'Piattaforma intelligente per nutrizione e allenamento',
-    description: "Sistema SaaS avanzato progettato per creare piani nutrizionali e routine di allenamento personalizzati al 100%. Integra un motore di IA per ottimizzare la salute dell'utente a partire da dati biometrici e obiettivi specifici, con un'architettura robusta in NestJS e Next.js.",
+    description: "Sistema SaaS avanzato progettato per creare piani nutrizionali e routine di allenamento personalizzati al 100%. Integra un motore di IA per ottimizzare la salute dell'utente a partire da dati biometrici e obiettivi specifici, con un'architettura full-stack in Next.js.",
     badge: 'Progetto personale',
     highlights: [
-      'Frontend Next.js e API NestJS separati',
+      "App Next.js full-stack con l'API nei Route Handlers",
       'Sicurezza avanzata con Row Level Security',
       'Generazione dei piani con logica di IA deterministica',
     ],
     case: {
       problem: 'Piani nutrizionali e di allenamento creati a mano da nutrizionisti indipendenti.',
-      solution: 'SaaS con Next.js 16, NestJS 11, Supabase e Gemini 2.0 Flash.',
+      solution: 'SaaS full-stack con Next.js 16, Supabase e Gemini 2.0 Flash.',
       decisions: ['Row Level Security nel database', 'Generazione dei piani con logica di IA deterministica'],
       evidence: ['Demo pubblica e repository', 'Stato Beta dichiarato'],
     },
-    chain: ['Next.js', 'NestJS', 'Supabase · RLS', 'Gemini'],
+    chain: ['Next.js', 'Route Handlers', 'Supabase · RLS', 'Gemini'],
   },
   'clinical-ai': {
     title: 'Clinical AI Multi-Agent',

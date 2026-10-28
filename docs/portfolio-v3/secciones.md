@@ -38,7 +38,7 @@ Invariantes:
 
 ## Diagramas de arquitectura
 
-`FlowDiagram` (`src/components/ui/FlowDiagram.tsx`, `src/data/diagrams.ts`, `src/app/pv3-diagrams.css`): nodos de cristal con iconos de marca y flechas con puntos en movimiento; bucle automático (1,8 s por paso, 2,4 s de pausa). Hay uno por caso, en la pestaña Arquitectura y en la ruta de detalle. Son no interactivos por decisión del propietario; para mitigar WCAG 2.2.2 se pausan fuera de pantalla y con la pestaña oculta, y con movimiento reducido quedan flechas estáticas y resaltado de color. Una lista oculta describe el flujo a lectores de pantalla. Algunas conexiones (NestJS→Gemini en NutriFlow, el abanico de Taller El Cardonal) son lectura de la lista de stack, no hechos explícitos.
+`FlowDiagram` (`src/components/ui/FlowDiagram.tsx`, `src/data/diagrams.ts`, `src/app/pv3-diagrams.css`): nodos de cristal con iconos de marca y flechas con puntos en movimiento; bucle automático (1,8 s por paso, 2,4 s de pausa). Hay uno por caso, en la pestaña Arquitectura y en la ruta de detalle. Son no interactivos por decisión del propietario; para mitigar WCAG 2.2.2 se pausan fuera de pantalla y con la pestaña oculta, y con movimiento reducido quedan flechas estáticas y resaltado de color. Una lista oculta describe el flujo a lectores de pantalla. Algunas conexiones (Route Handlers→Gemini en NutriFlow, el abanico de Taller El Cardonal) son lectura de la lista de stack, no hechos explícitos.
 
 ## Sobre mí
 

@@ -98,7 +98,7 @@ check("es/en/de/fr/it have identical key sets", () => {
 
 check("project tags cover documented stack (Gemini, Railway, Vercel, TypeScript)", () => {
   const tags = (id) => projects.find((p) => p.id === id).tags;
-  for (const t of ["Gemini", "Railway"]) assert.ok(tags("nutriflow").includes(t), `nutriflow ${t}`);
+  for (const t of ["Gemini", "Vercel"]) assert.ok(tags("nutriflow").includes(t), `nutriflow ${t}`);
   for (const t of ["TypeScript", "Vercel", "Railway", "Gemini"]) assert.ok(tags("squaads-meeting-bot").includes(t), `squaads ${t}`);
 });
 
