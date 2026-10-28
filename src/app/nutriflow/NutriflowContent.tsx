@@ -59,7 +59,7 @@ export function NutriflowContent() {
             <p className="pv3-detail__pull">{s.pull[0]}<strong>Gemini 2.0 Flash</strong>{s.pull[1]}<strong>Supabase</strong>{s.pull[2]}</p>
             <ul className="pv3-detail__cards">
               <li><strong>{s.frontend.lead}</strong> {s.frontend.before}<strong>Next.js 16</strong>{s.frontend.after}</li>
-              <li><strong>{s.backend.lead}</strong> <strong>NestJS 11</strong>{s.backend.after}</li>
+              <li><strong>{s.backend.lead}</strong> <strong>Next.js Route Handlers</strong>{s.backend.after}</li>
               <li>{s.auth[0]}<strong>RLS (Row Level Security)</strong>{s.auth[1]}</li>
               <li>{s.generator}</li>
             </ul>

@@ -39,10 +39,10 @@ const en: DiagramText = {
     },
   },
   nutriflow: {
-    label: 'NutriFlow architecture: Next.js frontend, NestJS API, Supabase database with Row Level Security and Gemini for the plans.',
+    label: 'NutriFlow architecture: Next.js app with Route Handlers as the API, Supabase database with Row Level Security and Gemini for the plans.',
     nodes: {
-      web: { title: 'Next.js 16', subtitle: 'Frontend', caption: 'Frontend in Next.js 16, separate from the API.' },
-      api: { title: 'NestJS 11', subtitle: 'API on Railway', caption: 'Modular API in NestJS 11 deployed on Railway.' },
+      web: { title: 'Next.js 16', subtitle: 'Frontend', caption: 'Frontend in Next.js 16 (App Router), in the same app as the API.' },
+      api: { title: 'Route Handlers', subtitle: 'API in Next.js', caption: 'Modular API in Next.js Route Handlers, deployed on Vercel alongside the frontend.' },
       db: { title: 'Supabase', subtitle: 'PostgreSQL · RLS', caption: 'Database with Row Level Security: role-based authentication lives in the database itself.' },
       ai: { title: 'Gemini 2.0', subtitle: 'Macro-based plans', caption: 'Gemini 2.0 Flash generates the meal plans based on macros.' },
     },
@@ -100,10 +100,10 @@ const de: DiagramText = {
     },
   },
   nutriflow: {
-    label: 'NutriFlow-Architektur: Next.js-Frontend, NestJS-API, Supabase-Datenbank mit Row Level Security und Gemini für die Pläne.',
+    label: 'NutriFlow-Architektur: Next.js-App mit Route Handlers als API, Supabase-Datenbank mit Row Level Security und Gemini für die Pläne.',
     nodes: {
-      web: { title: 'Next.js 16', subtitle: 'Frontend', caption: 'Frontend in Next.js 16, getrennt von der API.' },
-      api: { title: 'NestJS 11', subtitle: 'API auf Railway', caption: 'Modulare API in NestJS 11, auf Railway deployt.' },
+      web: { title: 'Next.js 16', subtitle: 'Frontend', caption: 'Frontend in Next.js 16 (App Router), in derselben App wie die API.' },
+      api: { title: 'Route Handlers', subtitle: 'API in Next.js', caption: 'Modulare API in Next.js Route Handlers, zusammen mit dem Frontend auf Vercel deployt.' },
       db: { title: 'Supabase', subtitle: 'PostgreSQL · RLS', caption: 'Datenbank mit Row Level Security: Die rollenbasierte Authentifizierung liegt in der Datenbank selbst.' },
       ai: { title: 'Gemini 2.0', subtitle: 'Pläne nach Makros', caption: 'Gemini 2.0 Flash erstellt die Ernährungspläne auf Basis von Makros.' },
     },
@@ -161,10 +161,10 @@ const fr: DiagramText = {
     },
   },
   nutriflow: {
-    label: "Architecture de NutriFlow : frontend Next.js, API NestJS, base de données Supabase avec Row Level Security et Gemini pour les plans.",
+    label: "Architecture de NutriFlow : application Next.js avec des Route Handlers comme API, base de données Supabase avec Row Level Security et Gemini pour les plans.",
     nodes: {
-      web: { title: 'Next.js 16', subtitle: 'Frontend', caption: "Frontend en Next.js 16, séparé de l'API." },
-      api: { title: 'NestJS 11', subtitle: 'API sur Railway', caption: 'API modulaire en NestJS 11 déployée sur Railway.' },
+      web: { title: 'Next.js 16', subtitle: 'Frontend', caption: "Frontend en Next.js 16 (App Router), dans la même application que l'API." },
+      api: { title: 'Route Handlers', subtitle: 'API dans Next.js', caption: 'API modulaire en Route Handlers Next.js, déployée sur Vercel avec le frontend.' },
       db: { title: 'Supabase', subtitle: 'PostgreSQL · RLS', caption: "Base de données avec Row Level Security : l'authentification par rôles réside dans la base elle-même." },
       ai: { title: 'Gemini 2.0', subtitle: 'Plans par macros', caption: 'Gemini 2.0 Flash génère les plans alimentaires à partir des macros.' },
     },
@@ -222,10 +222,10 @@ const it: DiagramText = {
     },
   },
   nutriflow: {
-    label: "Architettura di NutriFlow: frontend Next.js, API NestJS, database Supabase con Row Level Security e Gemini per i piani.",
+    label: "Architettura di NutriFlow: app Next.js con Route Handlers come API, database Supabase con Row Level Security e Gemini per i piani.",
     nodes: {
-      web: { title: 'Next.js 16', subtitle: 'Frontend', caption: "Frontend in Next.js 16, separato dall'API." },
-      api: { title: 'NestJS 11', subtitle: 'API su Railway', caption: 'API modulare in NestJS 11 distribuita su Railway.' },
+      web: { title: 'Next.js 16', subtitle: 'Frontend', caption: "Frontend in Next.js 16 (App Router), nella stessa app dell'API." },
+      api: { title: 'Route Handlers', subtitle: 'API in Next.js', caption: 'API modulare nei Route Handlers di Next.js, distribuita su Vercel insieme al frontend.' },
       db: { title: 'Supabase', subtitle: 'PostgreSQL · RLS', caption: "Database con Row Level Security: l'autenticazione basata sui ruoli risiede nel database stesso." },
       ai: { title: 'Gemini 2.0', subtitle: 'Piani per macro', caption: 'Gemini 2.0 Flash genera i piani alimentari basati sui macro.' },
     },

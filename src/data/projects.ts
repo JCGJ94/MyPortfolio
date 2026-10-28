@@ -74,14 +74,14 @@ export const projects: Project[] = [
         id: 'nutriflow',
         title: 'NutriFlow',
         subtitle: 'Plataforma Inteligente de Nutrición y Entrenamiento',
-        description: 'SISTEMA SaaS avanzado diseñado para la creación de planes nutricionales y rutinas de ejercicio 100% personalizados. Integra un motor de IA para optimizar la salud del usuario, basándose en datos biométricos y objetivos específicos con una arquitectura robusta en NestJS y Next.js.',
+        description: 'SISTEMA SaaS avanzado diseñado para la creación de planes nutricionales y rutinas de ejercicio 100% personalizados. Integra un motor de IA para optimizar la salud del usuario, basándose en datos biométricos y objetivos específicos sobre una arquitectura full-stack en Next.js.',
         image: '/projects/nutriflow.png',
-        tags: ['Next.js', 'NestJS', 'TypeScript', 'Supabase', 'PostgreSQL', 'Gemini', 'Railway', 'IA', 'Testing'],
+        tags: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Gemini', 'Vercel', 'IA', 'Testing'],
         badge: 'Proyecto Personal',
         badgeEmoji: '🚀',
         tier: 'flagship',
         highlights: [
-            'Frontend Next.js y API NestJS separados',
+            'App full-stack en Next.js con la API en Route Handlers',
             'Seguridad avanzada con Row Level Security',
             'Generación de planes con lógica de IA determinista'
         ],
@@ -89,7 +89,7 @@ export const projects: Project[] = [
         repoUrl: 'https://github.com/JCGJ94/NutriFlow-Project',
         case: {
             problem: 'Planes nutricionales y de ejercicio creados a mano por nutricionistas independientes.',
-            solution: 'SaaS con Next.js 16, NestJS 11, Supabase y Gemini 2.0 Flash.',
+            solution: 'SaaS full-stack con Next.js 16, Supabase y Gemini 2.0 Flash.',
             decisions: ['Row Level Security en la base de datos', 'Generación de planes con lógica de IA determinista'],
             evidence: ['Demo pública y repositorio', 'Estado Beta declarado'],
             pending: ['evidence'],
